@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {Poppins} from "next/font/google";
 import "./globals.css";
 import {ThemeProvider} from "@/components/theme-provider";
+import Navbar from "@/components/Navbar";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -24,10 +25,16 @@ export const metadata: Metadata = {
     "sourcing"
   ],
   authors: [
-    { name: "Sherard Dalaguit", url: "https://sherarddalaguit.com" }
+    { 
+      name: "Sherard Dalaguit", 
+      url: "https://sherarddalaguit.com" 
+    }
   ],
   creator: "Sherard Dalaguit",
   publisher: "RemoteRadar Inc.",
+  icons: {
+    icon: "/logo-solo.png",
+  }
 };
 
 export default function RootLayout({
@@ -40,10 +47,11 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>
