@@ -1,11 +1,23 @@
 import LitButton from '@/components/ui/LitButton';
 import { IconBriefcase, IconArrowDown } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-6xl mx-auto w-screen overflow-x-hidden h-screen">
       <Spotlight />
+
+      <div className="w-full absolute left-0 top-0 min-h-96 pointer-events-none rotate-180">
+        <Image
+          src="/footer-grid.svg"
+          alt="grid"
+          width={1000}
+          height={1000}
+          className="w-full h-full opacity-70 filter invert dark:filter-none"
+        />
+      </div>
+
       <h1 className="text-8xl font-semibold">
         Turn your <span className="primary-text-gradient">inbox</span> into the ultimate <span className="primary-text-gradient">remote board</span>
       </h1>
