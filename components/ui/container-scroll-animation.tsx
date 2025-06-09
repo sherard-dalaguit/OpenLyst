@@ -87,7 +87,7 @@ export const Card = ({
       }}
       className="-mt-12 h-full w-full border-4 border-[#222222] p-2 md:p-6 bg-black rounded-[30px] shadow-2xl"
     >
-        {children}
+      {children}
     </motion.div>
   );
 };

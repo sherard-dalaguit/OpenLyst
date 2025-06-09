@@ -42,7 +42,7 @@ export default function Home() {
       </div>
 
       <ContainerScroll>
-        <img
+        <Image
           src="/devexchange.webp"
           alt="hero"
           height={720}
