@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   creator: "Sherard Dalaguit",
   publisher: "RemoteRadar Inc.",
   icons: {
-    icon: "/logo-solo.png",
+    icon: "/logo.png",
   }
 };
 
