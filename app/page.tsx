@@ -3,8 +3,6 @@ import { IconBriefcase, IconArrowDown, IconSend } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from 'next/image';
 import {ContainerScroll} from '@/components/ui/container-scroll-animation';
-import { landingDetails } from '@/data';
-import {HoverCard, HoverCardContent, HoverCardTrigger} from '@/components/ui/hover-card';
 import Footer from "@/components/Footer";
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";
 import {Services} from "@/components/Services";
@@ -60,39 +58,9 @@ export default function Home() {
           />
         </ContainerScroll>
 
-        <h1 className="text-6xl max-w-6xl font-semibold mb-20">
+        <h1 className="text-6xl max-w-6xl font-semibold">
           Everything you need for a <span className="primary-text-gradient">winning remote job search</span>
         </h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl w-full items-center justify-center gap-8 mb-20">
-          {landingDetails.map((detail, index) => {
-            return (
-              <div key={index} className="flex flex-col items-center text-xl font-medium gap-4">
-                {detail.icon}
-                <HoverCard>
-                  <HoverCardTrigger className="hover:primary-text-gradient">{detail.title}</HoverCardTrigger>
-                  <HoverCardContent>
-                    {detail.des}
-                  </HoverCardContent>
-                </HoverCard>
-              </div>
-            )
-          })}
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pb-[20vh]">
-          <LitButton
-            title="Browse Jobs"
-            icon={<IconBriefcase/>}
-            position="right"
-          />
-
-          <LitButton
-            title="Sign Up Free"
-            icon={<IconArrowDown/>}
-            position="right"
-          />
-        </div>
 
         <div className="text-start w-full">
           <Services />

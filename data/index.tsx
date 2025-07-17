@@ -1,45 +1,4 @@
-import {
-	IconBriefcase2,
-	IconAdjustmentsHorizontal,
-	IconBell,
-	IconBookmarks,
-	IconListCheck,
-	IconMail
-} from "@tabler/icons-react";
 import React from "react";
-
-export const landingDetails = [
-	{
-		title: "Aggregated Listings",
-		des: "Pull in roles from WeWorkRemotely, RemoteOk, Wellfound, and more.",
-		icon: <IconListCheck size={60} />
-	},
-	{
-		title: "Real-Time Alerts",
-		des: "Be the first to know when your dream role goes live.",
-		icon: <IconBell size={60} />
-	},
-	{
-		title: "Advanced Filters",
-		des: "Filter by industry, seniority, salary, and more to find your perfect fit.",
-		icon: <IconAdjustmentsHorizontal size={60} />
-	},
-	{
-		title: "Saved Jobs",
-		des: "Bookmark your favorite jobs and revisit them any time.",
-		icon: <IconBookmarks size={60} />
-	},
-	{
-		title: "Job Tracker",
-		des: "Keep tabs on your applications, interviews, and follow-ups in one place.",
-		icon: <IconBriefcase2 size={60} />
-	},
-	{
-		title: "Email Digests",
-		des: "Receive a daily or weekly roundup of the best matching remote jobs straight to your inbox.",
-		icon: <IconMail size={60} />
-	},
-];
 
 export const servicesContent = [
   {
