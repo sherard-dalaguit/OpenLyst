@@ -24,10 +24,16 @@ export const metadata: Metadata = {
     "sourcing"
   ],
   authors: [
-    { name: "Sherard Dalaguit", url: "https://sherarddalaguit.com" }
+    { 
+      name: "Sherard Dalaguit", 
+      url: "https://sherarddalaguit.com" 
+    }
   ],
   creator: "Sherard Dalaguit",
   publisher: "RemoteRadar Inc.",
+  icons: {
+    icon: "/logo.png",
+  }
 };
 
 export default function RootLayout({
@@ -40,7 +46,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
