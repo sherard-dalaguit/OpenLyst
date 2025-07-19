@@ -1,4 +1,5 @@
 import LocalSearch from "@/components/search/LocalSearch";
+import HomeFilter from "@/components/filters/HomeFilter";
 import ROUTES from "@/constants/routes";
 
 const jobs = [
@@ -38,7 +39,7 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 				/>
 			</section>
 
-			HomeFilter
+			<HomeFilter />
 
 			<div className="mt-10 flex w-full flex-col gap-6">
 				{filteredJobs.map((job) => (
