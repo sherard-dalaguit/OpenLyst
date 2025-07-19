@@ -1,4 +1,4 @@
-import { model, models, Schema, Document } from "mongoose";
+import { model, models, Schema, Types, Document } from "mongoose";
 
 export interface IAlert {
 	name: string;
