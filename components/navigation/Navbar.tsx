@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {IconUserCircle} from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import {ModeToggle} from "@/components/Theme";
+import MobileNavigation from "@/components/navigation/MobileNavigation";
 
 const Navbar = () => {
   return (
@@ -22,7 +22,6 @@ const Navbar = () => {
       <h1 className="absolute left-1/2 -translate-x-1/2 text-center text-xl">Search bar</h1>
 
       <div className="flex-between gap-4">
-        <ModeToggle />
         <Link href="/" className="flex-shrink-0">
           <Button
             variant="ghost"
@@ -32,6 +31,8 @@ const Navbar = () => {
             <IconUserCircle />
           </Button>
         </Link>
+
+        <MobileNavigation />
       </div>
     </nav>
   );
