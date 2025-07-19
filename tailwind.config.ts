@@ -59,6 +59,13 @@ export default {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
   			},
+				screens: {
+					xs: "420px",
+				},
+				fontFamily: {
+					inter: ["var(--font-inter)"],
+					"space-grotesk": ["var(--font-space-grotesk)"],
+				},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
@@ -77,5 +84,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
