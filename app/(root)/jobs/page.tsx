@@ -1,19 +1,8 @@
 import LocalSearch from "@/components/search/LocalSearch";
 import HomeFilter from "@/components/filters/HomeFilter";
+import JobCard from "@/components/cards/JobCard";
 import ROUTES from "@/constants/routes";
-
-const jobs = [
-	{ _id: "1", title: "Software Engineer - Airbnb" },
-	{ _id: "2", title: "Data Engineer - Palantir" },
-	{ _id: "3", title: "Senior Software Engineer - Prismatic Software" },
-	{ _id: "4", title: "Full Stack Software Engineer - Twilio" },
-	{ _id: "5", title: "Staff Software Engineer - Discord" },
-	{ _id: "6", title: "Frontend Engineer - Meta" },
-	{ _id: "7", title: "Backend Engineer - Stripe" },
-	{ _id: "8", title: "DevOps Engineer - Google" },
-	{ _id: "9", title: "Machine Learning Engineer - OpenAI" },
-	{ _id: "10", title: "Cloud Solutions Architect - AWS" },
-]
+import {jobs} from "@/data";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
@@ -41,9 +30,25 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 
 			<HomeFilter />
 
-			<div className="mt-10 flex w-full flex-col gap-6">
+			<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
 				{filteredJobs.map((job) => (
-					<p key={job._id}>{job.title}</p>
+					<JobCard
+						key={job._id}
+						_id={job._id}
+						title={job.title}
+						companyName={job.companyName}
+						companyLogoUrl={job.companyLogoUrl}
+						datePosted={job.datePosted}
+						jobType={job.jobType}
+						experienceLevel={job.experienceLevel}
+						salary={job.salary}
+						category={job.category}
+						snippet={job.snippet}
+						applyUrl={job.applyUrl}
+						source={job.source}
+						isBookmarked={job.isBookmarked}
+						isApplied={job.isApplied}
+					/>
 				))}
 			</div>
 		</>
