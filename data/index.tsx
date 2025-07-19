@@ -66,8 +66,8 @@ export const sidebarLinks = [
 	},
 	{
 		imgURL: '/icons/tag.svg',
-		label: 'Tags',
-		route: '/tags'
+		label: 'Email Alerts',
+		route: '/email-alerts'
 	},
 	{
 		imgURL: '/icons/user.svg',
