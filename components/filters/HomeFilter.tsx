@@ -180,7 +180,7 @@ const HomeFilter = () => {
 					</div>
 				))}
         {activeFilters.length > 0 && (
-          <Button size="sm" variant="ghost" onClick={clearAllFilters}>
+          <Button size="sm" className="primary-gradient" onClick={clearAllFilters}>
             Clear All Filters
           </Button>
         )}
