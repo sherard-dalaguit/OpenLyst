@@ -16,10 +16,11 @@ import {
 import { Input } from "@/components/ui/input"
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
+import {ZodTypeDef} from "zod/v3";
 
 interface AuthFormProps<T extends FieldValues> {
   formType: "SIGN_IN" | "SIGN_UP"
-  schema: ZodType<T>
+  schema: ZodType<T, ZodTypeDef, any>
   defaultValues: T
   onSubmit: (data: T) => Promise<{ success: boolean }>
 }
