@@ -15,25 +15,24 @@ import {Slider} from "@/components/ui/slider";
 import { useState } from "react";
 import {SliderRange, SliderThumb, SliderTrack} from "@radix-ui/react-slider";
 
+const salaryMarks = [
+	0,
+	25000,
+	50000,
+	75000,
+	100000,
+	125000,
+	150000,
+	200000,
+	300000,
+	400000,
+]
+
 const HomeFilter = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
-	const salaryMarks = [
-		0,
-		25000,
-		50000,
-		75000,
-		100000,
-		125000,
-		150000,
-		200000,
-		300000,
-		400000,
-	]
-
-	// inside your HomeFilter component:
 	const rawSalary = searchParams.get("salary") ?? "0"
 	const initialIndex = salaryMarks.findIndex(s => s.toString() === rawSalary) || 0
 
@@ -65,16 +64,13 @@ const HomeFilter = () => {
 
 	const handleRangeApply = (filterKey: string, optionValue: string) => {
 		const params = new URLSearchParams(searchParams.toString())
-		// 2) set (or overwrite) the one you care about
 		params.set(filterKey, optionValue)
-		// 3) push a clean URL of form /jobs?<only the params>
 		router.push(`${pathname}?${params.toString()}`, { scroll: false })
 	};
 
 	const handleDropdownSelect = (filterKey: string, value: string) => {
-    // build a fresh URLSearchParams so we don’t drag along broken bits
     const params = new URLSearchParams(searchParams.toString())
-    params.set(filterKey, value)          // overwrite old value
+    params.set(filterKey, value)
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
@@ -180,7 +176,7 @@ const HomeFilter = () => {
 					</div>
 				))}
         {activeFilters.length > 0 && (
-          <Button size="sm" variant="ghost" onClick={clearAllFilters}>
+          <Button size="sm" className="primary-gradient" onClick={clearAllFilters}>
             Clear All Filters
           </Button>
         )}
