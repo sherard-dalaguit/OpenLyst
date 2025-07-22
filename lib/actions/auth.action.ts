@@ -1,13 +1,14 @@
 "use server";
 
 import action from "@/lib/handlers/action";
-import {SignUpSchema} from "@/lib/validations";
+import {SignInSchema, SignUpSchema} from "@/lib/validations";
 import handleError from "@/lib/handlers/error";
 import mongoose from "mongoose";
 import User from "@/database/user.model";
 import Account from "@/database/account.model";
 import bcrypt from "bcryptjs";
 import {signIn} from "@/auth";
+import {NotFoundError} from "@/lib/http-errors";
 
 export async function signUpWithCredentials(params: AuthCredentials): Promise<ActionResponse> {
 	const validationResult = await action({ params, schema: SignUpSchema });
@@ -59,5 +60,32 @@ export async function signUpWithCredentials(params: AuthCredentials): Promise<Ac
 		return handleError(error) as ErrorResponse;
 	} finally {
 		await session.endSession();
+	}
+}
+
+export async function signInWithCredentials(params: Pick<AuthCredentials, 'email' | 'password'>): Promise<ActionResponse> {
+	const validationResult = await action({ params, schema: SignInSchema });
+
+	if (validationResult instanceof Error) {
+		return handleError(validationResult) as ErrorResponse;
+	}
+
+	const { email, password } = validationResult.params!;
+
+	try {
+		const existingUser = await User.findOne({ email });
+		if (!existingUser) throw new NotFoundError("User");
+
+		const existingAccount  = await Account.findOne({ provider: 'credentials', providerAccountId: email });
+		if (!existingAccount) throw new NotFoundError("Account");
+
+		const passwordMatch = await bcrypt.compare(password, existingAccount.password!);
+		if (!passwordMatch) throw new Error("Password does not match");
+
+		await signIn('credentials', { email, password, redirect: false });
+
+		return { success: true }
+	} catch (error) {
+		return handleError(error) as ErrorResponse;
 	}
 }
