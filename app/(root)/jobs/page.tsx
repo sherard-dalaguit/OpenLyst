@@ -3,16 +3,12 @@ import HomeFilter from "@/components/filters/HomeFilter";
 import JobCard from "@/components/cards/JobCard";
 import ROUTES from "@/constants/routes";
 import {jobs} from "@/data";
-import {auth} from "@/auth";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
 }
 
 const Jobs = async ({ searchParams }: SearchParams) => {
-	const session = await auth();
-	console.log("Session:", session);
-
 	const { query = "" } = await searchParams;
 
 	const filteredJobs = jobs.filter((job) => job.title.toLowerCase().includes(query?.toLowerCase()))
