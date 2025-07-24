@@ -12,8 +12,8 @@ seedRemoteOk().catch(console.error);
 
 export async function seedWeWorkRemotely() {
   await dbConnect();
-  await Source.deleteMany({ name: "We Work Remotely" });
-  const src = await Source.create({ name: "We Work Remotely", baseUrl: "https://weworkremotely.com" });
+  await Source.deleteMany({ name: "WeWorkRemotely" });
+  const src = await Source.create({ name: "WeWorkRemotely", baseUrl: "https://weworkremotely.com" });
   console.log("Seeded Source:", src);
 }
 

@@ -1,4 +1,3 @@
-// remote_radar/scrapers/weworkremotely.ts
 import { chromium, BrowserContext } from "playwright";
 import Parser from "rss-parser";
 import Source from "@/database/source.model";
@@ -18,11 +17,11 @@ type WWRItem = {
 };
 
 export async function scrapeWeWorkRemotely(): Promise<number> {
-  // 1) Load your Source doc
+  // 1) load your Source doc
   const source = await Source.findOne({ name: "We Work Remotely" });
   if (!source) throw new Error("Missing Source document for We Work Remotely");
 
-  // 2) Solve CF JS challenge with Playwright
+  // 2) solve CF JS challenge with Playwright
   const browser = await chromium.launch();
   const context: BrowserContext = await browser.newContext({
     userAgent:
@@ -37,11 +36,11 @@ export async function scrapeWeWorkRemotely(): Promise<number> {
   }
   const rssXml = await response.text();
 
-  // 3) Parse the RSS
+  // 3) parse the RSS
   const parser = new Parser<{}, WWRItem>();
   const feed = await parser.parseString(rssXml);
 
-  // 4) Upsert each item
+  // 4) upsert each item
   let count = 0;
   for (const item of feed.items) {
     const link = item.link?.trim();
