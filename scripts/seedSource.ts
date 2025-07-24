@@ -18,3 +18,12 @@ export async function seedWeWorkRemotely() {
 }
 
 seedWeWorkRemotely().catch(console.error);
+
+export async function seedRemotive() {
+  await dbConnect();
+  await Source.deleteMany({ name: "Remotive" });
+  const src = await Source.create({ name: "Remotive", baseUrl: "https://remotive.com" });
+  console.log("Seeded Source:", src);
+}
+
+seedRemotive().catch(console.error);
