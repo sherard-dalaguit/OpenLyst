@@ -36,3 +36,12 @@ export async function seedJobspresso() {
 }
 
 seedJobspresso().catch(console.error);
+
+export async function seedJavascriptJobs() {
+  await dbConnect();
+  await Source.deleteMany({ name: "JavascriptJobs" });
+  const src = await Source.create({ name: "JavascriptJobs", baseUrl: "https://javascript.jobs" });
+  console.log("Seeded Source:", src);
+}
+
+seedJavascriptJobs().catch(console.error);

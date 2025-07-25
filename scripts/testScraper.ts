@@ -4,6 +4,7 @@ import {scrapeRemoteOK} from "@/scrapers/remoteok";
 import {scrapeWeWorkRemotely} from "@/scrapers/weworkremotely";
 import {scrapeRemotive} from "@/scrapers/remotive";
 import { scrapeJobspresso } from "@/scrapers/jobspresso";
+import { scrapeJavascriptJobs } from "@/scrapers/javascriptjobs";
 
 export async function testRemoteOkScraper() {
   await dbConnect();
@@ -104,7 +105,33 @@ export async function testJobspressoScraper() {
   process.exit(0);
 }
 
-testJobspressoScraper().catch(err => {
+// testJobspressoScraper().catch(err => {
+//   console.error(err);
+//   process.exit(1);
+// });
+
+export async function testJavascriptJobsScraper() {
+  await dbConnect();
+
+  await Job.deleteMany({ sourceName: "JavascriptJobs" });
+
+  console.log("Running scrapeJavascriptJobs…");
+  const inserted = await scrapeJavascriptJobs();
+  console.log(`scrapeJavascriptJobs returned count = ${inserted}`);
+
+  const docs = await Job.find({ sourceName: "JavascriptJobs" }).lean();
+  console.log(`Found ${docs.length} documents in the jobs collection.`);
+  console.log("Sample entry:", docs[0]);
+
+  console.log("Re-running scraper to test upsert…");
+  const inserted2 = await scrapeJavascriptJobs();
+  const totalAfter = await Job.countDocuments({ sourceName: "JavascriptJobs" });
+  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
+
+  process.exit(0);
+}
+
+testJavascriptJobsScraper().catch(err => {
   console.error(err);
   process.exit(1);
 });
