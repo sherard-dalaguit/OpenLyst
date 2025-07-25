@@ -6,6 +6,7 @@ import {scrapeRemotive} from "@/scrapers/remotive";
 import { scrapeJobspresso } from "@/scrapers/jobspresso";
 import { scrapeJavascriptJobs } from "@/scrapers/javascriptjobs";
 import {scrapeWorkingNomads} from "@/scrapers/workingnomads";
+import {scrapeSkipTheDrive} from "@/scrapers/skipthedrive";
 
 export async function testRemoteOkScraper() {
   await dbConnect();
@@ -128,6 +129,27 @@ export async function testWorkingNomadsScraper() {
   console.log("Re-running scraper to test upsert…");
   const inserted2 = await scrapeWorkingNomads();
   const totalAfter = await Job.countDocuments({ sourceName: "WorkingNomads" });
+  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
+
+  process.exit(0);
+}
+
+export async function testSkipTheDriveScraper() {
+  await dbConnect();
+
+  await Job.deleteMany({ sourceName: "SkipTheDrive" });
+
+  console.log("Running scrapeSkipTheDrive…");
+  const inserted = await scrapeSkipTheDrive();
+  console.log(`scrapeSkipTheDrive returned count = ${inserted}`);
+
+  const docs = await Job.find({ sourceName: "SkipTheDrive" }).lean();
+  console.log(`Found ${docs.length} documents in the jobs collection.`);
+  console.log("Sample entry:", docs[0]);
+
+  console.log("Re-running scraper to test upsert…");
+  const inserted2 = await scrapeSkipTheDrive();
+  const totalAfter = await Job.countDocuments({ sourceName: "SkipTheDrive" });
   console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
 
   process.exit(0);

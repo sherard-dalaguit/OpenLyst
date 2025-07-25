@@ -8,16 +8,12 @@ export async function seedRemoteOk() {
   console.log("Seeded Source:", src);
 }
 
-seedRemoteOk().catch(console.error);
-
 export async function seedWeWorkRemotely() {
   await dbConnect();
   await Source.deleteMany({ name: "WeWorkRemotely" });
   const src = await Source.create({ name: "WeWorkRemotely", baseUrl: "https://weworkremotely.com" });
   console.log("Seeded Source:", src);
 }
-
-seedWeWorkRemotely().catch(console.error);
 
 export async function seedRemotive() {
   await dbConnect();
@@ -26,16 +22,12 @@ export async function seedRemotive() {
   console.log("Seeded Source:", src);
 }
 
-seedRemotive().catch(console.error);
-
 export async function seedJobspresso() {
   await dbConnect();
   await Source.deleteMany({ name: "Jobspresso" });
   const src = await Source.create({ name: "Jobspresso", baseUrl: "https://jobspresso.co" });
   console.log("Seeded Source:", src);
 }
-
-seedJobspresso().catch(console.error);
 
 export async function seedJavascriptJobs() {
   await dbConnect();
@@ -44,8 +36,6 @@ export async function seedJavascriptJobs() {
   console.log("Seeded Source:", src);
 }
 
-seedJavascriptJobs().catch(console.error);
-
 export async function seedWorkingNomads() {
   await dbConnect();
   await Source.deleteMany({ name: "WorkingNomads" });
@@ -53,4 +43,9 @@ export async function seedWorkingNomads() {
   console.log("Seeded Source:", src);
 }
 
-seedWorkingNomads().catch(console.error);
+export async function seedSkipTheDrive() {
+  await dbConnect();
+  await Source.deleteMany({ name: "SkipTheDrive" });
+  const src = await Source.create({ name: "SkipTheDrive", baseUrl: "https://skipthedrive.com" });
+  console.log("Seeded Source:", src);
+}
