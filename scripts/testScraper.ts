@@ -5,6 +5,7 @@ import {scrapeWeWorkRemotely} from "@/scrapers/weworkremotely";
 import {scrapeRemotive} from "@/scrapers/remotive";
 import { scrapeJobspresso } from "@/scrapers/jobspresso";
 import { scrapeJavascriptJobs } from "@/scrapers/javascriptjobs";
+import {scrapeWorkingNomads} from "@/scrapers/workingnomads";
 
 export async function testRemoteOkScraper() {
   await dbConnect();
@@ -27,11 +28,6 @@ export async function testRemoteOkScraper() {
   process.exit(0);
 }
 
-// testRemoteOkScraper().catch(err => {
-//   console.error(err);
-//   process.exit(1);
-// });
-
 export async function testWeWorkRemotelyScraper() {
   await dbConnect();
 
@@ -52,11 +48,6 @@ export async function testWeWorkRemotelyScraper() {
 
   process.exit(0);
 }
-
-// testWeWorkRemotelyScraper().catch(err => {
-//   console.error(err);
-//   process.exit(1);
-// });
 
 export async function testRemotiveScraper() {
   await dbConnect();
@@ -79,11 +70,6 @@ export async function testRemotiveScraper() {
   process.exit(0);
 }
 
-// testRemotiveScraper().catch(err => {
-//   console.error(err);
-//   process.exit(1);
-// });
-
 export async function testJobspressoScraper() {
   await dbConnect();
 
@@ -104,11 +90,6 @@ export async function testJobspressoScraper() {
 
   process.exit(0);
 }
-
-// testJobspressoScraper().catch(err => {
-//   console.error(err);
-//   process.exit(1);
-// });
 
 export async function testJavascriptJobsScraper() {
   await dbConnect();
@@ -131,7 +112,23 @@ export async function testJavascriptJobsScraper() {
   process.exit(0);
 }
 
-testJavascriptJobsScraper().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+export async function testWorkingNomadsScraper() {
+  await dbConnect();
+
+  await Job.deleteMany({ sourceName: "WorkingNomads" });
+
+  console.log("Running scrapeWorkingNomads…");
+  const inserted = await scrapeWorkingNomads();
+  console.log(`scrapeWorkingNomads returned count = ${inserted}`);
+
+  const docs = await Job.find({ sourceName: "WorkingNomads" }).lean();
+  console.log(`Found ${docs.length} documents in the jobs collection.`);
+  console.log("Sample entry:", docs[0]);
+
+  console.log("Re-running scraper to test upsert…");
+  const inserted2 = await scrapeWorkingNomads();
+  const totalAfter = await Job.countDocuments({ sourceName: "WorkingNomads" });
+  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
+
+  process.exit(0);
+}
