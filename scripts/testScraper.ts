@@ -3,6 +3,7 @@ import dbConnect from "@/lib/mongoose";
 import {scrapeRemoteOK} from "@/scrapers/remoteok";
 import {scrapeWeWorkRemotely} from "@/scrapers/weworkremotely";
 import {scrapeRemotive} from "@/scrapers/remotive";
+import { scrapeJobspresso } from "@/scrapers/jobspresso";
 
 export async function testRemoteOkScraper() {
   await dbConnect();
@@ -77,7 +78,33 @@ export async function testRemotiveScraper() {
   process.exit(0);
 }
 
-testRemotiveScraper().catch(err => {
+// testRemotiveScraper().catch(err => {
+//   console.error(err);
+//   process.exit(1);
+// });
+
+export async function testJobspressoScraper() {
+  await dbConnect();
+
+  await Job.deleteMany({ sourceName: "Jobspresso" });
+
+  console.log("Running scrapeJobspresso…");
+  const inserted = await scrapeJobspresso();
+  console.log(`scrapeJobspresso returned count = ${inserted}`);
+
+  const docs = await Job.find({ sourceName: "Jobspresso" }).lean();
+  console.log(`Found ${docs.length} documents in the jobs collection.`);
+  console.log("Sample entry:", docs[0]);
+
+  console.log("Re-running scraper to test upsert…");
+  const inserted2 = await scrapeJobspresso();
+  const totalAfter = await Job.countDocuments({ sourceName: "Jobspresso" });
+  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
+
+  process.exit(0);
+}
+
+testJobspressoScraper().catch(err => {
   console.error(err);
   process.exit(1);
 });

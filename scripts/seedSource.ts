@@ -27,3 +27,12 @@ export async function seedRemotive() {
 }
 
 seedRemotive().catch(console.error);
+
+export async function seedJobspresso() {
+  await dbConnect();
+  await Source.deleteMany({ name: "Jobspresso" });
+  const src = await Source.create({ name: "Jobspresso", baseUrl: "https://jobspresso.co" });
+  console.log("Seeded Source:", src);
+}
+
+seedJobspresso().catch(console.error);
