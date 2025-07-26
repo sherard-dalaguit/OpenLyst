@@ -11,7 +11,7 @@ import {scrapeSkipTheDrive} from "@/scrapers/skipthedrive";
 export async function testRemoteOkScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "RemoteOk" });
+  // await Job.deleteMany({ sourceName: "RemoteOk" });
 
   console.log("Running scrapeRemoteOK…");
   const inserted = await scrapeRemoteOK();
@@ -20,19 +20,12 @@ export async function testRemoteOkScraper() {
   const docs = await Job.find({ sourceName: "RemoteOk" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeRemoteOK();
-  const totalAfter = await Job.countDocuments({ sourceName: "RemoteOk" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testWeWorkRemotelyScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "WeWorkRemotely" });
+  // await Job.deleteMany({ sourceName: "WeWorkRemotely" });
 
   console.log("Running scrapeWeWorkRemotely…");
   const inserted = await scrapeWeWorkRemotely();
@@ -41,19 +34,12 @@ export async function testWeWorkRemotelyScraper() {
   const docs = await Job.find({ sourceName: "WeWorkRemotely" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeWeWorkRemotely();
-  const totalAfter = await Job.countDocuments({ sourceName: "WeWorkRemotely" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testRemotiveScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "Remotive" });
+  // await Job.deleteMany({ sourceName: "Remotive" });
 
   console.log("Running scrapeRemotive…");
   const inserted = await scrapeRemotive();
@@ -62,19 +48,12 @@ export async function testRemotiveScraper() {
   const docs = await Job.find({ sourceName: "Remotive" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeRemotive();
-  const totalAfter = await Job.countDocuments({ sourceName: "Remotive" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testJobspressoScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "Jobspresso" });
+  // await Job.deleteMany({ sourceName: "Jobspresso" });
 
   console.log("Running scrapeJobspresso…");
   const inserted = await scrapeJobspresso();
@@ -83,19 +62,12 @@ export async function testJobspressoScraper() {
   const docs = await Job.find({ sourceName: "Jobspresso" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeJobspresso();
-  const totalAfter = await Job.countDocuments({ sourceName: "Jobspresso" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testJavascriptJobsScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "JavascriptJobs" });
+  // await Job.deleteMany({ sourceName: "JavascriptJobs" });
 
   console.log("Running scrapeJavascriptJobs…");
   const inserted = await scrapeJavascriptJobs();
@@ -104,19 +76,12 @@ export async function testJavascriptJobsScraper() {
   const docs = await Job.find({ sourceName: "JavascriptJobs" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeJavascriptJobs();
-  const totalAfter = await Job.countDocuments({ sourceName: "JavascriptJobs" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testWorkingNomadsScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "WorkingNomads" });
+  // await Job.deleteMany({ sourceName: "WorkingNomads" });
 
   console.log("Running scrapeWorkingNomads…");
   const inserted = await scrapeWorkingNomads();
@@ -125,19 +90,12 @@ export async function testWorkingNomadsScraper() {
   const docs = await Job.find({ sourceName: "WorkingNomads" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
-
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeWorkingNomads();
-  const totalAfter = await Job.countDocuments({ sourceName: "WorkingNomads" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
-
-  process.exit(0);
 }
 
 export async function testSkipTheDriveScraper() {
   await dbConnect();
 
-  await Job.deleteMany({ sourceName: "SkipTheDrive" });
+  // await Job.deleteMany({ sourceName: "SkipTheDrive" });
 
   console.log("Running scrapeSkipTheDrive…");
   const inserted = await scrapeSkipTheDrive();
@@ -146,11 +104,17 @@ export async function testSkipTheDriveScraper() {
   const docs = await Job.find({ sourceName: "SkipTheDrive" }).lean();
   console.log(`Found ${docs.length} documents in the jobs collection.`);
   console.log("Sample entry:", docs[0]);
+}
 
-  console.log("Re-running scraper to test upsert…");
-  const inserted2 = await scrapeSkipTheDrive();
-  const totalAfter = await Job.countDocuments({ sourceName: "SkipTheDrive" });
-  console.log(`Second run returned ${inserted2}, total docs now = ${totalAfter}`);
+export async function runAllTests() {
+  await testRemoteOkScraper();
+  await testWeWorkRemotelyScraper();
+  await testRemotiveScraper();
+  await testJobspressoScraper();
+  await testJavascriptJobsScraper();
+  await testWorkingNomadsScraper();
+  await testSkipTheDriveScraper();
 
+  console.log("All tests completed successfully.");
   process.exit(0);
 }
