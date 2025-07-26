@@ -16,106 +16,142 @@ type WWRItem = {
   creator?: string;
 };
 
+const RSS_FEEDS = [
+  // "https://weworkremotely.com/remote-jobs.rss",
+  "https://weworkremotely.com/categories/remote-product-jobs.rss",
+  "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss",
+  "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss",
+  "https://weworkremotely.com/categories/remote-front-end-programming-jobs.rss",
+  "https://weworkremotely.com/categories/remote-programming-jobs.rss",
+  "https://weworkremotely.com/categories/remote-sales-and-marketing-jobs.rss",
+  "https://weworkremotely.com/categories/remote-management-and-finance-jobs.rss",
+  "https://weworkremotely.com/categories/remote-design-jobs.rss",
+  "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss",
+  "https://weworkremotely.com/categories/all-other-remote-jobs.rss",
+];
+
 export async function scrapeWeWorkRemotely(): Promise<number> {
-  // 1) load your Source doc
-  const source = await Source.findOne({ name: "We Work Remotely" });
+  // 1. Mongo Source doc
+  const source = await Source.findOne({ name: "WeWorkRemotely" });
   if (!source) throw new Error("Missing Source document for We Work Remotely");
 
-  // 2) solve CF JS challenge with Playwright
+  // 2. Launch Playwright once
   const browser = await chromium.launch();
   const context: BrowserContext = await browser.newContext({
     userAgent:
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+      "(KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
   });
-  const page = await context.newPage();
-  const rssUrl = "https://weworkremotely.com/remote-jobs.rss";
-  const response = await page.goto(rssUrl, { waitUntil: "networkidle" });
-  if (!response || response.status() !== 200) {
-    await browser.close();
-    throw new Error(`Failed to load RSS: ${response?.status()}`);
-  }
-  const rssXml = await response.text();
 
-  // 3) parse the RSS
+  // 3. Prepare RSS parser
   const parser = new Parser<{}, WWRItem>();
-  const feed = await parser.parseString(rssXml);
 
-  // 4) upsert each item
-  let count = 0;
-  for (const item of feed.items) {
-    const link = item.link?.trim();
-    if (!link) continue;
+  let totalCount = 0;
 
-    console.log(item)
-
-    const sourceJobId = item.guid || link;
-    const rawTitle = item.title || "";
-    let [companyName, position] = rawTitle.split(": ").map((s) => s.trim());
-    if (!companyName) companyName = item.creator || "";
-
-    // full HTML description
-    const description = item.content || "";
-
-    // extract Headquarters location if present
-    const hqMatch = description.match( /<strong>Headquarters:<\/strong>\s*([^<\r\n]+)/ );
-    const location = hqMatch ? hqMatch[1].trim() : "Remote";
-
-    // use pubDate or isoDate
-    const dateString = item.pubDate || item.isoDate;
-    const postedAt = dateString ? new Date(dateString) : new Date();
-
-    // navigate to detail page and pull salary
-    const detailPage = await context.newPage();
-    let salaryText: string | null = null;
-    try {
-      await detailPage.goto(link, {
-        waitUntil: "domcontentloaded",
-        timeout: 60000,
-      });
-      salaryText = await detailPage.evaluate(() => {
-        const li = Array.from(document.querySelectorAll("li"))
-          .find((el) => el.textContent?.trim().startsWith("Salary"));
-        return li ? li.textContent!.replace(/^Salary[:\s]*/, "").trim() : null;
-      });
-    } catch (e) {
-      console.warn(`Could not load detail page for salary: ${link}`, e);
+  // 4. For each feed URL…
+  for (const rssUrl of RSS_FEEDS) {
+    console.log(`Fetching RSS feed: ${rssUrl}`);
+    const feedPage = await context.newPage();
+    const resp = await feedPage.goto(rssUrl, {
+      waitUntil: "domcontentloaded",
+      timeout: 60000,
+    });
+    if (!resp || resp.status() !== 200) {
+      console.warn(`⚠️  Could not load RSS feed ${rssUrl}: ${resp?.status()}`);
+      await feedPage.close();
+      continue;
     }
-    await detailPage.close();
+    const xml = await resp.text();
+    await feedPage.close();
 
-    // parse out min/max if available
-    let salaryMin: number | undefined;
-    let salaryMax: number | undefined;
-    if (salaryText) {
-      const match = salaryText.match(/\$([\d,]+)\s*-\s*\$([\d,]+)/);
-      if (match) {
-        salaryMin = Number(match[1].replace(/,/g, ""));
-        salaryMax = Number(match[2].replace(/,/g, ""));
+    // 5. Parse that feed’s items
+    const feed = await parser.parseString(xml);
+
+    // 6. Upsert each job in that feed
+    for (const item of feed.items) {
+      console.log(item)
+      const link = item.link?.trim();
+      if (!link) continue;
+
+      const sourceJobId = item.guid || link;
+      const rawTitle = item.title || "";
+      // split “Company: Position” or fallback
+      let [companyName, position] = rawTitle.split(": ").map((s) => s.trim());
+      if (!position) {
+        // maybe it was “Position at Company”
+        [position, companyName] = rawTitle.split(" at ").map((s) => s.trim());
       }
+      if (!companyName) companyName = item.creator || "";
+
+      const description = item.content || "";
+      const snippet = item.contentSnippet?.trim() || "";
+
+      // pull HQ or default “Remote”
+      const hqMatch = description.match(
+        /<strong>Headquarters:<\/strong>\s*([^<\r\n]+)/
+      );
+      const location = hqMatch ? hqMatch[1].trim() : "Remote";
+
+      // posted date
+      const dateString = item.pubDate || item.isoDate;
+      const postedAt = dateString ? new Date(dateString) : new Date();
+
+      // ** detail‐page salary extraction ** (optional, same as before )
+      let salaryMin: number | undefined;
+      let salaryMax: number | undefined;
+      const detailPage = await context.newPage();
+      try {
+        await detailPage.goto(link, {
+          waitUntil: "domcontentloaded",
+          timeout: 60000,
+        });
+        const salaryText = await detailPage.evaluate(() => {
+          const li = Array.from(document.querySelectorAll("li")).find((el) =>
+            el.textContent?.trim().startsWith("Salary")
+          );
+          return li
+            ? li.textContent!.replace(/^Salary[:\s]*/, "").trim()
+            : null;
+        });
+        if (salaryText) {
+          const m = salaryText.match(/\$([\d,]+)\s*-\s*\$([\d,]+)/);
+          if (m) {
+            salaryMin = Number(m[1].replace(/,/g, ""));
+            salaryMax = Number(m[2].replace(/,/g, ""));
+          }
+        }
+      } catch (e) {
+        console.warn(`Could not fetch salary for ${link}`, e);
+      }
+      await detailPage.close();
+
+      // upsert
+      await Job.findOneAndUpdate(
+        { sourceId: source._id, sourceJobId },
+        {
+          sourceJobId,
+          title: position,
+          companyName,
+          location,
+          category: mapToBroadCategory(position, item.categories || []),
+          description,
+          snippet,
+          salaryMin,
+          salaryMax,
+          postedAt,
+          fetchedAt: new Date(),
+          jobType: mapToJobType(item.categories || []),
+          sourceId: source._id,
+          sourceLink: link,
+          sourceName: "WeWorkRemotely",
+        },
+        { upsert: true, setDefaultsOnInsert: true }
+      );
+
+      totalCount++;
     }
-
-    await Job.findOneAndUpdate(
-      { sourceId: source._id, sourceJobId },
-      {
-        sourceJobId,
-        title: position,
-        companyName,
-        location,
-        category: mapToBroadCategory(position, item.categories || []),
-        description,
-        salaryMin,
-        salaryMax,
-        postedAt,
-        jobType: mapToJobType(item.categories || []),
-        sourceId: source._id,
-        sourceLink: link,
-        sourceName: "We Work Remotely",
-      },
-      { upsert: true, setDefaultsOnInsert: true }
-    );
-
-    count++;
   }
 
   await browser.close();
-  return count;
+  return totalCount;
 }
