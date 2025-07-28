@@ -100,8 +100,8 @@ const JobCard = (
 
 			<div className="flex-between mt-6 w-full flex-wrap gap-3">
 				<h4 className="text-dark100_light900">
-					{sourceName} posted {getTimeStamp(new Date(postedAt))}
-					{/*Posted {getTimeStamp(new Date(postedAt))}*/}
+					{/*{sourceName} posted {getTimeStamp(new Date(postedAt))}*/}
+					Posted {getTimeStamp(new Date(postedAt))}
 				</h4>
 			</div>
 		</div>

@@ -66,18 +66,24 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 		{ $match: filterQuery },
 	];
 
-	let sortCriteria = {};
-
-	switch (sort) {
-		case 'newest':
-			sortCriteria = { postedAt: -1 };
-			break;
-		case 'oldest':
-			sortCriteria = { postedAt: 1 };
-			break;
-		default:
-			sortCriteria = { postedAt: -1 };
-			break;
+	let sortStage: Record<string, 1 | -1>;
+	if (query) {
+		// if there's a query, choose between date or relevance-based sort
+		if (sort === "oldest") {
+			// pure date ascending
+			sortStage = { postedAt: 1 };
+		} else if (sort === "newest") {
+			// pure date descending
+			sortStage = { postedAt: -1 };
+		} else {
+			// fallback: relevance first, then newest
+			sortStage = { score: -1, postedAt: -1 };
+		}
+	} else {
+		// no query → just date sort
+		sortStage = sort === "oldest"
+			? { postedAt: 1 }
+			: /* newest or default */  { postedAt: -1 };
 	}
 
 	if (query) {
@@ -85,59 +91,27 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 			$addFields: {
 				score: {
 					$add: [
-						{
-							// +5 if title matches
-							$cond: [
-								{ $regexMatch: { input: "$title", regex: query, options: "i" } },
-								5,
-								0
-							]
-						},
-						{
-							// +3 if companyName matches
-							$cond: [
-								{ $regexMatch: { input: "$companyName", regex: query, options: "i" } },
-								3,
-								0
-							]
-						},
-						{
-							// +2 if category matches
-							$cond: [
-								{ $regexMatch: { input: "$category", regex: query, options: "i" } },
-								2,
-								0
-							]
-						},
-						{
-							// +1 if description matches
-							$cond: [
-								{ $regexMatch: { input: "$description", regex: query, options: "i" } },
-								1,
-								0
-							]
-						},
+						{ $cond: [ { $regexMatch: { input: "$title",       regex: query, options: "i" } }, 5, 0 ] },
+						{ $cond: [ { $regexMatch: { input: "$companyName", regex: query, options: "i" } }, 3, 0 ] },
+						{ $cond: [ { $regexMatch: { input: "$category",    regex: query, options: "i" } }, 2, 0 ] },
+						{ $cond: [ { $regexMatch: { input: "$description", regex: query, options: "i" } }, 1, 0 ] },
 					]
 				}
 			}
 		});
-		// drop results with zero score
 		pipeline.push({ $match: { score: { $gt: 0 } } });
-		// sort by that score
-		pipeline.push({ $sort: { score: -1, createdAt: -1 } });
-	} else {
-		// no search: use your normal sort
-		pipeline.push({ $sort: sortCriteria });
 	}
+
+	pipeline.push(
+		{ $sort: sortStage },
+		{ $skip: skip },
+		{ $limit: limit },
+	)
 
 	try {
 		const totalJobs = await Job.countDocuments(filterQuery);
 
-		const jobs = await Job.aggregate([
-			...pipeline,
-			{ $skip: skip },
-			{ $limit: limit },
-		]).collation({ locale: 'en', strength: 2 });
+		const jobs = await Job.aggregate(pipeline).collation({ locale: 'en', strength: 2 });
 
 		const isNext = totalJobs > skip + jobs.length;
 

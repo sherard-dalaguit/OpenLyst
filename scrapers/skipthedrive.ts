@@ -101,7 +101,11 @@ export async function scrapeSkipTheDrive(): Promise<number> {
         return el?.textContent!.trim() || "";
       });
 
-      const [companyNameFromDetail] = rawFirstLine.split(" - ").map((s) => s.trim());
+      const parts = rawFirstLine.split(/\s{2,}/).map((s) => s.trim());
+
+      const [companyNameFromDetail] = rawFirstLine.split(/\s{2,}/).map(s => s.trim());
+      const datePostedRaw        = parts[1] || "";
+      const locationFromDetail   = parts[2] || "Remote";
 
       const categories = await detailPage
         .$$eval("meta[property='article:tag']", (els) =>
@@ -119,12 +123,12 @@ export async function scrapeSkipTheDrive(): Promise<number> {
           sourceJobId: job.link,
           title,
           companyName: companyNameFromDetail,
-          location,
+          location: locationFromDetail || location,
           category: mappedCategory,
           description,
           salaryMin,
           salaryMax,
-          postedAt: new Date(),
+          postedAt: new Date(datePostedRaw),
           fetchedAt: new Date(),
           jobType,
           sourceId: source._id,

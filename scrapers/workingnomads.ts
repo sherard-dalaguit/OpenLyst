@@ -31,9 +31,9 @@ export async function scrapeWorkingNomads(): Promise<number> {
   for (const raw of jobsArray) {
     console.log(raw)
     // 5) map fields from the _source
-    const sourceJobId  = raw.id?.toString()   || raw.slug || raw.url;
-    const title        = raw.title            || raw.position || "";
-    const companyName  = raw.company          || raw.company_name || "";
+    const sourceJobId  = raw.id?.toString() || raw.slug || raw.url;
+    const title = raw.title || raw.position || "";
+    const companyName  = raw.company || raw.company_name || "";
 
     const location = Array.isArray(raw.locations) && raw.locations.length > 0
     ? raw.locations.join(", ")
@@ -41,14 +41,14 @@ export async function scrapeWorkingNomads(): Promise<number> {
       ? raw.location_base + (raw.location_extra ? ` (${raw.location_extra})` : "")
       : "Remote";
 
-    const sourceLink   = raw.url              || raw.link || "";
-    const postedAt     = raw.date
-      ? new Date(raw.date)
+    const sourceLink = raw.apply_url || raw.link || "";
+    const postedAt = raw.pub_date
+      ? new Date(raw.pub_date)
       : raw.published_at
       ? new Date(raw.published_at)
       : new Date();
 
-    const description  = raw.description      || raw.body || "";
+    const description  = raw.description || raw.body || "";
 
     // 6) salary parsing (if present)
     let salaryMin: number|undefined;
