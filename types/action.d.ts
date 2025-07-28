@@ -13,3 +13,7 @@ interface AuthCredentials {
 	email: string;
 	password: string;
 }
+
+interface GetJobParams {
+	jobId: string;
+}

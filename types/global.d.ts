@@ -8,8 +8,47 @@ type ActionResponse<T = null> = {
 	status?: number;
 }
 
+interface SourceType {
+	name: string;
+	baseUrl: string;
+	apiEndpoint?: string;
+}
+
+interface JobType {
+	_id: string;
+	sourceJobId: string;
+	title: string;
+	companyName: string;
+	location?: string;
+	category?: string;
+	experienceLevel?: string;
+	description?: string;
+	salaryMin?: number;
+	salaryMax?: number;
+	jobType: string;
+	sourceId: SourceType;
+	sourceLink: string;
+	sourceName: string;
+	isBookmarked: boolean;
+	isApplied: boolean;
+	postedAt: Date;
+}
+
 type SuccessResponse<T = null> = ActionResponse<T> & { success: true };
 type ErrorResponse = ActionResponse<undefined> & { success: false };
 
 type APIErrorResponse = NextResponse<ErrorResponse>;
 type APIResponse<T = null> = NextResponse<SuccessResponse<T> | ErrorResponse>;
+
+interface RouteParams {
+	params: Promise<Record<string, string>>;
+	searchParams: Promise<Record<string, string>>;
+}
+
+interface PaginatedSearchParams {
+	page?: number;
+	pageSize?: number;
+	query?: string;
+	filter?: string;
+	sort?: string;
+}

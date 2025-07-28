@@ -11,8 +11,6 @@ import {scrapeSkipTheDrive} from "@/scrapers/skipthedrive";
 export async function testRemoteOkScraper() {
   await dbConnect();
 
-  // await Job.deleteMany({ sourceName: "RemoteOk" });
-
   console.log("Running scrapeRemoteOK…");
   const inserted = await scrapeRemoteOK();
   console.log(`scrapeRemoteOK returned count = ${inserted}`);
@@ -24,8 +22,6 @@ export async function testRemoteOkScraper() {
 
 export async function testWeWorkRemotelyScraper() {
   await dbConnect();
-
-  // await Job.deleteMany({ sourceName: "WeWorkRemotely" });
 
   console.log("Running scrapeWeWorkRemotely…");
   const inserted = await scrapeWeWorkRemotely();
@@ -39,8 +35,6 @@ export async function testWeWorkRemotelyScraper() {
 export async function testRemotiveScraper() {
   await dbConnect();
 
-  // await Job.deleteMany({ sourceName: "Remotive" });
-
   console.log("Running scrapeRemotive…");
   const inserted = await scrapeRemotive();
   console.log(`scrapeRemotive returned count = ${inserted}`);
@@ -52,8 +46,6 @@ export async function testRemotiveScraper() {
 
 export async function testJobspressoScraper() {
   await dbConnect();
-
-  // await Job.deleteMany({ sourceName: "Jobspresso" });
 
   console.log("Running scrapeJobspresso…");
   const inserted = await scrapeJobspresso();
@@ -67,8 +59,6 @@ export async function testJobspressoScraper() {
 export async function testJavascriptJobsScraper() {
   await dbConnect();
 
-  // await Job.deleteMany({ sourceName: "JavascriptJobs" });
-
   console.log("Running scrapeJavascriptJobs…");
   const inserted = await scrapeJavascriptJobs();
   console.log(`scrapeJavascriptJobs returned count = ${inserted}`);
@@ -80,8 +70,6 @@ export async function testJavascriptJobsScraper() {
 
 export async function testWorkingNomadsScraper() {
   await dbConnect();
-
-  // await Job.deleteMany({ sourceName: "WorkingNomads" });
 
   console.log("Running scrapeWorkingNomads…");
   const inserted = await scrapeWorkingNomads();
@@ -95,8 +83,6 @@ export async function testWorkingNomadsScraper() {
 export async function testSkipTheDriveScraper() {
   await dbConnect();
 
-  // await Job.deleteMany({ sourceName: "SkipTheDrive" });
-
   console.log("Running scrapeSkipTheDrive…");
   const inserted = await scrapeSkipTheDrive();
   console.log(`scrapeSkipTheDrive returned count = ${inserted}`);
@@ -107,13 +93,13 @@ export async function testSkipTheDriveScraper() {
 }
 
 export async function runAllTests() {
-  await testRemoteOkScraper();
-  await testWeWorkRemotelyScraper();
-  await testRemotiveScraper();
-  await testJobspressoScraper();
-  await testJavascriptJobsScraper();
   await testWorkingNomadsScraper();
   await testSkipTheDriveScraper();
+  await testWeWorkRemotelyScraper();
+  await testJobspressoScraper();
+  await testJavascriptJobsScraper();
+  await testRemoteOkScraper();
+  await testRemotiveScraper();
 
   console.log("All tests completed successfully.");
   process.exit(0);

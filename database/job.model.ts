@@ -6,6 +6,7 @@ export interface IJob {
   companyName: string;
   location?: string;
   category?: string;
+	experienceLevel?: string;
 	description?: string;
   salaryMin?: number;
   salaryMax?: number;
@@ -13,6 +14,8 @@ export interface IJob {
   sourceId: Types.ObjectId;      // ref to your Source collection
   sourceLink: string;            // original URL
 	sourceName: string;          // name of the source (e.g. "RemoteOK")
+	isBookmarked: boolean;
+	isApplied: boolean;
   postedAt: Date;
 }
 
@@ -31,6 +34,8 @@ const JobSchema = new Schema<IJob>(
 		sourceId: { type: Schema.Types.ObjectId, ref: "Source", required: true },
 		sourceLink: { type: String, required: true },
 		sourceName: { type: String, required: true },
+		isBookmarked: { type: Boolean, default: false },
+		isApplied: { type: Boolean, default: false },
 		postedAt: { type: Date, required: true },
 	},
 	{ timestamps: true }

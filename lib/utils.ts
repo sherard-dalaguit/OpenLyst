@@ -10,34 +10,35 @@ export const getTimeStamp = (createdAt: Date) => {
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
+  if (diffInSeconds < 86400) {
+    return "today";
+  }
+
   let value: number;
   let unit: string;
 
-  if (diffInSeconds < 60) {
-    value = diffInSeconds;
-    unit = 'second';
-  } else if (diffInSeconds < 3600) {
-    value = Math.floor(diffInSeconds / 60);
-    unit = 'minute';
-  } else if (diffInSeconds < 86400) {
-    value = Math.floor(diffInSeconds / 3600);
-    unit = 'hour';
-  } else if (diffInSeconds < 86400 * 7) {
+  if (diffInSeconds < 86400 * 7) {
     value = Math.floor(diffInSeconds / 86400);
-    unit = 'day';
+    unit = "day";
   } else if (diffInSeconds < 86400 * 30) {
     value = Math.floor(diffInSeconds / (86400 * 7));
-    unit = 'week';
+    unit = "week";
   } else if (diffInSeconds < 86400 * 365) {
     value = Math.floor(diffInSeconds / (86400 * 30));
-    unit = 'month';
+    unit = "month";
   } else {
     value = Math.floor(diffInSeconds / (86400 * 365));
-    unit = 'year';
+    unit = "year";
   }
 
-  const plural = value === 1 ? '' : 's';
+  const plural = value === 1 ? "" : "s";
   return `${value} ${unit}${plural} ago`;
+};
+
+export function truncateByCommas(value: string, maxCommas = 5): string {
+  const parts = value.split(',')
+  if (parts.length <= maxCommas + 1) return value
+  return parts.slice(0, maxCommas + 1).join(',') + '...'
 }
 
 export function parseSalary(
@@ -206,4 +207,14 @@ export function mapToJobType(rawTags: string[]): string {
     return "Part-Time";
   }
   return tags.includes("full-time") ? "Full-Time" : "Full-Time";
+}
+
+export function slugToLabel(slug: string, joiner: "-" | " " = "-") {
+  return slug
+    .split("_")
+    .map(word =>
+      word.charAt(0).toUpperCase() +
+      word.slice(1).toLowerCase()
+    )
+    .join(joiner);
 }

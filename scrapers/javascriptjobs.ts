@@ -70,35 +70,49 @@ export async function scrapeJavascriptJobs(): Promise<number> {
 
       // --- POSTED AT: parse the "Job Posted:" relative time ---
       let postedAt = new Date();
-      const postedLine = lines.find(l => /posted/i.test(l));
-      if (postedLine) {
-        // strip "Posted on", "Job Posted:", etc.
-        const datePart = postedLine.replace(/posted(\s*on|:)?\s*/i, "");
-        const abs = Date.parse(datePart);
-        if (!isNaN(abs)) {
-          postedAt = new Date(abs);
-        } else {
-          // handle "X months/weeks/days ago"
-          let m: RegExpExecArray | null;
-          const now = new Date();
-          if ((m = /(\d+)\s*month/.exec(datePart))) {
-            now.setMonth(now.getMonth() - parseInt(m[1], 10));
-            postedAt = now;
-          } else if ((m = /(\d+)\s*week/.exec(datePart))) {
-            now.setDate(now.getDate() - parseInt(m[1], 10) * 7);
-            postedAt = now;
-          } else if ((m = /(\d+)\s*day/.exec(datePart))) {
-            now.setDate(now.getDate() - parseInt(m[1], 10));
-            postedAt = now;
-          } else if (/today/i.test(datePart)) {
-            postedAt = new Date();
-          } else if (/yesterday/i.test(datePart)) {
-            const d = new Date();
-            d.setDate(d.getDate() - 1);
-            postedAt = d;
+      const agoLine = lines.find(l =>
+        /\d+\s+(second|minute|hour|day|week|month|year)s?\s+ago/i.test(l)
+      );
+      if (agoLine) {
+        const m = agoLine.match(/(\d+)\s*(second|minute|hour|day|week|month|year)s?\s+ago/i);
+        if (m) {
+          const num = parseInt(m[1], 10);
+          const unit = m[2].toLowerCase();
+          const d = new Date();
+          switch (unit) {
+            case "second":
+            case "seconds":
+              d.setSeconds(d.getSeconds() - num);
+              break;
+            case "minute":
+            case "minutes":
+              d.setMinutes(d.getMinutes() - num);
+              break;
+            case "hour":
+            case "hours":
+              d.setHours(d.getHours() - num);
+              break;
+            case "day":
+            case "days":
+              d.setDate(d.getDate() - num);
+              break;
+            case "week":
+            case "weeks":
+              d.setDate(d.getDate() - num * 7);
+              break;
+            case "month":
+            case "months":
+              d.setMonth(d.getMonth() - num);
+              break;
+            case "year":
+            case "years":
+              d.setFullYear(d.getFullYear() - num);
+              break;
           }
+          postedAt = d;
         }
       }
+
 
       // --- TAGS: any elements with .tags .tag ---
       let tags: string[] = [];

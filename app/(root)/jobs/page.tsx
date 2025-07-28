@@ -2,17 +2,29 @@ import LocalSearch from "@/components/search/LocalSearch";
 import HomeFilter from "@/components/filters/HomeFilter";
 import JobCard from "@/components/cards/JobCard";
 import ROUTES from "@/constants/routes";
-import {jobs} from "@/data";
+import {getJobs} from "@/lib/actions/job.action";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
 }
 
 const Jobs = async ({ searchParams }: SearchParams) => {
-	const { query = "" } = await searchParams;
+	const { page, pageSize, query, jobType, experienceLevel, category, source, salary, datePosted, sortBy } = await searchParams;
 
-	const filteredJobs = jobs.filter((job) => job.title.toLowerCase().includes(query?.toLowerCase()))
+	const { success, data, error } = await getJobs({
+		page: Number(page) || 1,
+		pageSize: Number(pageSize) || 40,
+		query: query || '',
+		jobType: jobType || '',
+		experienceLevel: experienceLevel || '',
+		category: category || '',
+		source: source || '',
+		salary: salary ? Number(salary) : undefined,
+		datePosted: datePosted || 'anytime',
+		sort: sortBy || 'newest'
+	})
 
+	const { jobs } = data || {};
 	return (
 		<>
 			<section className="w-full flex flex-col-reverse sm:flex-row justify-between gap-4 sm:items-center">
@@ -30,27 +42,22 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 
 			<HomeFilter />
 
-			<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
-				{filteredJobs.map((job) => (
-					<JobCard
-						key={job._id}
-						_id={job._id}
-						title={job.title}
-						companyName={job.companyName}
-						companyLogoUrl={job.companyLogoUrl}
-						datePosted={job.datePosted}
-						jobType={job.jobType}
-						experienceLevel={job.experienceLevel}
-						salary={job.salary}
-						category={job.category}
-						snippet={job.snippet}
-						applyUrl={job.applyUrl}
-						source={job.source}
-						isBookmarked={job.isBookmarked}
-						isApplied={job.isApplied}
-					/>
-				))}
-			</div>
+			{success ? (
+				<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
+					{jobs && jobs.length > 0 ? jobs.map((job) => (
+						<JobCard key={job._id} job={job} />
+					)) : (
+						<div className="mt-10 flex w-full items-center justify-center">
+							<p className="text-dark400_light700">No Jobs Found</p>
+						</div>
+					)}
+				</div>
+			) : (
+				<div className="mt-10 flex w-full items-center justify-center">
+					{error?.message || "An error occurred while fetching jobs."}
+				</div>
+			)}
+
 		</>
 	)
 };

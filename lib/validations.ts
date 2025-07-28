@@ -93,3 +93,28 @@ export const SignInWithOAuthSchema = z.object({
 		image: z.string().url({message: 'Image must be a valid URL.'}).optional(),
 	})
 })
+
+export const PaginatedSearchParamsSchema = z.object({
+	page: z.number().int().positive().default(1),
+	pageSize: z.number().int().positive().default(10),
+	query: z.string().optional(),
+	filter: z.string().optional(),
+	sort: z.string().optional(),
+})
+
+export const GetJobSchema = z.object({
+	jobId: z.string().min(1, { message: 'Job ID is required' }),
+})
+
+export const JobSearchParamsSchema = z.object({
+  page: z.number().int().positive().default(1),
+  pageSize: z.number().int().positive().default(10),
+  query: z.string().optional(),
+  jobType: z.string().optional(),
+  experienceLevel: z.string().optional(),
+  category: z.string().optional(),
+	source: z.string().optional(),
+  salary: z.number().int().nonnegative().optional(),
+  datePosted: z.enum(["24h","3d","7d","14d","30d","60d","90d","anytime"]).optional(),
+  sort: z.enum(["newest","oldest"]).default("newest"),
+});
