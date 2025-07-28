@@ -1,7 +1,7 @@
 import ROUTES from '@/constants/routes';
 import Link from 'next/link';
 import {IconBookmark, IconBookmarkFilled, IconCircleCheckFilled, IconCircleDashedCheck} from "@tabler/icons-react";
-import {getTimeStamp} from "@/lib/utils";
+import {getTimeStamp, truncateByCommas} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 
 interface Props {
@@ -76,7 +76,7 @@ const JobCard = (
 				{location && (
 					<Badge className="small-semibold background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase">
 						<div className="flex-center space-x-2">
-							<span>{location}</span>
+							<span>{truncateByCommas(location)}</span>
 						</div>
 					</Badge>
 				)}
@@ -84,8 +84,8 @@ const JobCard = (
 
 			<div className="flex-between mt-6 w-full flex-wrap gap-3">
 				<h4 className="text-dark100_light900">
-					{/*{sourceName} posted {getTimeStamp(new Date(postedAt))}*/}
-					Posted {getTimeStamp(new Date(postedAt))}
+					{sourceName} posted {getTimeStamp(new Date(postedAt))}
+					{/*Posted {getTimeStamp(new Date(postedAt))}*/}
 				</h4>
 			</div>
 		</div>

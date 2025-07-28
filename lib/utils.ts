@@ -35,6 +35,12 @@ export const getTimeStamp = (createdAt: Date) => {
   return `${value} ${unit}${plural} ago`;
 };
 
+export function truncateByCommas(value: string, maxCommas = 5): string {
+  const parts = value.split(',')
+  if (parts.length <= maxCommas + 1) return value
+  return parts.slice(0, maxCommas + 1).join(',') + '...'
+}
+
 export function parseSalary(
   text: string | undefined
 ): [number | undefined, number | undefined] {
@@ -201,4 +207,14 @@ export function mapToJobType(rawTags: string[]): string {
     return "Part-Time";
   }
   return tags.includes("full-time") ? "Full-Time" : "Full-Time";
+}
+
+export function slugToLabel(slug: string, joiner: "-" | " " = "-") {
+  return slug
+    .split("_")
+    .map(word =>
+      word.charAt(0).toUpperCase() +
+      word.slice(1).toLowerCase()
+    )
+    .join(joiner);
 }

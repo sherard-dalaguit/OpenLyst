@@ -109,7 +109,8 @@ export const JobSearchParamsSchema = z.object({
   jobType: z.string().optional(),
   experienceLevel: z.string().optional(),
   category: z.string().optional(),
+	source: z.string().optional(),
   salary: z.number().int().nonnegative().optional(),
   datePosted: z.enum(["24h","3d","7d","14d","30d","60d","90d","anytime"]).optional(),
-  sort: z.enum(["newest","oldest"]).optional(),
+  sort: z.enum(["newest","oldest"]).default("newest"),
 });

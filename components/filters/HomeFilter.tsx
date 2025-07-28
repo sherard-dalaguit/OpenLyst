@@ -147,6 +147,9 @@ const HomeFilter = () => {
 										<span className="text-md">
 											{filter.name}: ${salaryMarks[sliderIndex]}+
 										</span>
+										<span className="text-sm text-light-500">
+											Note: Not all jobs may have a salary listed
+										</span>
 
 										<Slider
 											value={[sliderIndex]}

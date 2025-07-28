@@ -5,6 +5,7 @@ import action from "@/lib/handlers/action";
 import {JobSearchParamsSchema} from "@/lib/validations";
 import handleError from "@/lib/handlers/error";
 import {FilterQuery} from "mongoose";
+import {slugToLabel} from "@/lib/utils";
 
 type JobSearchParams = {
   page?: number;
@@ -13,6 +14,7 @@ type JobSearchParams = {
   jobType?: string;
   experienceLevel?: string;
   category?: string;
+	source?: string;
   salary?: number;
   datePosted?: string;
   sort?: string;
@@ -28,17 +30,37 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 		return handleError(validationResult) as ErrorResponse;
 	}
 
-	const { page = 1, pageSize = 10, query, jobType, experienceLevel, category,
-  salary, datePosted, sort } = params;
+	const { page = 1, pageSize = 10, query, jobType, experienceLevel, category, source, salary, datePosted, sort } = params;
 
 	const split = (s?: string) => s?.split(",").filter(Boolean) ?? [];
 	const types = split(jobType);
 	const levels = split(experienceLevel);
-	const cats   = split(category);
+	const cats = split(category);
+	const sources = split(source);
 	const skip = (Number(page) - 1) * Number(pageSize);
 	const limit = Number(pageSize);
 
 	const filterQuery: FilterQuery<typeof Job> = {};
+
+	if (types.length) {
+		filterQuery.jobType = { $in: types.map(s => slugToLabel(s, "-")) };
+	}
+	if (levels.length) filterQuery.experienceLevel = { $in: levels };
+	if (cats.length) {
+		filterQuery.category = { $in: cats.map(s => slugToLabel(s, " ")) };
+	}
+	if (sources.length) {
+		filterQuery.sourceName = { $in: sources.map(s => slugToLabel(s, " ")) };
+	}
+
+	if (salary != null) filterQuery.salaryMin = { $gte: salary };
+
+	if (datePosted !== "anytime") {
+		const now = Date.now();
+		const hoursMap = { "24h": 24, "3d": 72, "7d": 168, "14d": 336, "30d": 720, "60d": 1440, "90d": 2160 };
+		const agoMs = hoursMap[datePosted as keyof typeof hoursMap] * 60*60*1000;
+		filterQuery.postedAt = { $gte: new Date(now - agoMs) };
+	}
 
 	const pipeline: any[] = [
 		{ $match: filterQuery },
@@ -66,7 +88,7 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 						{
 							// +5 if title matches
 							$cond: [
-								{ $regexMatch: { input: "$title",       regex: query, options: "i" } },
+								{ $regexMatch: { input: "$title", regex: query, options: "i" } },
 								5,
 								0
 							]
@@ -82,7 +104,7 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 						{
 							// +2 if category matches
 							$cond: [
-								{ $regexMatch: { input: "$category",    regex: query, options: "i" } },
+								{ $regexMatch: { input: "$category", regex: query, options: "i" } },
 								2,
 								0
 							]
@@ -108,19 +130,6 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 		pipeline.push({ $sort: sortCriteria });
 	}
 
-	if (types.length) filterQuery.jobType = { $in: types };
-	if (levels.length) filterQuery.experienceLevel = { $in: levels };
-	if (cats.length) filterQuery.category = { $in: cats };
-
-	if (salary != null) filterQuery.salaryMin = { $gte: salary };
-
-	if (datePosted !== "anytime") {
-		const now = Date.now();
-		const hoursMap = { "24h": 24, "3d": 72, "7d": 168, "14d": 336, "30d": 720, "60d": 1440, "90d": 2160 };
-		const agoMs = hoursMap[datePosted as keyof typeof hoursMap] * 60*60*1000;
-		filterQuery.postedAt = { $gte: new Date(now - agoMs) };
-	}
-
 	try {
 		const totalJobs = await Job.countDocuments(filterQuery);
 
@@ -128,7 +137,7 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 			...pipeline,
 			{ $skip: skip },
 			{ $limit: limit },
-		]);
+		]).collation({ locale: 'en', strength: 2 });
 
 		const isNext = totalJobs > skip + jobs.length;
 

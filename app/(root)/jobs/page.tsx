@@ -9,7 +9,7 @@ interface SearchParams {
 }
 
 const Jobs = async ({ searchParams }: SearchParams) => {
-	const { page, pageSize, query, jobType, experienceLevel, category, salary, datePosted, sort } = await searchParams;
+	const { page, pageSize, query, jobType, experienceLevel, category, source, salary, datePosted, sortBy } = await searchParams;
 
 	const { success, data, error } = await getJobs({
 		page: Number(page) || 1,
@@ -18,9 +18,10 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 		jobType: jobType || '',
 		experienceLevel: experienceLevel || '',
 		category: category || '',
+		source: source || '',
 		salary: salary ? Number(salary) : undefined,
 		datePosted: datePosted || 'anytime',
-		sort: sort || 'newest'
+		sort: sortBy || 'newest'
 	})
 
 	const { jobs } = data || {};
