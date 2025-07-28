@@ -2,7 +2,7 @@
 
 import Job from "@/database/job.model";
 import action from "@/lib/handlers/action";
-import {JobSearchParamsSchema} from "@/lib/validations";
+import {JobSearchParamsSchema, GetJobSchema} from "@/lib/validations";
 import handleError from "@/lib/handlers/error";
 import {FilterQuery} from "mongoose";
 import {slugToLabel} from "@/lib/utils";
@@ -145,6 +145,31 @@ export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{
 			success: true,
 			data: { jobs: JSON.parse(JSON.stringify(jobs)), isNext }
 		};
+	} catch (error) {
+		return handleError(error) as ErrorResponse;
+	}
+}
+
+export async function getJob(params: GetJobParams): Promise<ActionResponse<JobType>> {
+	const validationResult = await action({
+		params,
+		schema: GetJobSchema,
+	});
+
+	if (validationResult instanceof Error) {
+		return handleError(validationResult) as ErrorResponse;
+	}
+
+	const { jobId } = validationResult.params!;
+
+	try {
+		const job = await Job.findById(jobId);
+
+		if (!job) {
+			throw new Error("Job not found");
+		}
+
+		return { success: true, data: JSON.parse(JSON.stringify(job)) };
 	} catch (error) {
 		return handleError(error) as ErrorResponse;
 	}

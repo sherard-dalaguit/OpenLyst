@@ -102,6 +102,10 @@ export const PaginatedSearchParamsSchema = z.object({
 	sort: z.string().optional(),
 })
 
+export const GetJobSchema = z.object({
+	jobId: z.string().min(1, { message: 'Job ID is required' }),
+})
+
 export const JobSearchParamsSchema = z.object({
   page: z.number().int().positive().default(1),
   pageSize: z.number().int().positive().default(10),

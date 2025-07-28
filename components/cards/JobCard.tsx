@@ -1,4 +1,3 @@
-import ROUTES from '@/constants/routes';
 import Link from 'next/link';
 import {IconBookmark, IconBookmarkFilled, IconCircleCheckFilled, IconCircleDashedCheck} from "@tabler/icons-react";
 import {getTimeStamp, truncateByCommas} from "@/lib/utils";
@@ -9,13 +8,30 @@ interface Props {
 }
 
 const JobCard = (
-	{ job: { _id, sourceJobId, title, companyName, location, category, experienceLevel, description, salaryMin, salaryMax, jobType, sourceId, sourceLink, sourceName, postedAt, isBookmarked, isApplied} }: Props
-) => {
+{job: {
+	_id,
+	sourceJobId,
+	title,
+	companyName,
+	location,
+	category,
+	experienceLevel,
+	description,
+	salaryMin,
+	salaryMax,
+	jobType,
+	sourceId,
+	sourceLink,
+	sourceName,
+	postedAt,
+	isBookmarked,
+	isApplied
+}}: Props) => {
 	return (
 		<div className="card-wrapper lg:w-48/100 rounded-[10px] p-9 sm:px-11">
 			<div className="flex flex-row items-start justify-between gap-5 sm:flex-row">
 				<div className="flex-1">
-					<Link href={ROUTES.JOB(_id)}>
+					<Link href={sourceLink} target="_blank" rel="noopener noreferrer">
 						<h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
 							{title}
 						</h3>
