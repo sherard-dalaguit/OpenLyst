@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import {IconBookmark, IconBookmarkFilled, IconCircleCheckFilled, IconCircleDashedCheck} from "@tabler/icons-react";
 import {getTimeStamp, truncateByCommas} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 import SaveJob from "@/components/jobs/SaveJob";
 import {hasSavedJob} from "@/lib/actions/saved.action";
+import ApplyJob from "@/components/jobs/ApplyJob";
+import {hasAppliedJob} from "@/lib/actions/applied.action";
 
 interface Props {
 	job: JobType;
@@ -30,6 +31,8 @@ const JobCard = (
 	isApplied
 }}: Props) => {
 	const hasSavedJobPromise = hasSavedJob({ jobId: _id });
+	const hasAppliedJobPromise = hasAppliedJob({ jobId: _id });
+
 	return (
 		<div className="card-wrapper lg:w-48/100 rounded-[10px] p-9 sm:px-11">
 			<div className="flex flex-row items-start justify-between gap-5 sm:flex-row">
@@ -43,7 +46,7 @@ const JobCard = (
 
 				<div className="flex items-center gap-3">
 					<SaveJob jobId={_id} hasSavedJobPromise={hasSavedJobPromise} />
-					{isApplied ? <IconCircleCheckFilled /> : <IconCircleDashedCheck />}
+					<ApplyJob jobId={_id} hasAppliedJobPromise={hasAppliedJobPromise} />
 				</div>
 			</div>
 
