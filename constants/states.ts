@@ -29,9 +29,9 @@ export const EMPTY_JOB = {
 
 export const EMPTY_BOOKMARK = {
   title: "Bookmark Collections Are Empty",
-  message: "Looks like you haven’t created saved any jobs yet.",
+  message: "Looks like you haven’t saved any jobs yet.",
   button: {
-    text: "Save to Collection",
-    href: ROUTES.SAVED_JOBS,
+    text: "Find Jobs To Save",
+    href: ROUTES.HOME,
   },
 };

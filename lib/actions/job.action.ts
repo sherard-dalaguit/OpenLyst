@@ -7,19 +7,6 @@ import handleError from "@/lib/handlers/error";
 import {FilterQuery} from "mongoose";
 import {slugToLabel} from "@/lib/utils";
 
-type JobSearchParams = {
-  page?: number;
-  pageSize?: number;
-  query?: string;
-  jobType?: string;
-  experienceLevel?: string;
-  category?: string;
-	source?: string;
-  salary?: number;
-  datePosted?: string;
-  sort?: string;
-};
-
 export async function getJobs(params: JobSearchParams): Promise<ActionResponse<{ jobs: JobType[], isNext: boolean }>> {
 	const validationResult = await action({
 		params,
