@@ -122,3 +122,7 @@ export const JobSearchParamsSchema = z.object({
 export const SavedJobSchema = z.object({
 	jobId: z.string().min(1, { message: 'Job ID is required' }),
 })
+
+export const AppliedJobSchema = z.object({
+	jobId: z.string().min(1, { message: 'Job ID is required' }),
+})

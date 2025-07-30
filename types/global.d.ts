@@ -75,6 +75,10 @@ interface SavedJobParams {
 	jobId: string;
 }
 
+interface ApplyJobParams {
+	jobId: string;
+}
+
 interface SaveJobType {
 	_id: string;
 	user: string | User;
