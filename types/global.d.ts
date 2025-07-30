@@ -52,3 +52,7 @@ interface PaginatedSearchParams {
 	filter?: string;
 	sort?: string;
 }
+
+interface SavedJobParams {
+	jobId: string;
+}

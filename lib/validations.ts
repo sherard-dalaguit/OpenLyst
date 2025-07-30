@@ -118,3 +118,7 @@ export const JobSearchParamsSchema = z.object({
   datePosted: z.enum(["24h","3d","7d","14d","30d","60d","90d","anytime"]).optional(),
   sort: z.enum(["newest","oldest"]).default("newest"),
 });
+
+export const SavedJobSchema = z.object({
+	jobId: z.string().min(1, { message: 'Job ID is required' }),
+})
