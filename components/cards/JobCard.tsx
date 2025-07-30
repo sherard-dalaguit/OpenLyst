@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {IconBookmark, IconBookmarkFilled, IconCircleCheckFilled, IconCircleDashedCheck} from "@tabler/icons-react";
 import {getTimeStamp, truncateByCommas} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
+import SaveJob from "@/components/jobs/SaveJob";
 
 interface Props {
 	job: JobType;
@@ -39,7 +40,7 @@ const JobCard = (
 				</div>
 
 				<div className="flex items-center gap-3">
-					{isBookmarked ? <IconBookmarkFilled /> : <IconBookmark />}
+					<SaveJob jobId={_id} />
 					{isApplied ? <IconCircleCheckFilled /> : <IconCircleDashedCheck />}
 				</div>
 			</div>
