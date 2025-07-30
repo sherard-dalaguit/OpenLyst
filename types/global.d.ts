@@ -14,6 +14,11 @@ interface SourceType {
 	apiEndpoint?: string;
 }
 
+interface User {
+	_id: string;
+	name: string;
+}
+
 interface JobType {
 	_id: string;
 	sourceJobId: string;
@@ -51,4 +56,37 @@ interface PaginatedSearchParams {
 	query?: string;
 	filter?: string;
 	sort?: string;
+}
+
+interface JobSearchParams {
+  page?: number;
+  pageSize?: number;
+  query?: string;
+  jobType?: string;
+  experienceLevel?: string;
+  category?: string;
+	source?: string;
+  salary?: number;
+  datePosted?: string;
+  sort?: string;
+}
+
+interface SavedJobParams {
+	jobId: string;
+}
+
+interface ApplyJobParams {
+	jobId: string;
+}
+
+interface SaveJobType {
+	_id: string;
+	user: string | User;
+	job: JobType;
+}
+
+interface ApplyJobType {
+	_id: string;
+	user: string | User;
+	job: JobType;
 }

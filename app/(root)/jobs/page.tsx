@@ -3,6 +3,9 @@ import HomeFilter from "@/components/filters/HomeFilter";
 import JobCard from "@/components/cards/JobCard";
 import ROUTES from "@/constants/routes";
 import {getJobs} from "@/lib/actions/job.action";
+import DataRenderer from "@/components/DataRenderer";
+import {EMPTY_JOB} from "@/constants/states";
+import {runAllTests} from "@/scripts/testScraper";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
@@ -10,6 +13,7 @@ interface SearchParams {
 
 const Jobs = async ({ searchParams }: SearchParams) => {
 	const { page, pageSize, query, jobType, experienceLevel, category, source, salary, datePosted, sortBy } = await searchParams;
+	// await runAllTests();
 
 	const { success, data, error } = await getJobs({
 		page: Number(page) || 1,
@@ -42,21 +46,19 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 
 			<HomeFilter />
 
-			{success ? (
-				<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
-					{jobs && jobs.length > 0 ? jobs.map((job) => (
-						<JobCard key={job._id} job={job} />
-					)) : (
-						<div className="mt-10 flex w-full items-center justify-center">
-							<p className="text-dark400_light700">No Jobs Found</p>
-						</div>
-					)}
-				</div>
-			) : (
-				<div className="mt-10 flex w-full items-center justify-center">
-					{error?.message || "An error occurred while fetching jobs."}
-				</div>
-			)}
+			<DataRenderer
+				success={success}
+				error={error}
+				data={jobs}
+				empty={EMPTY_JOB}
+				render={(jobs) => (
+					<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
+						{jobs.map((job) => (
+							<JobCard key={job._id} job={job} />
+						))}
+					</div>
+				)}
+			/>
 
 		</>
 	)
