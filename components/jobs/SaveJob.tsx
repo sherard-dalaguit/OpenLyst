@@ -1,14 +1,24 @@
 "use client"
 
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import {use, useState} from "react";
 import {IconBookmark, IconBookmarkFilled} from "@tabler/icons-react";
 import { toast } from "sonner";
 import {toggleSaveJob} from "@/lib/actions/saved.action";
 
-const SaveJob = ({ jobId }: { jobId: string }) => {
+const SaveJob = ({
+	jobId,
+	hasSavedJobPromise
+}: {
+	jobId: string,
+	hasSavedJobPromise: Promise<ActionResponse<{ saved: boolean }>>
+}) => {
 	const session = useSession();
 	const userId = session?.data?.user?.id;
+
+	const { data } = use(hasSavedJobPromise);
+
+	const { saved: hasSaved } = data || { saved: false };
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -30,8 +40,6 @@ const SaveJob = ({ jobId }: { jobId: string }) => {
 			setIsLoading(false);
 		}
 	}
-
-	const hasSaved = false;
 
 	return (
 		hasSaved

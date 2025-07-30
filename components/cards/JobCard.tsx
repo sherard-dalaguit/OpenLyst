@@ -3,6 +3,7 @@ import {IconBookmark, IconBookmarkFilled, IconCircleCheckFilled, IconCircleDashe
 import {getTimeStamp, truncateByCommas} from "@/lib/utils";
 import {Badge} from "@/components/ui/badge";
 import SaveJob from "@/components/jobs/SaveJob";
+import {hasSavedJob} from "@/lib/actions/saved.action";
 
 interface Props {
 	job: JobType;
@@ -28,6 +29,7 @@ const JobCard = (
 	isBookmarked,
 	isApplied
 }}: Props) => {
+	const hasSavedJobPromise = hasSavedJob({ jobId: _id });
 	return (
 		<div className="card-wrapper lg:w-48/100 rounded-[10px] p-9 sm:px-11">
 			<div className="flex flex-row items-start justify-between gap-5 sm:flex-row">
@@ -40,7 +42,7 @@ const JobCard = (
 				</div>
 
 				<div className="flex items-center gap-3">
-					<SaveJob jobId={_id} />
+					<SaveJob jobId={_id} hasSavedJobPromise={hasSavedJobPromise} />
 					{isApplied ? <IconCircleCheckFilled /> : <IconCircleDashedCheck />}
 				</div>
 			</div>

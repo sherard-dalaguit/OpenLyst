@@ -30,6 +30,8 @@ export async function toggleSaveJob(params: SavedJobParams): Promise<ActionRespo
 
 		if (savedJob) {
 			await SavedJob.findByIdAndDelete(savedJob._id);
+
+			revalidatePath(ROUTES.SAVED_JOBS);
 			return { success: true, data: { saved: false } };
 		}
 
@@ -37,6 +39,29 @@ export async function toggleSaveJob(params: SavedJobParams): Promise<ActionRespo
 
 		revalidatePath(ROUTES.SAVED_JOBS);
 		return { success: true, data: { saved: true } };
+	} catch (error) {
+		return handleError(error) as ErrorResponse;
+	}
+}
+
+export async function hasSavedJob(params: SavedJobParams): Promise<ActionResponse<{saved: boolean}>> {
+	const validationResult = await action({
+		params,
+		schema: SavedJobSchema,
+		authorize: true,
+	});
+
+	if (validationResult instanceof Error) {
+		return handleError(validationResult) as ErrorResponse;
+	}
+
+	const { jobId } = validationResult.params!;
+	const userId = validationResult.session?.user?.id;
+
+	try {
+		const savedJob = await SavedJob.findOne({ user: userId, job: jobId });
+
+		return { success: true, data: { saved: !!savedJob } };
 	} catch (error) {
 		return handleError(error) as ErrorResponse;
 	}
