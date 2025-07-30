@@ -35,3 +35,12 @@ export const EMPTY_BOOKMARK = {
     href: ROUTES.HOME,
   },
 };
+
+export const EMPTY_APPLIED = {
+  title: "Applied Collections Are Empty",
+  message: "Looks like you haven’t added any jobs to your applied list yet.",
+  button: {
+    text: "Find Jobs To Apply",
+    href: ROUTES.HOME,
+  },
+};

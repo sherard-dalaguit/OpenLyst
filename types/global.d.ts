@@ -69,7 +69,7 @@ interface JobSearchParams {
   salary?: number;
   datePosted?: string;
   sort?: string;
-};
+}
 
 interface SavedJobParams {
 	jobId: string;
@@ -80,6 +80,12 @@ interface ApplyJobParams {
 }
 
 interface SaveJobType {
+	_id: string;
+	user: string | User;
+	job: JobType;
+}
+
+interface ApplyJobType {
 	_id: string;
 	user: string | User;
 	job: JobType;
