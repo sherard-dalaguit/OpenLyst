@@ -6,6 +6,7 @@ import {getJobs} from "@/lib/actions/job.action";
 import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_JOB} from "@/constants/states";
 import {runAllTests} from "@/scripts/testScraper";
+import Pagination from "@/components/Pagination";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
@@ -28,7 +29,7 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 		sort: sortBy || 'newest'
 	})
 
-	const { jobs } = data || {};
+	const { jobs, isNext } = data || {};
 	return (
 		<>
 			<section className="w-full flex flex-col-reverse sm:flex-row justify-between gap-4 sm:items-center">
@@ -60,6 +61,7 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 				)}
 			/>
 
+			<Pagination page={page} isNext={isNext || false} />
 		</>
 	)
 };
