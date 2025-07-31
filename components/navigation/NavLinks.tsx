@@ -4,7 +4,6 @@ import {sidebarLinks} from "@/data";
 import {SheetClose} from "@/components/ui/sheet";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import {cn} from "@/lib/utils";
 
 const NavLinks = ({
@@ -37,13 +36,7 @@ const NavLinks = ({
 							'flex items-center justify-start gap-4 bg-transparent p-4'
 						)}
 					>
-						<Image
-							src={item.imgURL}
-							alt={item.label}
-							width={20}
-							height={20}
-							className={cn({ "invert-colors": !isActive })}
-						/>
+						{item.icon}
 						<p className={
 							cn(
 								isActive ? 'base-bold' : 'base-medium',

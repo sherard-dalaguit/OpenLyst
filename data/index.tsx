@@ -1,4 +1,5 @@
 import React from "react";
+import {IconBookmark, IconCircleCheck, IconHome, IconSettings} from "@tabler/icons-react";
 
 export const servicesContent = [
   {
@@ -50,30 +51,25 @@ export const servicesContent = [
 
 export const sidebarLinks = [
 	{
-		imgURL: '/icons/home.svg',
+    icon: <IconHome className="w-6 h-6" />,
 		label: 'Jobs',
 		route: '/jobs'
 	},
 	{
-		imgURL: '/icons/users.svg',
+    icon: <IconBookmark className="w-6 h-6" />,
 		label: 'Saved Jobs',
 		route: '/saved-jobs'
 	},
 	{
-		imgURL: '/icons/star.svg',
+    icon: <IconCircleCheck className="w-6 h-6" />,
 		label: 'Applied Jobs',
 		route: '/applied-jobs'
 	},
-	{
-		imgURL: '/icons/tag.svg',
-		label: 'Email Alerts',
-		route: '/email-alerts'
-	},
-	{
-		imgURL: '/icons/user.svg',
-		label: 'Profile',
-		route: '/profile'
-	},
+  {
+    icon: <IconSettings className="w-6 h-6" />,
+    label: 'Settings',
+    route: '/settings'
+  },
 ];
 
 export const jobs = [

@@ -35,7 +35,7 @@ export const getTimeStamp = (createdAt: Date) => {
   return `${value} ${unit}${plural} ago`;
 };
 
-export function truncateByCommas(value: string, maxCommas = 5): string {
+export function truncateByCommas(value: string, maxCommas = 2): string {
   const parts = value.split(',')
   if (parts.length <= maxCommas + 1) return value
   return parts.slice(0, maxCommas + 1).join(',') + '...'
