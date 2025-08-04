@@ -19,6 +19,14 @@ interface User {
 	name: string;
 }
 
+interface UserType {
+	_id: string;
+	name: string;
+	image: string;
+	email: string;
+	createdAt: Date;
+}
+
 interface JobType {
 	_id: string;
 	sourceJobId: string;
@@ -89,4 +97,8 @@ interface ApplyJobType {
 	_id: string;
 	user: string | User;
 	job: JobType;
+}
+
+interface GetUserParams {
+	userId: string;
 }
