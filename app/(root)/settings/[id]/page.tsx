@@ -10,10 +10,12 @@ import { Label } from "@/components/ui/label";
 import {Checkbox} from "@/components/ui/checkbox";
 import {jobFilters} from "@/constants/filters";
 import {Switch} from "@/components/ui/switch";
+import {api} from "@/lib/api";
 
 const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 	const { id } = await params;
   const { page, pageSize } = await searchParams;
+	await api.cron.dailyDigest();
 
 	if (!id) notFound();
 
