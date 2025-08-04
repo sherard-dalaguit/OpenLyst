@@ -32,17 +32,17 @@ const UserSchema = new Schema<IUser>(
       categories: {
         type: [String],
         default: [
-          "software_engineering",
-          "data",
-          "product_management",
-          "design",
-          "marketing",
-          "sales",
-          "customer_support",
-          "devops",
-          "quality_assurance",
-          "operations",
-          "other"
+          "Software Engineering",
+          "Data",
+          "Product Management",
+          "Design",
+          "Marketing",
+          "Sales",
+          "Customer Support",
+          "DevOps",
+          "Quality Assurance",
+          "Operations",
+          "Other"
         ]
       },
       frequency: {
@@ -50,7 +50,10 @@ const UserSchema = new Schema<IUser>(
         enum: ["daily", "weekly"],
         default: "daily"
       },
-      lastSentAt: Date,
+      lastSentAt: {
+        type: Date,
+        default: null
+      },
       unsubscribeToken: {
         type: String,
         required: true,

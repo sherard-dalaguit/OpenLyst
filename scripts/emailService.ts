@@ -5,8 +5,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
 export interface JobDigestItem {
   title: string;
-  company: string;
-  url: string;
+  companyName: string;
+  sourceLink: string;
 }
 
 export async function gatherNewJobs(
@@ -21,8 +21,8 @@ export async function gatherNewJobs(
 
   return jobs.map(item => ({
     title: item.title,
-    company: item.company,
-    url: item.url,
+    companyName: item.companyName,
+    sourceLink: item.sourceLink,
   }))
 }
 
@@ -45,22 +45,21 @@ export async function sendJobDigestEmail(
 
   const subject =
     type === 'daily'
-      ? 'Your Daily Remote Jobs Digest 🌐'
-      : 'Your Weekly Remote Jobs Digest 🌐'
+      ? `${jobs.length} New Remote Jobs Posted Today! 🌐`
+      : `${jobs.length} New Remote Jobs Posted This Week! 🌐`
 
   const jobItemsHtml = jobs
     .map(
       (j) =>
-        `<li><a href="${j.url}" target="_blank">${j.title} @ ${j.company}</a></li>`
+        `<strong>${j.companyName}: </strong><a href="${j.sourceLink}" target="_blank">${j.title}</a><br/>`
     )
     .join('\n')
 
   const html = `
     <p>Hey ${name},</p>
     <p>Here are your ${type} remote job matches:</p>
-    <ul>
-      ${jobItemsHtml}
-    </ul>
+    <p>${jobItemsHtml}</p>
+    
     <p><a href="${process.env.SITE_URL}/api/unsubscribe/${unsubscribeToken}">
       Unsubscribe
     </a></p>
