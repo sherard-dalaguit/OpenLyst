@@ -21,7 +21,7 @@ const UserAvatar = ({ id, name, imageUrl, className="h-9 w-9", fallbackClassName
 		.slice(0, 2);
 
 	return (
-		<Link href={ROUTES.PROFILE(id)}>
+		<Link href={`/settings/${id}`}>
 			<Avatar className={cn('relative', className)}>
 				{imageUrl ? (
 					<Image

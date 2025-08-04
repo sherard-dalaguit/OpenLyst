@@ -21,8 +21,6 @@ const Navbar = async () => {
         <h1 className="primary-text-gradient">Remote Radar</h1>
       </Link>
 
-      <h1 className="absolute left-1/2 -translate-x-1/2 text-center text-xl">Search bar</h1>
-
       <div className="flex-between gap-4">
         {session?.user?.id ? (
 					<UserAvatar

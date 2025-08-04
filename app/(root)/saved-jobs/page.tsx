@@ -5,6 +5,7 @@ import ROUTES from "@/constants/routes";
 import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_BOOKMARK} from "@/constants/states";
 import {getSavedJobs} from "@/lib/actions/saved.action";
+import Pagination from "@/components/Pagination";
 
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
@@ -26,7 +27,7 @@ const SavedJobsPage = async ({ searchParams }: SearchParams) => {
 		sort: sortBy || 'newest'
 	})
 
-	const { collection } = data || {};
+	const { collection, isNext } = data || {};
 	return (
 		<>
 			<h1 className="h1-bold text-dark100_light900">Saved Jobs</h1>
@@ -56,6 +57,7 @@ const SavedJobsPage = async ({ searchParams }: SearchParams) => {
 				)}
 			/>
 
+			<Pagination page={page} isNext={isNext || false} />
 		</>
 	)
 };

@@ -4,7 +4,6 @@ import {sidebarLinks} from "@/data";
 import {SheetClose} from "@/components/ui/sheet";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import {cn} from "@/lib/utils";
 
 const NavLinks = ({
@@ -21,8 +20,8 @@ const NavLinks = ({
 			{sidebarLinks.map((item) => {
 				const isActive = (pathname.includes(item.route) && item.route.length > 1) || pathname === item.route;
 
-				if (item.route === '/profile') {
-					if (userId) item.route = `/profile/${userId}`;
+				if (item.route === '/settings') {
+					if (userId) item.route = `/settings/${userId}`;
 					else return null;
 				}
 
@@ -37,13 +36,7 @@ const NavLinks = ({
 							'flex items-center justify-start gap-4 bg-transparent p-4'
 						)}
 					>
-						<Image
-							src={item.imgURL}
-							alt={item.label}
-							width={20}
-							height={20}
-							className={cn({ "invert-colors": !isActive })}
-						/>
+						{item.icon}
 						<p className={
 							cn(
 								isActive ? 'base-bold' : 'base-medium',
