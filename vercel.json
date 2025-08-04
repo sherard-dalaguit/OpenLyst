@@ -2,8 +2,7 @@
   "crons": [
     {
       "path": "/api/run-tests",
-      "schedule": "0 5 * * *",
-      "timezone": "America/Los_Angeles"
+      "schedule": "0 5 * * *"
     }
   ]
 }
