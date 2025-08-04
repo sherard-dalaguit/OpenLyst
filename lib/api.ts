@@ -57,4 +57,14 @@ export const api = {
 			}),
 		delete: (id: string) => fetchHandler(`${API_BASE_URL}/accounts/${id}`, { method: "DELETE" }),
 	},
+	cron: {
+		dailyDigest: () =>
+			fetchHandler(`${API_BASE_URL}/cron/daily`, {
+				method: "GET",
+			}),
+		weeklyDigest: () =>
+			fetchHandler(`${API_BASE_URL}/cron/weekly`, {
+				method: "GET",
+			}),
+	}
 }

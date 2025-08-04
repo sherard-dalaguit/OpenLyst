@@ -17,6 +17,7 @@ export async function gatherNewJobs(
     postedAt: {$gt: since},
     category: {$in: categories}
   })
+  console.log(`Found ${jobs.length} new jobs since ${since.toISOString()}`)
 
   return jobs.map(item => ({
     title: item.title,

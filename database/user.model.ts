@@ -31,7 +31,19 @@ const UserSchema = new Schema<IUser>(
       },
       categories: {
         type: [String],
-        default: []
+        default: [
+          "software_engineering",
+          "data",
+          "product_management",
+          "design",
+          "marketing",
+          "sales",
+          "customer_support",
+          "devops",
+          "quality_assurance",
+          "operations",
+          "other"
+        ]
       },
       frequency: {
         type: String,
