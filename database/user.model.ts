@@ -1,5 +1,5 @@
 import { model, models, Schema, Document } from "mongoose";
-import {nanoid} from "zod";
+import {nanoid} from "nanoid";
 
 export interface Preferences {
   receiveAlerts: boolean;
