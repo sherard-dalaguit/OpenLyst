@@ -5,8 +5,9 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
 export interface JobDigestItem {
   title: string;
-  company: string;
-  url: string;
+  companyName: string;
+  sourceLink: string;
+	category: string;
 }
 
 export async function gatherNewJobs(
@@ -21,10 +22,25 @@ export async function gatherNewJobs(
 
   return jobs.map(item => ({
     title: item.title,
-    company: item.company,
-    url: item.url,
+    companyName: item.companyName,
+    sourceLink: item.sourceLink,
+		category: item.category || 'Other'
   }))
 }
+
+const CATEGORY_ORDER = [
+  'Software Engineering',
+  'Data',
+  'Product Management',
+  'Design',
+  'DevOps',
+  'Marketing',
+  'Sales',
+  'Customer Support',
+  'Quality Assurance',
+  'Operations',
+  'Other'
+]
 
 /**
  * Sends a digest email.
@@ -45,25 +61,44 @@ export async function sendJobDigestEmail(
 
   const subject =
     type === 'daily'
-      ? 'Your Daily Remote Jobs Digest 🌐'
-      : 'Your Weekly Remote Jobs Digest 🌐'
+      ? `${jobs.length} New Remote Jobs Posted Today! 🏝️🌍🧑‍💻`
+      : `${jobs.length} New Remote Jobs Posted This Week! 🏝️🌍🧑‍💻`
 
-  const jobItemsHtml = jobs
-    .map(
-      (j) =>
-        `<li><a href="${j.url}" target="_blank">${j.title} @ ${j.company}</a></li>`
-    )
-    .join('\n')
+	const orderedCategories = CATEGORY_ORDER.filter(cat =>
+    jobs.some(j => j.category === cat)
+  )
+
+  let sectionsHtml = ''
+  for (const cat of orderedCategories) {
+    const items = jobs.filter(j => j.category === cat)
+    sectionsHtml += `
+      <div style="margin:24px 0;">
+        <h2 style="font-size:20px; margin:0 0 8px; color:#2c3e50;">${cat}</h2>
+        ${items
+          .map(
+            j => `
+              <p style="margin:4px 0;">
+                <strong>${j.companyName}:</strong>
+                <a href="${j.sourceLink}" target="_blank">${j.title}</a>
+              </p>
+            `
+          )
+          .join('')}
+      </div>
+    `
+  }
 
   const html = `
-    <p>Hey ${name},</p>
-    <p>Here are your ${type} remote job matches:</p>
-    <ul>
-      ${jobItemsHtml}
-    </ul>
-    <p><a href="${process.env.SITE_URL}/api/unsubscribe/${unsubscribeToken}">
-      Unsubscribe
-    </a></p>
+		<p style="margin:0 0 16px; font-size:16px;">Hey ${name},</p>
+		<p style="margin:0 0 16px; font-size:16px;">
+			Here are your ${type} remote job matches:
+		</p>
+		${sectionsHtml}
+		<p style="margin:24px 0 16px; font-size:14px;">
+			<a href="${process.env.SITE_URL}/api/unsubscribe/${unsubscribeToken}">
+				Unsubscribe
+			</a>
+		</p>
   `
 
   await sgMail.send({

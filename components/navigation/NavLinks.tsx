@@ -22,7 +22,6 @@ const NavLinks = ({
 
 				if (item.route === '/settings') {
 					if (userId) item.route = `/settings/${userId}`;
-					else return null;
 				}
 
 				const LinkComponent = (
