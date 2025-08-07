@@ -4,7 +4,7 @@ import handleError from "@/lib/handlers/error";
 import {NotFoundError} from "@/lib/http-errors";
 import { NextResponse } from 'next/server'
 
-export async function GET(_: Request, { params }: { params: { token: string } }) {
+export async function GET(request: Request, { params }: { params: { token: string } }) {
   const { token } = params
 	if (!token) throw new NotFoundError("Unsubscribe token");
 
@@ -17,7 +17,7 @@ export async function GET(_: Request, { params }: { params: { token: string } })
 		user.preferences.receiveAlerts = false
 		await user.save()
 
-		return NextResponse.json({ success: true, message: 'You’ve been unsubscribed. Sorry to see you go!' }, { status: 200 });
+		return NextResponse.redirect(new URL('/unsubscribe-success', request.url));
 	} catch (error) {
 		return handleError(error, "api") as APIErrorResponse;
 	}

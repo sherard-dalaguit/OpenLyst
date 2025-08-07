@@ -10,7 +10,7 @@
     },
     {
       "path": "/api/cron/weekly",
-      "schedule": "0 5 * * 0"
+      "schedule": "0 5 * * *"
     }
   ]
 }
