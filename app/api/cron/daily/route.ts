@@ -11,8 +11,8 @@ export async function GET() {
     'preferences.receiveAlerts': true,
     'preferences.frequency': 'daily',
     $or: [
-      { 'preferences.lastSentAt': { $lt: since } },
-      { 'preferences.lastSentAt': { $exists: false } }
+      { 'preferences.lastSentAtDaily': { $lt: since } },
+      { 'preferences.lastSentAtDaily': { $exists: false } }
     ]
   }).lean()
   console.log(`[cron/daily] Found ${users.length} users to email`)
@@ -35,7 +35,7 @@ export async function GET() {
       console.error(`  ✗ Error sending to ${u.email}`, error)
     }
     await User.findByIdAndUpdate(u._id, {
-      'preferences.lastSentAt': new Date()
+      'preferences.lastSentAtDaily': new Date()
     })
   }
 

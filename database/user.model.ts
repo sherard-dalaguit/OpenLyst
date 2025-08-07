@@ -50,10 +50,14 @@ const UserSchema = new Schema<IUser>(
         enum: ["daily", "weekly"],
         default: "daily"
       },
-      lastSentAt: {
+      lastSentAtDaily: {
         type: Date,
         default: null
       },
+			lastSentAtWeekly: {
+				type: Date,
+				default: null
+			},
       unsubscribeToken: {
         type: String,
         required: true,
