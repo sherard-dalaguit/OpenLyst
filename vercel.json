@@ -1,15 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/run-tests",
-      "schedule": "0 5 * * *"
-    },
-    {
-      "path": "/api/cron/daily",
-      "schedule": "0 5 * * *"
-    },
-    {
-      "path": "/api/cron/weekly",
+      "path": "/api/run-all",
       "schedule": "0 5 * * *"
     }
   ]
