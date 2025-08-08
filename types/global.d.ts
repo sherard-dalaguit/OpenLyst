@@ -19,11 +19,21 @@ interface User {
 	name: string;
 }
 
+interface UserPreferences {
+	receiveAlerts: boolean;
+	categories: string[];
+	frequency: 'daily' | 'weekly';
+	unsubscribeToken: string;
+	lastSentAtDaily?: Date;
+	lastSentAtWeekly?: Date;
+}
+
 interface UserType {
 	_id: string;
 	name: string;
-	image: string;
+	image?: string;
 	email: string;
+	preferences: UserPreferences;
 	createdAt: Date;
 }
 

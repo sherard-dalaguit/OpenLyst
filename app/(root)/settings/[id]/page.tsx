@@ -9,13 +9,11 @@ import dayjs from "dayjs";
 import { Label } from "@/components/ui/label";
 import {Checkbox} from "@/components/ui/checkbox";
 import {jobFilters} from "@/constants/filters";
-import {Switch} from "@/components/ui/switch";
-import {api} from "@/lib/api";
+import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
 
 const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 	const { id } = await params;
   const { page, pageSize } = await searchParams;
-	await api.cron.dailyDigest();
 
 	if (!id) notFound();
 
@@ -88,7 +86,10 @@ const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 			<h1 className="h1-bold text-dark100_light900 mt-10">Email Alerts</h1>
 
 			<div className="flex items-center my-8 space-x-2">
-				<Switch id="airplane-mode" className="body-medium rounded-lg capitalize shadow-none bg-light-800 text-light-500 hover:bg-light-800 dark:bg-dark-300 dark:text-light-500 dark:hover:bg-dark-300" />
+				<ReceiveAlertsSwitch
+					userId={user._id}
+					initial={user.preferences.receiveAlerts}
+				/>
 				<Label htmlFor="airplane-mode">Receive Email Alerts?</Label>
 			</div>
 
