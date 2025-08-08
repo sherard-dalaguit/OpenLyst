@@ -77,5 +77,10 @@ export const api = {
 				method: "PUT",
 				body: JSON.stringify({ userId, receiveAlerts }),
 			}),
+		updatePreferences: (userId: string, categories: string[], frequency: 'daily' | 'weekly') =>
+			fetchHandler(`${API_BASE_URL}/settings/preferences`, {
+				method: "PUT",
+				body: JSON.stringify({ userId, categories, frequency }),
+			}),
 	}
 }

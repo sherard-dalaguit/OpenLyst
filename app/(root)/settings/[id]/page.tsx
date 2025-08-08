@@ -7,9 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { Label } from "@/components/ui/label";
-import {Checkbox} from "@/components/ui/checkbox";
 import {jobFilters} from "@/constants/filters";
 import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
+import PreferencesForm from "@/components/forms/PreferencesForm";
 
 const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 	const { id } = await params;
@@ -22,9 +22,6 @@ const SettingsPage = async ({ params, searchParams }: RouteParams) => {
     userId: id,
   });
 
-	const categoryFilter = jobFilters.find(f => f.key === "category")
-  const categories = categoryFilter?.options ?? []
-
 	if (!success)
     return (
       <div className="flex flex-col items-center justify-center gap-4">
@@ -36,6 +33,16 @@ const SettingsPage = async ({ params, searchParams }: RouteParams) => {
     );
 
   const { user } = data!;
+
+	const categoryFilter = jobFilters.find(f => f.key === "category")
+  const allCategories = categoryFilter?.options ?? []
+
+	const initialCategoryValues = user.preferences.categories
+  .map(label => {
+    const opt = allCategories.find(o => o.label === label)
+    return opt ? opt.label : null
+  })
+  .filter((x): x is string => x !== null)
 
 	return (
 		<>
@@ -90,36 +97,15 @@ const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 					userId={user._id}
 					initial={user.preferences.receiveAlerts}
 				/>
-				<Label htmlFor="airplane-mode">Receive Email Alerts?</Label>
+				<Label htmlFor="receive-alerts" className="text-md text-dark500_light800">Receive Email Alerts?</Label>
 			</div>
 
-			<section className="flex flex-row gap-16 max-sm:flex-col">
-				<div className="flex flex-col gap-3">
-					<h2 className="h2-semibold text-dark100_light900">Job Categories</h2>
-					<div className="flex flex-col gap-3">
-						{categories.map((category, id) => (
-							<div key={id} className="flex items-center gap-3">
-								<Checkbox id={category.label} className="background-light900_dark300 border-light-400" />
-								<Label htmlFor={category.value} className="text-md text-dark500_light800">{category.label}</Label>
-							</div>
-						))}
-					</div>
-				</div>
-
-				<div className="flex flex-col gap-3">
-					<h2 className="h2-semibold text-dark100_light900">Frequency</h2>
-					<div className="flex flex-col gap-3">
-						<div className="flex items-center gap-3">
-							<Checkbox id="daily" className="background-light900_dark300 border-light-400" />
-							<Label htmlFor="daily" className="text-md text-dark500_light800">Daily</Label>
-						</div>
-						<div className="flex items-center gap-3">
-							<Checkbox id="weekly" className="background-light900_dark300 border-light-400" />
-							<Label htmlFor="weekly" className="text-md text-dark500_light800">Weekly</Label>
-						</div>
-					</div>
-				</div>
-			</section>
+			<PreferencesForm
+        userId={user._id}
+        initialCategories={initialCategoryValues}
+        initialFrequency={user.preferences.frequency}
+        allCategories={allCategories}
+      />
 		</>
 	)
 };
