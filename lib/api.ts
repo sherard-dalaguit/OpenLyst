@@ -70,5 +70,17 @@ export const api = {
 			fetchHandler(`${API_BASE_URL}/cron/weekly`, {
 				method: "GET",
 			}),
+	},
+	settings: {
+		updateAlerts: (userId: string, receiveAlerts: boolean) =>
+			fetchHandler(`${API_BASE_URL}/settings/receive-alerts`, {
+				method: "PUT",
+				body: JSON.stringify({ userId, receiveAlerts }),
+			}),
+		updatePreferences: (userId: string, categories: string[], frequency: 'daily' | 'weekly') =>
+			fetchHandler(`${API_BASE_URL}/settings/preferences`, {
+				method: "PUT",
+				body: JSON.stringify({ userId, categories, frequency }),
+			}),
 	}
 }
