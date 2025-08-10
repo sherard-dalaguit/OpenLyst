@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 45     # plenty for a 10–15 min run
     env:
       NODE_ENV: production
-      MONGODB_URI: ${{ process.env.MONGODB_URI }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
       SITE_URL: https://www.remoteradar.io
       # If your scraper needs other envs, add them as repo secrets and map here.
 
