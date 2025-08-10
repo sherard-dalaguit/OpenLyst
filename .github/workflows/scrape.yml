@@ -28,6 +28,8 @@ jobs:
           cache: npm
 
       - name: Install deps
+        env:
+          NODE_ENV: ""
         run: npm ci
 
       # Install Chromium + OS deps for Playwright on the runner
