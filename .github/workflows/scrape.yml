@@ -38,7 +38,7 @@ jobs:
       - name: Run scraper
         env:
           TS_NODE_TRANSPILE_ONLY: "1"   # skip type-checking
-        run: npx ts-node --esm -r tsconfig-paths/register scripts/run-scraper.ts | tee scraper-output.txt
+        run: npx ts-node-esm -r tsconfig-paths/register scripts/run-scraper.ts | tee scraper-output.txt
 
       # (Optional) quick DB sanity check right after the run
       - name: Count last-hour inserts
