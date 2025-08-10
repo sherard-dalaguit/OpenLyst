@@ -1,0 +1,64 @@
+name: Scrape Remote Jobs
+
+on:
+  schedule:
+    - cron: "5 * * * *"   # every hour at :05 (UTC). adjust as you like
+  workflow_dispatch: {}    # allow manual runs from the Actions tab
+
+concurrency:
+  group: scrape-remote-jobs
+  cancel-in-progress: true # never let two scrapes overlap
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45     # plenty for a 10–15 min run
+    env:
+      NODE_ENV: production
+      MONGODB_URI: ${{ process.env.MONGODB_URI }}
+      SITE_URL: https://www.remoteradar.io
+      # If your scraper needs other envs, add them as repo secrets and map here.
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      # Install Playwright browser + OS deps on the runner
+      - name: Install Playwright (Chromium) + deps
+        run: npx playwright install --with-deps chromium
+
+      # If your scraper is TypeScript, either build or use tsx
+      # Option A: Build then run
+      - name: Build (optional if you run with tsx)
+        run: npm run build --if-present
+
+      # Option A: Run compiled JS (adjust path if you emit to ./dist/)
+      # - name: Run scraper
+      #   run: node dist/scripts/run-scraper.js
+
+      # Option B (simpler): run TS directly with tsx (add `tsx` devDependency)
+      - name: Run scraper (tsx)
+        run: npx tsx scripts/run-scraper.ts
+
+      # (Optional) Kick digests after scraping finishes
+      # Safer if your Vercel route checks a secret header!
+#      - name: Trigger daily/weekly digests (optional)
+#        if: ${{ always() }}  # run even if scraper inserted 0
+#        env:
+#          CRON_TRIGGER_URL: ${{ secrets.CRON_TRIGGER_URL }} # e.g. https://www.remoteradar.io/api/cron/run-all?key=...
+#        run: |
+#          if [ -n "$CRON_TRIGGER_URL" ]; then
+#            echo "Triggering digests…"
+#            curl -fsSL "$CRON_TRIGGER_URL" || echo "Digest trigger failed"
+#          else
+#            echo "No CRON_TRIGGER_URL set; skipping digest trigger."
+#          fi
