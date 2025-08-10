@@ -28,6 +28,8 @@ jobs:
           cache: npm
 
       - name: Install deps
+        env:
+          NODE_ENV: ""
         run: npm ci
 
       - name: Install Playwright (Chromium) + deps
