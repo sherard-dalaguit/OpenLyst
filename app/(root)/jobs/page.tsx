@@ -5,7 +5,6 @@ import ROUTES from "@/constants/routes";
 import {getJobs} from "@/lib/actions/job.action";
 import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_JOB} from "@/constants/states";
-import {runAllTests} from "@/scripts/testScraper";
 import Pagination from "@/components/Pagination";
 
 interface SearchParams {
@@ -14,7 +13,6 @@ interface SearchParams {
 
 const Jobs = async ({ searchParams }: SearchParams) => {
 	const { page, pageSize, query, jobType, experienceLevel, category, source, salary, datePosted, sortBy } = await searchParams;
-	// await runAllTests();
 
 	const { success, data, error } = await getJobs({
 		page: Number(page) || 1,

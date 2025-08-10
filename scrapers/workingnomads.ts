@@ -16,7 +16,11 @@ export async function scrapeWorkingNomads(): Promise<number> {
   // 3) request all jobs (size can be bumped if you need more)
   const esUrl = `${elasticRootUrl}/${elasticIndex}/_search`;
   const { data: esResp } = await axios.post(esUrl, {
-    size: 10000,
+    size: 1000,
+		sort: [
+			{ pub_date: { order: "desc" } }, // newest first
+			{ id: { order: "desc" } } // tiebreaker for stable ordering
+		],
     query: { match_all: {} }
   });
 

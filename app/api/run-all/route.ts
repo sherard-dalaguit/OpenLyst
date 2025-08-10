@@ -1,25 +1,16 @@
 import { api } from '@/lib/api';
 import { NextResponse } from 'next/server';
-import {
-	testJavascriptJobsScraper,
-	testJobspressoScraper,
-	testRemoteOkScraper,
-	testRemotiveScraper,
-	testSkipTheDriveScraper,
-	testWeWorkRemotelyScraper,
-	testWorkingNomadsScraper
-} from "@/scripts/testScraper";
 
 export async function GET() {
 	console.log('[api/run-all] -> handler hit');
 
-	await testWorkingNomadsScraper();
-  await testSkipTheDriveScraper();
-  await testWeWorkRemotelyScraper();
-  await testJobspressoScraper();
-  await testJavascriptJobsScraper();
-  await testRemoteOkScraper();
-  await testRemotiveScraper();
+	await api.run_tests.runJavascriptJobsScraper();
+	await api.run_tests.runJobspressoScraper();
+	await api.run_tests.runRemoteOkScraper();
+	await api.run_tests.runRemotiveScraper();
+	await api.run_tests.runSkipTheDriveScraper();
+	await api.run_tests.runWeWorkRemotelyScraper();
+	await api.run_tests.runWorkingNomadsScraper();
 	await api.cron.dailyDigest();
 	await api.cron.weeklyDigest();
 
