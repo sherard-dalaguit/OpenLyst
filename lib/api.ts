@@ -58,16 +58,42 @@ export const api = {
 		delete: (id: string) => fetchHandler(`${API_BASE_URL}/accounts/${id}`, { method: "DELETE" }),
 	},
 	cron: {
-		runScraper: () =>
-			fetchHandler(`${API_BASE_URL}/run-tests`, {
-				method: "GET",
-			}),
 		dailyDigest: () =>
 			fetchHandler(`${API_BASE_URL}/cron/daily`, {
 				method: "GET",
 			}),
 		weeklyDigest: () =>
 			fetchHandler(`${API_BASE_URL}/cron/weekly`, {
+				method: "GET",
+			}),
+	},
+	run_tests: {
+		runJavascriptJobsScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/javascriptjobs`, {
+				method: "GET",
+			}),
+		runJobspressoScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/jobspresso`, {
+				method: "GET",
+			}),
+		runRemoteOkScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/remoteok`, {
+				method: "GET",
+			}),
+		runRemotiveScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/remotive`, {
+				method: "GET",
+			}),
+		runSkipTheDriveScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/skipthedrive`, {
+				method: "GET",
+			}),
+		runWeWorkRemotelyScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/weworkremotely`, {
+				method: "GET",
+			}),
+		runWorkingNomadsScraper: () =>
+			fetchHandler(`${API_BASE_URL}/run-tests/workingnomads`, {
 				method: "GET",
 			}),
 	},
