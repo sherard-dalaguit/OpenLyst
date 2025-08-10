@@ -36,7 +36,7 @@ jobs:
 
       # If your scraper is TypeScript and uses "@/..." path aliases, use tsx + tsconfig-paths:
       - name: Run scraper
-        run: npx tsx --tsconfig-paths scripts/run-scraper.ts | tee scraper-output.txt
+        run: npx ts-node -r tsconfig-paths/register scripts/run-scraper.ts | tee scraper-output.txt
 
       # (Optional) quick DB sanity check right after the run
       - name: Count last-hour inserts
