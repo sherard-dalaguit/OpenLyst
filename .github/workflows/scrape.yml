@@ -3,7 +3,7 @@ name: Scrape Remote Jobs
 on:
   workflow_dispatch: {} # run manually from Actions tab
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "0 6 * * *"
 concurrency:
   group: scrape-remote-jobs
   cancel-in-progress: true # avoid overlapping scrapes
