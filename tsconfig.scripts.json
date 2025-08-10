@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "scripts-dist",
+    "noEmit": false,
+    "declaration": false,
+    "sourceMap": false,
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+
+    "baseUrl": ".",
+    "paths": { "@/*": ["./*"] }
+  },
+  "include": ["scripts/**/*", "database/**/*", "lib/**/*"],
+  "exclude": ["node_modules", ".next"]
+}
