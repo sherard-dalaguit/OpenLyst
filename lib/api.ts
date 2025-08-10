@@ -61,6 +61,7 @@ export const api = {
 		runScraper: () =>
 			fetchHandler(`${API_BASE_URL}/run-tests`, {
 				method: "GET",
+				timeout: 0,
 			}),
 		dailyDigest: () =>
 			fetchHandler(`${API_BASE_URL}/cron/daily`, {
