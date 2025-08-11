@@ -3,7 +3,7 @@ import { IUser } from "@/database/user.model";
 import { IAccount } from "@/database/account.model";
 import ROUTES from "@/constants/routes";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://www.remoteradar.io/api";
 
 export const api = {
 	auth: {
