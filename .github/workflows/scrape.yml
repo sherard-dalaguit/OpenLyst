@@ -1,17 +1,17 @@
 name: Scrape Remote Jobs
 
 on:
-  workflow_dispatch: {} # run manually from Actions tab
+  workflow_dispatch: {}
   schedule:
     - cron: "0 6 * * *"
 concurrency:
   group: scrape-remote-jobs
-  cancel-in-progress: true # avoid overlapping scrapes
+  cancel-in-progress: true
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 45 # plenty for a 10–15 min scrape
+    timeout-minutes: 45
     env:
       NODE_ENV: production
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -43,7 +43,6 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npx tsx scripts/run-scraper.ts | tee scraper-output.txt
 
-      # (Optional) quick DB sanity check right after the run
       - name: Count last-hour inserts
         run: |
           node -e "
@@ -59,7 +58,6 @@ jobs:
             })().catch(e=>{ console.error(e); process.exit(1); });
           " | tee db-count.txt
 
-      # Nice summary in the Actions UI
       - name: Summary
         if: always()
         run: |
