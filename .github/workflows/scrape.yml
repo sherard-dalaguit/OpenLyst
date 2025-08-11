@@ -33,6 +33,11 @@ jobs:
       - name: Install Playwright (Chromium) + deps
         run: npx playwright install --with-deps chromium
 
+      - name: Seed sources
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: npx tsx scripts/seed-sources.ts
+
       - name: Run scraper
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
