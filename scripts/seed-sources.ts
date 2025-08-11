@@ -6,10 +6,10 @@ const SOURCES = [
   { name: "RemoteOK", slug: "remoteok", baseUrl: "https://remoteok.com", enabled: true },
   { name: "Remotive", slug: "remotive", baseUrl: "https://remotive.com", enabled: true },
   { name: "SkipTheDrive", slug: "skipthedrive", baseUrl: "https://skipthedrive.com", enabled: true },
-  { name: "We Work Remotely", slug: "weworkremotely", baseUrl: "https://weworkremotely.com", enabled: true },
+  { name: "WeWorkRemotely", slug: "weworkremotely", baseUrl: "https://weworkremotely.com", enabled: true },
   { name: "Jobspresso", slug: "jobspresso", baseUrl: "https://jobspresso.co", enabled: true },
   { name: "JavascriptJobs", slug: "javascriptjobs", baseUrl: "https://javascript.jobs", enabled: true },
-  { name: "Working Nomads", slug: "workingnomads", baseUrl: "https://workingnomads.com", enabled: true },
+  { name: "WorkingNomads", slug: "workingnomads", baseUrl: "https://workingnomads.com", enabled: true },
 ];
 
 async function main() {
