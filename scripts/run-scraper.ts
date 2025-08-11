@@ -9,9 +9,10 @@ import {
 	testWeWorkRemotelyScraper,
 	testWorkingNomadsScraper
 } from "@/scripts/testScraper";
+import dbConnect from "@/lib/mongoose";
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URI!);
+  await dbConnect();
   const limit = pLimit(2);
   const tasks = [
     () => testJavascriptJobsScraper(),
