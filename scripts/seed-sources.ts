@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Source from "@/database/source.model";
+import dbConnect from "@/lib/mongoose";
 
 const SOURCES = [
   { name: "RemoteOK", slug: "remoteok", baseUrl: "https://remoteok.com", enabled: true },
@@ -12,7 +13,7 @@ const SOURCES = [
 ];
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URI!);
+  await dbConnect();
   for (const s of SOURCES) {
     await Source.updateOne({ name: s.name }, { $setOnInsert: s }, { upsert: true });
   }

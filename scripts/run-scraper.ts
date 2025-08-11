@@ -17,10 +17,10 @@ async function main() {
     () => testJavascriptJobsScraper(),
 		() => testJobspressoScraper(),
 		() => testRemoteOkScraper(),
-		() => testRemotiveScraper(),
 		() => testSkipTheDriveScraper(),
 		() => testWeWorkRemotelyScraper(),
 		() => testWorkingNomadsScraper(),
+		() => testRemotiveScraper(),
   ];
   const results = await Promise.allSettled(tasks.map(t => limit(t)));
   results.forEach((r, i) => console.log(`[scraper ${i}]`, r.status, r));
