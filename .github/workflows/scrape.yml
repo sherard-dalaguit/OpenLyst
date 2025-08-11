@@ -34,6 +34,8 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run scraper
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: npx tsx scripts/run-scraper.ts | tee scraper-output.txt
 
       # (Optional) quick DB sanity check right after the run

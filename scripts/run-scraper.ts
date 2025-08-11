@@ -1,20 +1,31 @@
-import { api } from '@/lib/api';
+import mongoose from "mongoose";
+import pLimit from "p-limit";
+import {
+	testJavascriptJobsScraper,
+	testJobspressoScraper,
+	testRemoteOkScraper,
+	testRemotiveScraper,
+	testSkipTheDriveScraper,
+	testWeWorkRemotelyScraper,
+	testWorkingNomadsScraper
+} from "@/scripts/testScraper";
 
 async function main() {
-	console.log('[run-scraper] -> Starting scraper jobs...');
+  await mongoose.connect(process.env.MONGODB_URI!);
+  const limit = pLimit(2);
+  const tasks = [
+    () => testJavascriptJobsScraper(),
+		() => testJobspressoScraper(),
+		() => testRemoteOkScraper(),
+		() => testRemotiveScraper(),
+		() => testSkipTheDriveScraper(),
+		() => testWeWorkRemotelyScraper(),
+		() => testWorkingNomadsScraper(),
+  ];
+  const results = await Promise.allSettled(tasks.map(t => limit(t)));
+  results.forEach((r, i) => console.log(`[scraper ${i}]`, r.status, r));
+  await mongoose.disconnect();
 
-	await api.run_tests.runJavascriptJobsScraper();
-	await api.run_tests.runJobspressoScraper();
-	await api.run_tests.runRemoteOkScraper();
-	await api.run_tests.runRemotiveScraper();
-	await api.run_tests.runSkipTheDriveScraper();
-	await api.run_tests.runWeWorkRemotelyScraper();
-	await api.run_tests.runWorkingNomadsScraper();
-
-	console.log('[run-scraper] -> Scraper jobs completed.');
+  if (results.every(r => r.status === "rejected")) process.exit(1);
 }
-
-main().catch((err) => {
-  console.error('[scraper] fatal', err)
-  process.exit(1)
-})
+main().catch(e => { console.error(e); process.exit(1); });
