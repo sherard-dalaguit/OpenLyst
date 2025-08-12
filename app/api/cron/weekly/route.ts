@@ -6,12 +6,15 @@ import {gatherNewJobs, sendJobDigestEmail} from "@/scripts/emailService";
 export async function GET() {
   console.log('[cron/weekly] -> handler hit')
   await dbConnect()
-  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-  const users = await User.find({
+
+	const jobsSince = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)                // full week of jobs
+  const eligibilitySince = new Date(Date.now() - ((7 * 24 - 1) * 60 * 60 * 1000)) // 1h buffer
+
+	const users = await User.find({
     'preferences.receiveAlerts': true,
     'preferences.frequency': 'weekly',
     $or: [
-      { 'preferences.lastSentAtWeekly': { $lt: since } },
+      { 'preferences.lastSentAtWeekly': { $lte: eligibilitySince } },
       { 'preferences.lastSentAtWeekly': { $exists: false } }
     ]
   }).lean()
@@ -19,7 +22,7 @@ export async function GET() {
 
   for (const u of users) {
     console.log(`[cron/weekly] → processing ${u.email}`)
-    const jobs = await gatherNewJobs(since, u.preferences.categories)
+    const jobs = await gatherNewJobs(jobsSince, u.preferences.categories)
     console.log(`  • ${jobs.length} new jobs`)
 
     try {
@@ -31,12 +34,14 @@ export async function GET() {
         'weekly'
       )
       console.log(`  ✓ Sent email to ${u.email}`)
+
+			await User.findByIdAndUpdate(u._id, {
+				'preferences.lastSentAtWeekly': new Date()
+			})
     } catch (error) {
       console.error(`  ✗ Error sending to ${u.email}`, error)
     }
-    await User.findByIdAndUpdate(u._id, {
-      'preferences.lastSentAtWeekly': new Date()
-    })
+
   }
 
   return NextResponse.json({ status: 'ok', sent: users.length })
