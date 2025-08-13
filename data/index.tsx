@@ -234,3 +234,31 @@ export const jobs = [
     isApplied: true,
   },
 ];
+
+export const dailyTips = [
+  "Customize your resume and cover letter for each role",
+  "Apply within 48 hours of a posting for higher visibility",
+  "Track your applications to avoid duplicate submissions",
+  "Treat your job search like a part-time job",
+  "Follow up 3–5 days after applying",
+  "Keep your resume to one page unless you have 10+ years experience",
+  "Highlight measurable results in your achievements",
+  "Use keywords from the job description in your application",
+  "Connect with recruiters on LinkedIn",
+  "Ask for informational interviews with industry professionals",
+  "Save roles even if you’re unsure—you can revisit later",
+  "Practice your interview answers out loud",
+  "Research the company before applying",
+  "Apply to stretch roles slightly above your current level",
+  "Set weekly job application goals",
+  "Don’t wait for motivation—build a routine",
+  "Apply even if you don’t meet 100% of the requirements",
+  "Always proofread before submitting",
+  "Network with peers in your industry",
+  "Use job boards and company career pages directly",
+  "Block off time each day for your job search",
+  "Review your applications weekly and follow up",
+  "Leverage your personal network for referrals",
+  "Stay persistent—one ‘yes’ can change everything",
+  "Every no brings you closer to your yes"
+];

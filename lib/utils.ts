@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import Job from "@/database/job.model";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -217,4 +218,10 @@ export function slugToLabel(slug: string, joiner: "-" | " " = "-") {
       word.slice(1).toLowerCase()
     )
     .join(joiner);
+}
+
+export async function countJobsSince(since: Date) {
+  return Job.countDocuments({
+    postedAt: { $gt: since },
+  }).exec()
 }

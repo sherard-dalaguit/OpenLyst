@@ -1,34 +1,46 @@
-import ROUTES from "@/constants/routes";
-import Link from "next/link";
-import Image from "next/image";
+import {dailyTips} from "@/data";
+import {countJobsSince} from "@/lib/utils";
 
-const recommendedJobs = [
-	{ _id: "1", title: "Software Engineer - Airbnb" },
-	{ _id: "2", title: "Data Engineer - Palantir" },
-	{ _id: "3", title: "Senior Software Engineer - Prismatic Software" },
-	{ _id: "4", title: "Full Stack Software Engineer - Twilio" },
-	{ _id: "5", title: "Staff Software Engineer - Discord" },
-	{ _id: "6", title: "Frontend Engineer - Meta" },
-	{ _id: "7", title: "Backend Engineer - Stripe" },
-	{ _id: "8", title: "DevOps Engineer - Google" },
-	{ _id: "9", title: "Machine Learning Engineer - OpenAI" },
-	{ _id: "10", title: "Cloud Solutions Architect - AWS" },
-];
+const RightSidebar = async () => {
+	const today = new Date();
+  const dayNumber = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
 
-const RightSidebar = () => {
+  const tipsPerDay = 5;
+  const startIndex = dayNumber % dailyTips.length;
+
+  const tipsToShow = Array.from({ length: tipsPerDay }).map((_, i) => {
+    return dailyTips[(startIndex + i) % dailyTips.length];
+  });
+
+	const dailySince = new Date(Date.now() - 24 * 60 * 60 * 1000);
+	const weeklySince = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+	const foreverSince = new Date(0);
+	const [dailyCount, weeklyCount, allCount] = await Promise.all([
+		countJobsSince(dailySince),
+		countJobsSince(weeklySince),
+		countJobsSince(foreverSince),
+	]);
+
 	return (
 		<section className="custom-scrollbar background-light900_dark200 light-border sticky right-0 top-0 h-screen w-[350px] flex flex-col gap-6 overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden">
 			<div>
-				<h2 className="h2-bold primary-text-gradient">Recommended For You</h2>
+				<h2 className="h2-bold"><span className="primary-text-gradient">Job Digest Summary</span> 📊</h2>
 
-				<div className="mt-7 flex w-full flex-col gap-[30px]">
-					{recommendedJobs.map(({ _id, title }) => (
-						<Link key={_id} href={ROUTES.PROFILE(_id)} className="flex cursor-pointer items-center justify-between gap-7">
-							<p className="body-large text-dark500_light700">{title}</p>
-							<Image src="/icons/chevron-right.svg" alt="Chevron" width={20} height={20} className="invert-colors" />
-						</Link>
+				<ul className="my-7 space-y-2 text-dark500_light700">
+					<li>New today: {dailyCount}</li>
+					<li>New this week: {weeklyCount}</li>
+					<li>Total jobs: {allCount}</li>
+				</ul>
+			</div>
+
+			<div>
+				<h2 className="h2-bold"><span className="primary-text-gradient">Daily Job Hunt Tips</span> 💡</h2>
+
+				<ul className="mt-7 flex flex-col gap-[30px] text-dark500_light700">
+					{tipsToShow.map((tip, i) => (
+						<li key={i}>{tip}</li>
 					))}
-				</div>
+				</ul>
 			</div>
 		</section>
 	)

@@ -7,8 +7,8 @@ export async function GET() {
   console.log('[cron/weekly] -> handler hit')
   await dbConnect()
 
-	const jobsSince = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)                // full week of jobs
-  const eligibilitySince = new Date(Date.now() - ((7 * 24 - 1) * 60 * 60 * 1000)) // 1h buffer
+	const jobsSince = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+  const eligibilitySince = new Date(Date.now() - ((7 * 24 - 1) * 60 * 60 * 1000))
 
 	const users = await User.find({
     'preferences.receiveAlerts': true,
