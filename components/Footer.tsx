@@ -5,7 +5,7 @@ const Footer = () => {
 	return (
 		<footer className="relative w-full p-10 lg:px-[10vh] flex flex-col space-y-8 border-t border-[#171717] bg-[#070707]" id="contact">
 			<div className="flex flex-col sm:flex-row mx-auto w-full max-w-7xl xl:max-w-[70vw] justify-around sm:items-center">
-				<div className="flex flex-col pt-10 sm:gap-2">
+				<div className="flex flex-col sm:pt-10 sm:gap-2">
 					<Link
 						href="#"
 						className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 font-normal text-black"
@@ -16,10 +16,10 @@ const Footer = () => {
 							width={30}
 							height={30}
 						/>
-						<span className="font-medium text-black dark:text-white">Remote Radar</span>
+						<span className="font-medium primary-text-gradient">Remote Radar</span>
 					</Link>
 
-					<div className="text-neutral-400 p-2 space-y-2">
+					<div className="text-neutral-300 p-2 space-y-2">
 						<p>Copyright @ 2025 Remote Radar</p>
 						<p>All rights reserved</p>
 					</div>

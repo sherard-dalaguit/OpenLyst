@@ -2,7 +2,6 @@ import LitButton from '@/components/ui/LitButton';
 import { IconBriefcase, IconArrowDown, IconSend } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from 'next/image';
-import {ContainerScroll} from '@/components/ui/container-scroll-animation';
 import Footer from "@/components/Footer";
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";
 import {Services} from "@/components/Services";
@@ -11,54 +10,55 @@ export default function Home() {
   return (
     <>
       <LandingNavbar />
-      <div className="relative flex flex-col items-center justify-center text-center bg-black mx-auto pt-[32vh]">
+      <div className="relative flex flex-col items-center justify-center text-center bg-black mx-auto pt-[21vh] sm:pt-[32vh]">
+				<section className="min-h-screen flex flex-col items-center">
+					<Spotlight/>
 
-        <Spotlight/>
+					<div className="w-full absolute left-0 top-0 min-h-96 pointer-events-none rotate-180">
+						<Image
+							src="/footer-grid.svg"
+							alt="grid"
+							width={1000}
+							height={1000}
+							className="w-full h-full opacity-40 dark:opacity-70 filter invert dark:filter-none"
+						/>
+					</div>
 
-        <div className="w-full absolute left-0 top-0 min-h-96 pointer-events-none rotate-180">
-          <Image
-            src="/footer-grid.svg"
-            alt="grid"
-            width={1000}
-            height={1000}
-            className="w-full h-full opacity-40 dark:opacity-70 filter invert dark:filter-none"
-          />
-        </div>
+					<h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl max-w-6xl font-semibold">
+						Turn your <span className="primary-text-gradient">inbox</span> into the ultimate <span className="primary-text-gradient">remote board</span>
+					</h1>
 
-        <h1 className="text-8xl max-w-6xl font-semibold">
-          Turn your <span className="primary-text-gradient">inbox</span> into the ultimate <span className="primary-text-gradient">remote board</span>
-        </h1>
+					<p className="text-lg md:text-xl lg:text-2xl px-4 max-w-4xl my-16">
+						Remote Radar pulls in hundreds of remote job listings from around the web and sends them to your inbox every day.
+					</p>
 
-        <p className="text-2xl max-w-4xl my-16">
-          Remote Radar pulls in hundreds of remote job listings from around the web and sends them to your inbox every day.
-        </p>
+					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+						<LitButton
+							title="Browse Jobs"
+							icon={<IconBriefcase/>}
+							position="right"
+						/>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pb-4 md:pb-8 xl:pb-12">
-          <LitButton
-            title="Browse Jobs"
-            icon={<IconBriefcase/>}
-            position="right"
-          />
+						<LitButton
+							title="Sign Up Free"
+							icon={<IconArrowDown/>}
+							position="right"
+						/>
+					</div>
+				</section>
 
-          <LitButton
-            title="Sign Up Free"
-            icon={<IconArrowDown/>}
-            position="right"
-          />
-        </div>
+				<div className="mx-6 md:mx-10 -mt-[30vh] mb-[22vh] max-w-6xl p-[4px] z-50 bg-gradient-to-r from-[#843cf3] via-[#d73ed7] to-[#ff8f5d] rounded-2xl">
+					<Image
+						src="/remote_radar.webp"
+						alt="hero"
+						height={720}
+						width={1400}
+						className="rounded-2xl object-cover h-full object-left-top"
+						draggable={false}
+					/>
+				</div>
 
-        <ContainerScroll>
-          <Image
-            src="/devexchange.webp"
-            alt="hero"
-            height={720}
-            width={1400}
-            className="mx-auto max-w-6xl rounded-2xl object-cover h-full object-left-top"
-            draggable={false}
-          />
-        </ContainerScroll>
-
-        <h1 className="text-6xl max-w-6xl font-semibold">
+        <h1 className="text-4xl md:text-5xl xl:text-6xl max-w-6xl font-semibold">
           Everything you need for a <span className="primary-text-gradient">winning remote job search</span>
         </h1>
 
@@ -66,8 +66,8 @@ export default function Home() {
           <Services />
         </div>
 
-        <section id="get-alerts" className="-mt-[25vh] pb-[15vh] z-10 text-center">
-          <h1 className="text-6xl font-semibold mb-12">
+        <section id="get-alerts" className="-mt-[25vh] pb-[15vh] z-10 flex flex-col items-center">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-semibold mb-12">
             <span className="primary-text-gradient">Never Miss a Remote Job</span>
           </h1>
 
