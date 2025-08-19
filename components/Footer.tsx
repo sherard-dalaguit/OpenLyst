@@ -3,6 +3,7 @@ import {IconBriefcase, IconSend} from "@tabler/icons-react";
 import Image from "next/image";
 import {socialMedia} from "@/data";
 import LitButton from "@/components/ui/LitButton";
+import Link from "next/link";
 
 const Footer = () => {
 	return (
@@ -30,17 +31,21 @@ const Footer = () => {
 					Sign up free to get the latest remote openings—filtered by your favorite categories—straight to your inbox.
 				</p>
 				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<LitButton
-						title="Browse Jobs"
-						icon={<IconBriefcase/>}
-						position="right"
-					/>
+					<Link href="/jobs">
+						<LitButton
+							title="Browse Jobs"
+							icon={<IconBriefcase/>}
+							position="right"
+						/>
+					</Link>
 
-					<LitButton
-						title="Sign Up Free"
-						icon={<IconSend/>}
-						position="right"
-					/>
+					<Link href="/sign-up">
+						<LitButton
+							title="Sign Up Free"
+							icon={<IconSend/>}
+							position="right"
+						/>
+					</Link>
 				</div>
 			</div>
 
