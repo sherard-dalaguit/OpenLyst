@@ -1,5 +1,5 @@
 import {SpotlightReverse} from "@/components/ui/spotlight-reverse";
-import {IconSend} from "@tabler/icons-react";
+import {IconBriefcase, IconSend} from "@tabler/icons-react";
 import Image from "next/image";
 import {socialMedia} from "@/data";
 import LitButton from "@/components/ui/LitButton";
@@ -29,11 +29,19 @@ const Footer = () => {
 				<p className="max-w-3xl text-xl pb-12">
 					Sign up free to get the latest remote openings—filtered by your favorite categories—straight to your inbox.
 				</p>
-				<LitButton
-					title="Create Job Alert"
-					icon={<IconSend/>}
-					position="right"
-				/>
+				<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+					<LitButton
+						title="Browse Jobs"
+						icon={<IconBriefcase/>}
+						position="right"
+					/>
+
+					<LitButton
+						title="Sign Up Free"
+						icon={<IconSend/>}
+						position="right"
+					/>
+				</div>
 			</div>
 
 			<div className="flex mt-16 md:flex-row flex-col max-w-screen-xl mx-auto justify-between items-center">

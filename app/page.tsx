@@ -1,10 +1,11 @@
 import LitButton from '@/components/ui/LitButton';
-import { IconBriefcase, IconArrowDown } from '@tabler/icons-react';
+import { IconBriefcase, IconSend } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from 'next/image';
 import Footer from "@/components/Footer";
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";
 import {Services} from "@/components/Services";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -33,17 +34,21 @@ export default function Home() {
 					</p>
 
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-						<LitButton
-							title="Browse Jobs"
-							icon={<IconBriefcase/>}
-							position="right"
-						/>
+						<Link href="/jobs">
+							<LitButton
+								title="Browse Jobs"
+								icon={<IconBriefcase/>}
+								position="right"
+							/>
+						</Link>
 
-						<LitButton
-							title="Sign Up Free"
-							icon={<IconArrowDown/>}
-							position="right"
-						/>
+						<Link href="/sign-up">
+							<LitButton
+								title="Sign Up Free"
+								icon={<IconSend/>}
+								position="right"
+							/>
+						</Link>
 					</div>
 				</section>
 
