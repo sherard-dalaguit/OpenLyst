@@ -1,5 +1,5 @@
 import LitButton from '@/components/ui/LitButton';
-import { IconBriefcase, IconArrowDown, IconSend } from '@tabler/icons-react';
+import { IconBriefcase, IconArrowDown } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from 'next/image';
 import Footer from "@/components/Footer";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <LandingNavbar />
-      <div className="relative flex flex-col items-center justify-center text-center bg-black mx-auto pt-[21vh] sm:pt-[32vh]">
+      <div className="relative flex flex-col items-center justify-center text-center overflow-clip bg-black mx-auto pt-[21vh] sm:pt-[32vh]">
 				<section className="min-h-screen flex flex-col items-center">
 					<Spotlight/>
 
@@ -66,24 +66,8 @@ export default function Home() {
           <Services />
         </div>
 
-        <section id="get-alerts" className="-mt-[25vh] pb-[15vh] z-10 flex flex-col items-center">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-semibold mb-12">
-            <span className="primary-text-gradient">Never Miss a Remote Job</span>
-          </h1>
-
-          <p className="max-w-3xl text-xl pb-12">
-            Sign up free to get the latest remote openings—filtered by your favorite categories—straight to your inbox.
-          </p>
-
-          <LitButton
-            title="Create Job Alert"
-            icon={<IconSend/>}
-            position="right"
-          />
-        </section>
-
+				<Footer />
       </div>
-      <Footer />
     </>
   );
 }

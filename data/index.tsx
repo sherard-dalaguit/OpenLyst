@@ -262,3 +262,21 @@ export const dailyTips = [
   "Stay persistent—one ‘yes’ can change everything",
   "Every no brings you closer to your yes"
 ];
+
+export const socialMedia = [
+  {
+    id: 1,
+    img: "/git.svg",
+    link: "https://github.com/sherard-dalaguit",
+  },
+  {
+    id: 2,
+    img: "/link.svg",
+    link: "https://www.linkedin.com/in/sherard-d/"
+  },
+  {
+    id: 3,
+    img: "/insta.svg",
+    link: "https://www.instagram.com/sherard_dalaguit/"
+  },
+];

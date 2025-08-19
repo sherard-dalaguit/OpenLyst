@@ -1,53 +1,59 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import {SpotlightReverse} from "@/components/ui/spotlight-reverse";
+import {IconSend} from "@tabler/icons-react";
+import Image from "next/image";
+import {socialMedia} from "@/data";
+import LitButton from "@/components/ui/LitButton";
 
 const Footer = () => {
 	return (
-		<footer className="relative w-full p-10 lg:px-[10vh] flex flex-col space-y-8 border-t border-[#171717] bg-[#070707]" id="contact">
-			<div className="flex flex-col sm:flex-row mx-auto w-full max-w-7xl xl:max-w-[70vw] justify-around sm:items-center">
-				<div className="flex flex-col sm:pt-10 sm:gap-2">
-					<Link
-						href="#"
-						className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 font-normal text-black"
-					>
-						<Image
-							src="/logo.png"
-							alt="logo"
-							width={30}
-							height={30}
-						/>
-						<span className="font-medium primary-text-gradient">Remote Radar</span>
-					</Link>
+		<footer className="w-full pb-10 px-4 sm:px-20 relative" id="contact">
+			<div className="h-48 mb-0 overflow-hidden">
+				<SpotlightReverse/>
+			</div>
 
-					<div className="text-neutral-300 p-2 space-y-2">
-						<p>Copyright @ 2025 Remote Radar</p>
-						<p>All rights reserved</p>
-					</div>
-				</div>
+			<div className="w-full absolute left-0 -bottom-72 min-h-96 pointer-events-none">
+				<Image
+					src="/footer-grid.svg"
+					alt="grid"
+					width={1000}
+					height={1000}
+					className="w-full h-full opacity-70"
+				/>
+			</div>
 
-				<div className="flex flex-row space-x-20 pt-10 text-xs sm:text-sm text-neutral-300">
-					<div className="flex flex-col gap-4">
-						<p>Pricing</p>
-						<p>Blog</p>
-						<p>Contact</p>
-					</div>
+			<div className="flex flex-col items-center max-w-screen-xl mx-auto w-full md:px-4">
+				<h1 className="text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-semibold mb-12">
+					<span className="primary-text-gradient">Never Miss a Remote Job</span>
+				</h1>
 
-					<div className="flex flex-col gap-4">
-						<p>Privacy Policy</p>
-						<p>Terms of Service</p>
-						<p>Refund Policy</p>
-					</div>
+				<p className="max-w-3xl text-xl pb-12">
+					Sign up free to get the latest remote openings—filtered by your favorite categories—straight to your inbox.
+				</p>
+				<LitButton
+					title="Create Job Alert"
+					icon={<IconSend/>}
+					position="right"
+				/>
+			</div>
 
-					<div className="flex flex-col gap-4">
-						<p>Twitter</p>
-						<p>LinkedIn</p>
-						<p>GitHub</p>
-					</div>
+			<div className="flex mt-16 md:flex-row flex-col max-w-screen-xl mx-auto justify-between items-center">
+				<p className="md:text-base text-sm md:font-normal font-light">Copyright © 2025 Remote Radar</p>
+
+				<div className="flex items-center justify-center md:gap-3 gap-6 mt-5">
+					{socialMedia.map((profile) => (
+						<a key={profile.id} href={profile.link} target="_blank" rel="noopener noreferrer">
+							<div className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300">
+								<Image
+									src={profile.img}
+									alt={profile.img}
+									width={20}
+									height={20}
+								/>
+							</div>
+						</a>
+					))}
 				</div>
 			</div>
-			<h1 className="mx-auto text-[40px] sm:text-[80px] md:text-[100px] lg:text-[130px] xl:text-[160px] font-bold primary-text-gradient">
-				Remote Radar
-			</h1>
 		</footer>
 	)
 }
