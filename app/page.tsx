@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";
 import {Services} from "@/components/Services";
 import Link from "next/link";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -69,6 +70,7 @@ export default function Home() {
 
         <div className="text-start w-full">
           <Services />
+					<FAQ />
         </div>
 
 				<Footer />

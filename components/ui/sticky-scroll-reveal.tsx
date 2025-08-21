@@ -58,7 +58,7 @@ export const StickyScroll = ({
         ? "#000000"
         : "#080212"
       }}
-      className="relative flex justify-center min-h-screen space-x-10 rounded-md p-10 pb-[40vh]"
+      className="relative flex justify-center min-h-screen space-x-10 rounded-md p-10 pb-[20vh]"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
