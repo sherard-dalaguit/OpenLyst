@@ -5,38 +5,22 @@ export const servicesContent = [
   {
     title: "Aggregated Job Listings",
     description: "Browse thousands of remote jobs in one place. Remote Radar pulls roles from top boards like WeWorkRemotely, RemoteOK, and Wellfound into a single, unified feed—so you don’t have to hop between platforms.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-500 text-white">
-        Aggregated Listings
-      </div>
-    ),
-  },
-  {
-    title: "Email Digests",
-    description: "Stay updated without constant refreshing. Get curated daily or weekly emails with the latest remote jobs that match your interests—delivered straight to your inbox.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-green-500 to-teal-400 text-white">
-        Email Digests
-      </div>
-    ),
-  },
-  {
-    title: "Advanced Search & Filters",
-    description: "Narrow down listings by role, industry, salary range, and more to find your perfect match. Combine multiple criteria to refine results with pinpoint accuracy.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500 text-white">
-        Advanced Filters
-      </div>
-    ),
+    image: "/screenshots/remote_radar_2.webp",
   },
   {
     title: "Save & Track Jobs",
     description: "Bookmark jobs you’re interested in and revisit them anytime. Keep track of saved roles as you prepare applications, so nothing slips through the cracks.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-yellow-400 to-orange-500 text-white">
-        Saved Jobs
-      </div>
-    ),
+    image: "/screenshots/remote_radar_3.webp",
+  },
+  {
+    title: "Advanced Search & Filters",
+    description: "Narrow down listings by role, industry, salary range, and more to find your perfect match. Combine multiple criteria to refine results with pinpoint accuracy.",
+    image: "/screenshots/remote_radar_4.webp",
+  },
+	{
+    title: "Email Digests",
+    description: "Stay updated without constant refreshing. Get curated daily or weekly emails with the latest remote jobs that match your interests—delivered straight to your inbox.",
+    image: "/screenshots/remote_radar_5.webp",
   },
 ];
 
@@ -44,51 +28,48 @@ export const FAQDetails = [
   {
     value: "item-1",
     title: "What is Remote Radar?",
-    content:
-      "Remote Radar is a free platform that collects remote job postings from multiple top job boards and displays them in one place. Instead of visiting several sites every day, you can browse everything from one dashboard.",
+    content: "Remote Radar is a free platform that collects remote job postings from multiple top job boards and displays them in one place. Instead of visiting several sites every day, you can browse everything from one dashboard.",
   },
   {
     value: "item-2",
     title: "How often are jobs updated?",
-    content:
-      "New jobs are pulled in throughout the day, so the feed is always fresh. You’ll see the latest postings whenever you log in.",
+    content: "New jobs are pulled in throughout the day, so the feed is always fresh. You’ll see the latest postings whenever you log in.",
   },
   {
     value: "item-3",
     title: "Can I get jobs sent to my email?",
-    content:
-      "Yes! You can subscribe to daily or weekly digests to receive the newest jobs that match your preferred categories straight to your inbox.",
+    content: "Yes! You can subscribe to daily or weekly digests to receive the newest jobs that match your preferred categories straight to your inbox.",
   },
   {
     value: "item-4",
     title: "Is Remote Radar free to use?",
-    content:
-      "Absolutely. Remote Radar is completely free—there are no hidden fees, subscriptions, or paywalls.",
+    content: "Absolutely. Remote Radar is completely free—there are no hidden fees, subscriptions, or paywalls. I don't care about monetizing your job search.",
   },
   {
     value: "item-5",
     title: "Do you only list software engineering jobs?",
-    content:
-      "No. While we include plenty of engineering roles, we also cover design, marketing, sales, customer support, product management, and more. You can filter by category to see only the jobs you care about.",
+    content: "No. While Remote Radar includes plenty of developer roles, it also covers design, marketing, sales, customer support, product management, and more. You can filter by category to see only the jobs you care about.",
   },
   {
     value: "item-6",
     title: "How do I keep track of jobs I’m interested in?",
-    content:
-      "You can save jobs to your personal list with one click, and they’ll be waiting for you in your Saved Jobs page whenever you return.",
+    content: "You can save jobs to your personal list with one click, and they’ll be waiting for you in your Saved Jobs page whenever you return.",
   },
   {
     value: "item-7",
     title: "What about applied jobs?",
-    content:
-      "Remote Radar lets you mark jobs as 'applied' so you can easily track your progress and avoid applying to the same posting twice.",
+    content: "Remote Radar lets you mark jobs as 'applied' so you can easily track your progress and avoid applying to the same posting twice.",
   },
   {
     value: "item-8",
     title: "Do you store or share my applications?",
-    content:
-      "No. Remote Radar never sends your applications to companies directly—we just link you to the original posting. Saved and applied jobs are only stored in your account for your personal tracking.",
+    content: "No. Remote Radar doesn't even have a feature to submit job applications to companies directly—it just links you to the original posting. Saved and applied jobs are only stored in your account for your personal tracking.",
   },
+	{
+		value: "item-9",
+		title: "Why did you make this?",
+		content: "After spending hours each day hopping between job boards, I wanted a simpler way to find remote roles. Remote Radar is my solution to streamline the search process and help others do the same. Plus, the current SWE market is looking pretty tough so I wanted to build something useful that I can bring up in interviews 😭.",
+	},
 ]
 
 export const sidebarLinks = [

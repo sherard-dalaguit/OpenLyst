@@ -20,14 +20,6 @@ export function LandingNavbar() {
 			link: "/jobs",
 		},
     {
-      name: "Features",
-      link: "#features",
-    },
-    {
-      name: "FAQ",
-      link: "#faq",
-    },
-    {
       name: "Contact",
       link: "/contact",
     },
