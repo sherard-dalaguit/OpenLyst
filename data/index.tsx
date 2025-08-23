@@ -4,50 +4,73 @@ import {IconBookmark, IconCircleCheck, IconHome, IconSettings} from "@tabler/ico
 export const servicesContent = [
   {
     title: "Aggregated Job Listings",
-    description: "Pull remote roles from multiple top boards—WeWorkRemotely, RemoteOk, Wellfound, and more—into one unified feed. This consolidated view eliminates the need to hop between platforms and helps you discover opportunities faster. Customize your feed by skills, location, and salary to see the most relevant listings first.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-500 text-white">
-        Aggregated Listings
-      </div>
-    ),
+    description: "Browse thousands of remote jobs in one place. Remote Radar pulls roles from top boards like WeWorkRemotely, RemoteOK, and Wellfound into a single, unified feed—so you don’t have to hop between platforms.",
+    image: "/screenshots/remote_radar_2.webp",
   },
   {
-    title: "Real-Time Email Alerts",
-    description: "Get instant email notifications the moment new jobs matching your criteria go live. Stay ahead of the competition by being one of the first applicants. Define multiple alert rules so you can focus solely on roles that align with your career goals.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-green-500 to-teal-400 text-white">
-        Email Alerts
-      </div>
-    ),
+    title: "Save & Track Jobs",
+    description: "Bookmark jobs you’re interested in and revisit them anytime. Keep track of saved roles as you prepare applications, so nothing slips through the cracks.",
+    image: "/screenshots/remote_radar_3.webp",
   },
   {
     title: "Advanced Search & Filters",
-    description: "Narrow down listings by role, industry, salary range, experience level, and more to find your perfect match. Combine multiple criteria to refine results with pinpoint accuracy. Save custom filter presets for quick access to your most-used searches.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500 text-white">
-        Advanced Filters
-      </div>
-    ),
+    description: "Narrow down listings by role, industry, salary range, and more to find your perfect match. Combine multiple criteria to refine results with pinpoint accuracy.",
+    image: "/screenshots/remote_radar_4.webp",
   },
-  {
-    title: "Save & Bookmark Jobs",
-    description: "Quickly mark favorites and revisit them anytime with a single click. Organize your bookmarks into custom folders and add personal notes for each saved role. Never lose track of your top prospects as you prepare your applications.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-yellow-400 to-orange-500 text-white">
-        Saved Jobs
-      </div>
-    ),
-  },
-  {
-    title: "Custom Email Digests",
-    description: "Receive daily or weekly digests of top matching remote jobs directly to your inbox. Tailor the frequency and format of your summaries to suit your workflow. Scan through curated listings at a glance without having to log in.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cyan-400 to-blue-600 text-white">
-        Email Digests
-      </div>
-    ),
+	{
+    title: "Email Digests",
+    description: "Stay updated without constant refreshing. Get curated daily or weekly emails with the latest remote jobs that match your interests—delivered straight to your inbox.",
+    image: "/screenshots/remote_radar_5.webp",
   },
 ];
+
+export const FAQDetails = [
+  {
+    value: "item-1",
+    title: "What is Remote Radar?",
+    content: "Remote Radar is a free platform that collects remote job postings from multiple top job boards and displays them in one place. Instead of visiting several sites every day, you can browse everything from one dashboard.",
+  },
+  {
+    value: "item-2",
+    title: "How often are jobs updated?",
+    content: "New jobs are pulled in throughout the day, so the feed is always fresh. You’ll see the latest postings whenever you log in.",
+  },
+  {
+    value: "item-3",
+    title: "Can I get jobs sent to my email?",
+    content: "Yes! You can subscribe to daily or weekly digests to receive the newest jobs that match your preferred categories straight to your inbox.",
+  },
+  {
+    value: "item-4",
+    title: "Is Remote Radar free to use?",
+    content: "Absolutely. Remote Radar is completely free—there are no hidden fees, subscriptions, or paywalls. I don't care about monetizing your job search.",
+  },
+  {
+    value: "item-5",
+    title: "Do you only list software engineering jobs?",
+    content: "No. While Remote Radar includes plenty of developer roles, it also covers design, marketing, sales, customer support, product management, and more. You can filter by category to see only the jobs you care about.",
+  },
+  {
+    value: "item-6",
+    title: "How do I keep track of jobs I’m interested in?",
+    content: "You can save jobs to your personal list with one click, and they’ll be waiting for you in your Saved Jobs page whenever you return.",
+  },
+  {
+    value: "item-7",
+    title: "What about applied jobs?",
+    content: "Remote Radar lets you mark jobs as 'applied' so you can easily track your progress and avoid applying to the same posting twice.",
+  },
+  {
+    value: "item-8",
+    title: "Do you store or share my applications?",
+    content: "No. Remote Radar doesn't even have a feature to submit job applications to companies directly—it just links you to the original posting. Saved and applied jobs are only stored in your account for your personal tracking.",
+  },
+	{
+		value: "item-9",
+		title: "Why did you make this?",
+		content: "After spending hours each day hopping between job boards, I wanted a simpler way to find remote roles. Remote Radar is my solution to streamline the search process and help others do the same. Plus, the current SWE market is looking pretty tough so I wanted to build something useful that I can bring up in interviews 😭.",
+	},
+]
 
 export const sidebarLinks = [
 	{
@@ -69,169 +92,6 @@ export const sidebarLinks = [
     icon: <IconSettings className="w-6 h-6" />,
     label: 'Settings',
     route: '/settings'
-  },
-];
-
-export const jobs = [
-  {
-    _id: "1",
-    title: "Software Engineer",
-    companyName: "Airbnb",
-    companyLogoUrl: "https://remote-radar.com/logos/airbnb.png",
-    datePosted: "2025-07-18T14:00:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Mid",
-    salary: "$120,000 - $150,000",
-    category: "Software Engineering",
-    snippet: "Join our team to build scalable web services that power Airbnb’s core booking platform.",
-    applyUrl: "https://wellfound.com/airbnb/software-engineer-1",
-    source: "Wellfound",
-    isBookmarked: true,
-    isApplied: false,
-  },
-  {
-    _id: "2",
-    title: "Data Engineer",
-    companyName: "Palantir",
-    companyLogoUrl: "https://remote-radar.com/logos/palantir.png",
-    datePosted: "2025-07-17T09:30:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Senior",
-    salary: "$140,000 - $170,000",
-    category: "Data Engineering",
-    snippet: "Design and implement data pipelines to process petabytes of data for critical analytics workloads.",
-    applyUrl: "https://weworkremotely.com/companies/palantir/jobs/2",
-    source: "WeWorkRemotely",
-    isBookmarked: false,
-    isApplied: false,
-  },
-  {
-    _id: "3",
-    title: "Senior Software Engineer",
-    companyName: "Prismatic Software",
-    companyLogoUrl: "https://remote-radar.com/logos/prismatic.png",
-    datePosted: "2025-07-16T12:15:00Z",
-    jobType: "Contract",
-    experienceLevel: "Senior",
-    salary: "$80,000 - $100,000",
-    category: "Software Engineering",
-    snippet: "Lead feature development on our Node.js microservices architecture and mentor junior engineers.",
-    applyUrl: "https://remoteok.com/remote-jobs/3",
-    source: "RemoteOK",
-    isBookmarked: false,
-    isApplied: true,
-  },
-  {
-    _id: "4",
-    title: "Full Stack Software Engineer",
-    companyName: "Twilio",
-    companyLogoUrl: "https://remote-radar.com/logos/twilio.png",
-    datePosted: "2025-07-15T08:00:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Mid",
-    salary: "$110,000 - $135,000",
-    category: "Software Engineering",
-    snippet: "Work on both frontend (React) and backend (Node.js) to deliver scalable communication APIs.",
-    applyUrl: "https://remotive.com/jobs/4",
-    source: "Remotive",
-    isBookmarked: true,
-    isApplied: false,
-  },
-  {
-    _id: "5",
-    title: "Staff Software Engineer",
-    companyName: "Discord",
-    companyLogoUrl: "https://remote-radar.com/logos/discord.png",
-    datePosted: "2025-07-14T16:45:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Lead",
-    salary: "$160,000 - $190,000",
-    category: "Software Engineering",
-    snippet: "Architect and scale our real-time chat infrastructure to handle millions of concurrent users.",
-    applyUrl: "https://wellfound.com/discord/staff-software-engineer-5",
-    source: "Wellfound",
-    isBookmarked: false,
-    isApplied: true,
-  },
-  {
-    _id: "6",
-    title: "Frontend Engineer",
-    companyName: "Meta",
-    companyLogoUrl: "https://remote-radar.com/logos/meta.png",
-    datePosted: "2025-07-13T11:20:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Mid",
-    salary: "$130,000 - $155,000",
-    category: "Frontend Engineering",
-    snippet: "Build and optimize React components for high-traffic social media products.",
-    applyUrl: "https://weworkremotely.com/companies/meta/jobs/6",
-    source: "WeWorkRemotely",
-    isBookmarked: true,
-    isApplied: false,
-  },
-  {
-    _id: "7",
-    title: "Backend Engineer",
-    companyName: "Stripe",
-    companyLogoUrl: "https://remote-radar.com/logos/stripe.png",
-    datePosted: "2025-07-12T13:10:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Mid",
-    salary: "$135,000 - $160,000",
-    category: "Backend Engineering",
-    snippet: "Design and maintain RESTful APIs and microservices powering global payments.",
-    applyUrl: "https://remoteok.com/remote-jobs/7",
-    source: "RemoteOK",
-    isBookmarked: false,
-    isApplied: true,
-  },
-  {
-    _id: "8",
-    title: "DevOps Engineer",
-    companyName: "Google",
-    companyLogoUrl: "https://remote-radar.com/logos/google.png",
-    datePosted: "2025-07-11T07:50:00Z",
-    jobType: "Contract",
-    experienceLevel: "Senior",
-    salary: "$100,000 - $125,000",
-    category: "DevOps",
-    snippet: "Implement CI/CD pipelines and infrastructure-as-code for our cloud services.",
-    applyUrl: "https://remotive.com/jobs/8",
-    source: "Remotive",
-    isBookmarked: false,
-    isApplied: false,
-  },
-  {
-    _id: "9",
-    title: "Machine Learning Engineer",
-    companyName: "OpenAI",
-    companyLogoUrl: "https://remote-radar.com/logos/openai.png",
-    datePosted: "2025-07-10T10:30:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Senior",
-    salary: "$180,000 - $210,000",
-    category: "Machine Learning",
-    snippet: "Develop and deploy state-of-the-art NLP models in production environments.",
-    applyUrl: "https://wellfound.com/openai/ml-engineer-9",
-    source: "Wellfound",
-    isBookmarked: true,
-    isApplied: false,
-  },
-  {
-    _id: "10",
-    title: "Cloud Solutions Architect",
-    companyName: "AWS",
-    companyLogoUrl: "https://remote-radar.com/logos/aws.png",
-    datePosted: "2025-07-09T15:00:00Z",
-    jobType: "Full-time",
-    experienceLevel: "Lead",
-    salary: "$170,000 - $200,000",
-    category: "Cloud Architecture",
-    snippet: "Architect scalable, secure cloud solutions and guide enterprise migrations to AWS.",
-    applyUrl: "https://weworkremotely.com/companies/aws/jobs/10",
-    source: "WeWorkRemotely",
-    isBookmarked: true,
-    isApplied: true,
   },
 ];
 
@@ -261,4 +121,22 @@ export const dailyTips = [
   "Leverage your personal network for referrals",
   "Stay persistent—one ‘yes’ can change everything",
   "Every no brings you closer to your yes"
+];
+
+export const socialMedia = [
+  {
+    id: 1,
+    img: "/git.svg",
+    link: "https://github.com/sherard-dalaguit",
+  },
+  {
+    id: 2,
+    img: "/link.svg",
+    link: "https://www.linkedin.com/in/sherard-d/"
+  },
+  {
+    id: 3,
+    img: "/insta.svg",
+    link: "https://www.instagram.com/sherard_dalaguit/"
+  },
 ];
