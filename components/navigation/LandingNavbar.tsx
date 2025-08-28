@@ -20,31 +20,23 @@ export function LandingNavbar() {
 			link: "/jobs",
 		},
     {
-      name: "Features",
-      link: "#features",
-    },
-    {
-      name: "FAQ",
-      link: "#faq",
-    },
-    {
       name: "Contact",
-      link: "#contact",
+      link: "/contact",
     },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-100">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+            <NavbarButton href="/sign-in" variant="secondary">Login</NavbarButton>
+            <NavbarButton href="/sign-up" variant="primary">Sign Up</NavbarButton>
           </div>
         </NavBody>
 
@@ -85,7 +77,7 @@ export function LandingNavbar() {
                 variant="primary"
                 className="w-full"
               >
-                Book a call
+                Sign Up
               </NavbarButton>
             </div>
           </MobileNavMenu>

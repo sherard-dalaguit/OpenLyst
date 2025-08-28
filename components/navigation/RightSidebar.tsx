@@ -1,5 +1,5 @@
 import {dailyTips} from "@/data";
-import {countJobsSince} from "@/lib/utils";
+import {getJobCounts} from "@/lib/actions/getJobCounts";
 
 const RightSidebar = async () => {
 	const today = new Date();
@@ -12,14 +12,7 @@ const RightSidebar = async () => {
     return dailyTips[(startIndex + i) % dailyTips.length];
   });
 
-	const dailySince = new Date(Date.now() - 24 * 60 * 60 * 1000);
-	const weeklySince = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-	const foreverSince = new Date(0);
-	const [dailyCount, weeklyCount, allCount] = await Promise.all([
-		countJobsSince(dailySince),
-		countJobsSince(weeklySince),
-		countJobsSince(foreverSince),
-	]);
+	const { dailyCount, weeklyCount, allCount } = await getJobCounts();
 
 	return (
 		<section className="custom-scrollbar background-light900_dark200 light-border sticky right-0 top-0 h-screen w-[350px] flex flex-col gap-6 overflow-y-auto border-l p-6 pt-36 shadow-light-300 dark:shadow-none max-xl:hidden">

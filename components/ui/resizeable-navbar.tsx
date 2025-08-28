@@ -278,7 +278,7 @@ export const NavbarButton = ({
 
   return (
     <Link
-      href={href || 'www.sherarddalaguit.com'}
+      href={href || ""}
       className={cn(baseStyles, variantStyles[variant], className)}
     >
       {children}
