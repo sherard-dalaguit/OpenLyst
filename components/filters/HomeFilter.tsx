@@ -14,6 +14,7 @@ import {formUrlQuery, removeKeysFromUrlQuery} from "@/lib/url";
 import {Slider} from "@/components/ui/slider";
 import { useState } from "react";
 import {SliderRange, SliderThumb, SliderTrack} from "@radix-ui/react-slider";
+import {pushCategoryRoute} from "@/lib/utils";
 
 const salaryMarks = [
 	0,
@@ -54,13 +55,8 @@ const HomeFilter = () => {
 		}[]
 
 	const clearAllFilters = () => {
-		const allKeys = jobFilters.map(filter => filter.key);
-		const newUrl = removeKeysFromUrlQuery({
-			params: searchParams.toString(),
-			keysToRemove: allKeys,
-		});
-		router.push(newUrl, { scroll: false });
-	}
+		router.push("/jobs", { scroll: false });
+	};
 
 	const handleRangeApply = (filterKey: string, optionValue: string) => {
 		const params = new URLSearchParams(searchParams.toString())
@@ -69,7 +65,12 @@ const HomeFilter = () => {
 	};
 
 	const handleDropdownSelect = (filterKey: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString())
+    if (filterKey === "category") {
+			pushCategoryRoute(router, new URLSearchParams(searchParams.toString()), value);
+			return;
+		}
+
+		const params = new URLSearchParams(searchParams.toString())
     params.set(filterKey, value)
     router.push(`${pathname}?${params.toString()}`, { scroll: false })
   }

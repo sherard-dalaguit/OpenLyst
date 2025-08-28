@@ -225,3 +225,25 @@ export async function countJobsSince(since: Date) {
     postedAt: { $gt: since },
   }).exec()
 }
+
+export function formatCategoryTitle(category: string): string {
+  if (!category) return "";
+  return category
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+export function pushCategoryRoute(
+  router: { push: (url: string, opts?: any) => void },
+  searchParams: URLSearchParams,
+  newCategory: string | null
+) {
+  const params = new URLSearchParams(searchParams.toString());
+  params.delete("category");
+
+  const basePath = newCategory ? `/jobs/${newCategory}` : `/jobs`;
+  const query = params.toString();
+
+  router.push(query ? `${basePath}?${query}` : basePath, { scroll: false });
+}

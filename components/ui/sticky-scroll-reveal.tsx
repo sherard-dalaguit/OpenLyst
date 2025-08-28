@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export const StickyScroll = ({
   content,
@@ -11,7 +12,7 @@ export const StickyScroll = ({
   content: {
     title: string;
     description: string;
-    content?: React.ReactNode | any;
+    image?: React.ReactNode | any;
   }[];
   contentClassName?: string;
 }) => {
@@ -58,7 +59,7 @@ export const StickyScroll = ({
         ? "#000000"
         : "#080212"
       }}
-      className="relative flex justify-center min-h-screen space-x-10 rounded-md p-10 pb-[40vh]"
+      className="relative flex justify-center min-h-screen space-x-10 rounded-md p-10 pb-[20vh]"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
@@ -110,14 +111,22 @@ export const StickyScroll = ({
 
         return (
           <div
-            style={{ background: backgroundGradient }}
             className={cn(
               panelClasses,
-              "hidden w-[35vw] overflow-hidden rounded-xl bg-white lg:block",
+              "hidden w-[35vw] rounded-xl lg:block",
               contentClassName,
             )}
           >
-            {content[activeCard].content}
+						<div className="p-[3px] z-50 bg-gradient-to-r from-[#843cf3] via-[#d73ed7] to-[#ff8f5d] rounded-2xl">
+							<Image
+								src={content[activeCard].image}
+								alt="remote radar screenshot"
+								height={720}
+								width={1400}
+								className="h-full rounded-2xl object-left-top"
+								draggable={false}
+							/>
+						</div>
           </div>
         );
       })()}

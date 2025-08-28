@@ -2,7 +2,7 @@ export const jobFilters = [
   {
     name: 'Job Type',
     key: 'jobType',
-    type: 'checkbox',
+    type: 'dropdown',
     options: [
       { label: 'Full-time', value: 'full_time' },
       { label: 'Contract', value: 'contract' },
@@ -12,7 +12,7 @@ export const jobFilters = [
   {
     name: 'Category',
     key: 'category',
-    type: 'checkbox',
+    type: 'dropdown',
     options: [
       { label: 'Software Engineering', value: 'software_engineering' },
       { label: 'Data', value: 'data' },
@@ -41,7 +41,7 @@ export const jobFilters = [
   //     { label: 'JavaScript Jobs', value: 'JavascriptJobs' },
   //   ]
   // },
-  {
+	{
     name: 'Salary Range (USD)',
     key: 'salary',
     type: 'rangeSlider',
