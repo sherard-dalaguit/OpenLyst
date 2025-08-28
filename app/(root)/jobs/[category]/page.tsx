@@ -9,11 +9,35 @@ import Pagination from "@/components/Pagination";
 import {formatCategoryTitle} from "@/lib/utils";
 
 interface Props {
+  params: { category: string };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const titleCategory = formatCategoryTitle(params.category);
+  return {
+    title: `${titleCategory} Remote Jobs`,
+    description: `Find curated remote ${titleCategory} jobs from top companies worldwide. Updated daily on Remote Radar.`,
+    openGraph: {
+      title: `${titleCategory} Remote Jobs | Remote Radar`,
+      description: `Browse the latest remote ${titleCategory} job opportunities. Filter by salary, type, and more.`,
+      url: `https://remoteradar.io/jobs/${params.category}`,
+      siteName: "Remote Radar",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${titleCategory} Remote Jobs | Remote Radar`,
+      description: `Discover the best remote ${titleCategory} roles, curated daily.`,
+    },
+  };
+}
+
+interface PageProps {
 	params: { category: string };
 	searchParams: Promise<{ [key: string]: string }>;
 }
 
-const Jobs = async ({ params, searchParams }: Props) => {
+const Jobs = async ({ params, searchParams }: PageProps) => {
 	const { category } = params;
 	const { page, pageSize, query, jobType, experienceLevel, source, salary, datePosted, sortBy } = await searchParams;
 

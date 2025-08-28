@@ -7,6 +7,23 @@ import {EMPTY_APPLIED} from "@/constants/states";
 import {getAppliedJobs} from "@/lib/actions/applied.action";
 import Pagination from "@/components/Pagination";
 
+export const metadata: Metadata = {
+  title: "Applied Jobs",
+  description: "Review the remote jobs you’ve already applied for. Stay organized in your job hunt with Remote Radar.",
+  openGraph: {
+    title: "Applied Jobs | Remote Radar",
+    description: "Track all the remote job applications you’ve submitted with Remote Radar.",
+    url: "https://remoteradar.io/applied-jobs",
+    siteName: "Remote Radar",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Applied Jobs | Remote Radar",
+    description: "Review and manage your remote job applications in one place.",
+  },
+};
+
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
 }

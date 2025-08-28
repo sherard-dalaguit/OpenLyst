@@ -11,6 +11,24 @@ import {jobFilters} from "@/constants/filters";
 import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
 import PreferencesForm from "@/components/forms/PreferencesForm";
 
+export const metadata: Metadata = {
+  title: "Settings",
+  description: "Manage your profile, preferences, and email job alert settings on Remote Radar.",
+  openGraph: {
+    title: "Profile | Remote Radar",
+    description: "Update your personal information, job preferences, and saved alerts.",
+    url: "https://remoteradar.io/profile",
+    siteName: "Remote Radar",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Profile | Remote Radar",
+    description:
+      "Customize your job search experience with Remote Radar’s profile settings.",
+  },
+};
+
 const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 	const { id } = await params;
   const { page, pageSize } = await searchParams;

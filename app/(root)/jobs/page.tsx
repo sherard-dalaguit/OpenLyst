@@ -7,6 +7,23 @@ import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_JOB} from "@/constants/states";
 import Pagination from "@/components/Pagination";
 
+export const metadata: Metadata = {
+  title: "Browse Remote Jobs",
+  description: "Explore thousands of remote jobs across engineering, product, design, data, and more. Updated daily with powerful filters and email digests.",
+  openGraph: {
+    title: "Browse Remote Jobs | Remote Radar",
+    description: "Discover the latest remote job opportunities, updated daily. Filter by category, salary, and more.",
+    url: "https://remoteradar.io/jobs",
+    siteName: "Remote Radar",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse Remote Jobs | Remote Radar",
+    description: "Explore thousands of remote jobs curated daily. Filter by category, salary, and more.",
+  },
+};
+
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
 }

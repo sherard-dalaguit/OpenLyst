@@ -15,18 +15,21 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Remote Radar – Intelligent Remote Job Scanner & AI Application Assistant",
-  description: "Continuously discover, track, and apply to remote jobs with AI-powered resume tailoring and cover letter generation.",
+  title: {
+    default: "Remote Radar",
+    template: "%s | Remote Radar",
+  },
+  description:
+    "Remote Radar helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
   keywords: [
     "remote jobs",
-    "job scraper",
-    "AI resume",
-    "cover letter",
-    "job tracker",
-    "RemoteRadar",
-    "Next.js",
-    "automation",
-    "sourcing"
+    "work from anywhere",
+    "remote engineering jobs",
+    "remote design jobs",
+    "remote product management jobs",
+    "job board",
+    "remote work",
+    "digital nomad jobs",
   ],
   authors: [
     { 
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     }
   ],
   creator: "Sherard Dalaguit",
-  publisher: "RemoteRadar Inc.",
+  publisher: "Remote Radar",
   icons: {
     icon: "/logo.png",
   }

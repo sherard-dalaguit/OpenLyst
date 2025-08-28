@@ -7,6 +7,24 @@ import {EMPTY_BOOKMARK} from "@/constants/states";
 import {getSavedJobs} from "@/lib/actions/saved.action";
 import Pagination from "@/components/Pagination";
 
+export const metadata: Metadata = {
+  title: "Saved Jobs",
+  description:
+    "View and manage all the remote jobs you've saved for later. Keep track of opportunities easily with Remote Radar.",
+  openGraph: {
+    title: "Saved Jobs | Remote Radar",
+    description: "Access all your saved remote job listings in one place.",
+    url: "https://remoteradar.io/saved-jobs",
+    siteName: "Remote Radar",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saved Jobs | Remote Radar",
+    description: "Keep track of all your saved remote job opportunities.",
+  },
+};
+
 interface SearchParams {
 	searchParams: Promise<{ [key: string]: string }>;
 }
