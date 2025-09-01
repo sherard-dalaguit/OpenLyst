@@ -34,12 +34,15 @@ const HomeFilter = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
+	const segments = pathname.split("/").filter(Boolean);
+	const categorySlug = segments[0] === "jobs" && segments[1] ? segments[1] : null;
+
 	const rawSalary = searchParams.get("salary") ?? "0"
 	const initialIndex = salaryMarks.findIndex(s => s.toString() === rawSalary) || 0
 
 	const [sliderIndex, setSliderIndex] = useState<number>(initialIndex)
 
-	const activeFilters = jobFilters
+	const baseActiveFilters = jobFilters
 		.map((filter) => {
 			const value = searchParams.get(filter.key)
 			if (!value) return null
@@ -53,6 +56,19 @@ const HomeFilter = () => {
 			filterName: string
 			optionLabel: string
 		}[]
+
+	const categoryFilterDef = jobFilters.find((f) => f.key === "category");
+	const categoryLabel =
+		categorySlug && categoryFilterDef?.options
+			? categoryFilterDef.options.find((o) => o.value === categorySlug)?.label ?? categorySlug
+			: null;
+
+	const activeFilters = [
+		...(categorySlug && categoryLabel
+			? [{ key: "category", filterName: categoryFilterDef?.name ?? "Category", optionLabel: categoryLabel }]
+			: []),
+		...baseActiveFilters,
+	];
 
 	const clearAllFilters = () => {
 		router.push("/jobs", { scroll: false });
@@ -179,7 +195,7 @@ const HomeFilter = () => {
 						</DropdownMenu>
 					</div>
 				))}
-        {activeFilters.length > 0 && (
+        {(activeFilters.length > 0 || !!categorySlug) && (
           <Button size="sm" className="primary-gradient" onClick={clearAllFilters}>
             Clear All Filters
           </Button>
