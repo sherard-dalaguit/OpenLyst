@@ -6,6 +6,7 @@ import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_BOOKMARK} from "@/constants/states";
 import {getSavedJobs} from "@/lib/actions/saved.action";
 import Pagination from "@/components/Pagination";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Saved Jobs",

@@ -6,6 +6,7 @@ import {getJobs} from "@/lib/actions/job.action";
 import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_JOB} from "@/constants/states";
 import Pagination from "@/components/Pagination";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Browse Remote Jobs",

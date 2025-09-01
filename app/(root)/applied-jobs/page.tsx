@@ -6,6 +6,7 @@ import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_APPLIED} from "@/constants/states";
 import {getAppliedJobs} from "@/lib/actions/applied.action";
 import Pagination from "@/components/Pagination";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Applied Jobs",

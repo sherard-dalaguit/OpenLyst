@@ -7,6 +7,7 @@ import DataRenderer from "@/components/DataRenderer";
 import {EMPTY_JOB} from "@/constants/states";
 import Pagination from "@/components/Pagination";
 import {formatCategoryTitle} from "@/lib/utils";
+import {Metadata} from "next";
 
 interface Props {
   params: { category: string };
@@ -15,10 +16,10 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const titleCategory = formatCategoryTitle(params.category);
   return {
-    title: `${titleCategory} Remote Jobs`,
+    title: `Remote ${titleCategory} Jobs`,
     description: `Find curated remote ${titleCategory} jobs from top companies worldwide. Updated daily on Remote Radar.`,
     openGraph: {
-      title: `${titleCategory} Remote Jobs | Remote Radar`,
+      title: `Remote ${titleCategory} Jobs | Remote Radar`,
       description: `Browse the latest remote ${titleCategory} job opportunities. Filter by salary, type, and more.`,
       url: `https://remoteradar.io/jobs/${params.category}`,
       siteName: "Remote Radar",
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${titleCategory} Remote Jobs | Remote Radar`,
+      title: `Remote ${titleCategory} Jobs | Remote Radar`,
       description: `Discover the best remote ${titleCategory} roles, curated daily.`,
     },
   };

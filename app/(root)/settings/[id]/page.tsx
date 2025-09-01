@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import {jobFilters} from "@/constants/filters";
 import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
 import PreferencesForm from "@/components/forms/PreferencesForm";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Settings",
