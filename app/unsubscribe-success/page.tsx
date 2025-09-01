@@ -2,8 +2,12 @@ import {Spotlight} from "@/components/ui/spotlight";
 import Image from "next/image";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {auth} from "@/auth";
 
-const UnsubscribeSuccess = () => {
+const UnsubscribeSuccess = async () => {
+	const session = await auth();
+	const userId = session?.user?.id;
+
 	return (
 		<main className="flex min-h-screen items-center bg-black justify-center overflow-hidden relative">
 			<Spotlight />
@@ -25,7 +29,7 @@ const UnsubscribeSuccess = () => {
 					</p>
 					<p className="paragraph-regular text-dark500_light400">
 						If you change your mind, you can {' '}
-						<a href="/settings" className="primary-text-gradient">update your email preferences</a> at any time.
+						<a href={`/settings/${userId}`} className="primary-text-gradient">update your email preferences</a> at any time.
 					</p>
 				</div>
 				<div className="mt-8 flex justify-center">
