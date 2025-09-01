@@ -2,8 +2,6 @@ import { auth } from "@/auth";
 import UserAvatar from "@/components/UserAvatar";
 import { getUser } from "@/lib/actions/user.action";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { Label } from "@/components/ui/label";
@@ -11,6 +9,7 @@ import {jobFilters} from "@/constants/filters";
 import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
 import PreferencesForm from "@/components/forms/PreferencesForm";
 import {Metadata} from "next";
+import DeleteAccountDialog from "@/components/DeleteAccountDialog";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -99,12 +98,7 @@ const SettingsPage = async ({ params, searchParams }: RouteParams) => {
 
 				<div className="flex justify-end max-sm:mb-5 max-sm:w-full sm:mt-3">
           {loggedInUser?.user?.id === id && (
-            <Link href="/">
-							{/* TODO: Create Modal For Deleting Account */}
-              <Button className="paragraph-medium btn-secondary text-dark300_light900 min-h-12 min-w-44 px-4 py-3">
-                Delete Account
-              </Button>
-            </Link>
+						<DeleteAccountDialog userId={user._id.toString()} />
           )}
         </div>
 			</section>
