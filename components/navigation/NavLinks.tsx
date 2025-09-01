@@ -18,15 +18,21 @@ const NavLinks = ({
 	return (
 		<>
 			{sidebarLinks.map((item) => {
-				const isActive = (pathname.includes(item.route) && item.route.length > 1) || pathname === item.route;
+				const href =
+          item.route === "/settings"
+            ? userId
+              ? `/settings/${userId}`
+              : "/sign-in"
+            : item.route;
 
-				if (item.route === '/settings') {
-					if (userId) item.route = `/settings/${userId}`;
-				}
+        const isActive =
+          (pathname.includes(item.route) && item.route.length > 1) ||
+          pathname === item.route ||
+          pathname === href;
 
 				const LinkComponent = (
 					<Link
-						href={item.route}
+						href={href}
 						key={item.label}
 						className={cn(
 							isActive
