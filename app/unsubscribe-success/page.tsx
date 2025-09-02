@@ -34,7 +34,7 @@ const UnsubscribeSuccess = async () => {
 				</div>
 				<div className="mt-8 flex justify-center">
 					<Button className="primary-gradient">
-						<Link href="/jobs">Return to Remote Radar</Link>
+						<Link href="/jobs">Return to Nomadlyst</Link>
 					</Button>
 				</div>
 			</section>

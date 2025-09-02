@@ -15,7 +15,7 @@ jobs:
     env:
       NODE_ENV: production
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      SITE_URL: https://www.remoteradar.io
+      SITE_URL: https://www.nomadlyst.com
 
     steps:
       - name: Checkout

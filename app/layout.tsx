@@ -16,11 +16,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Remote Radar",
-    template: "%s | Remote Radar",
+    default: "Nomadlyst",
+    template: "%s | Nomadlyst",
   },
   description:
-    "Remote Radar helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
+    "Nomadlyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
   keywords: [
     "remote jobs",
     "work from anywhere",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     }
   ],
   creator: "Sherard Dalaguit",
-  publisher: "Remote Radar",
+  publisher: "Nomadlyst",
   icons: {
     icon: "/logo.png",
   }

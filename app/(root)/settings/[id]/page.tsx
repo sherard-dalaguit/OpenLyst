@@ -12,20 +12,20 @@ import {Metadata} from "next";
 import DeleteAccountDialog from "@/components/DeleteAccountDialog";
 
 export const metadata: Metadata = {
-  title: "Settings",
-  description: "Manage your profile, preferences, and email job alert settings on Remote Radar.",
+  title: "Settings | Nomadlyst",
+  description: "Manage your profile, preferences, and email job alert settings on Nomadlyst.",
   openGraph: {
-    title: "Profile | Remote Radar",
+    title: "Profile | Nomadlyst",
     description: "Update your personal information, job preferences, and saved alerts.",
-    url: "https://remoteradar.io/profile",
-    siteName: "Remote Radar",
+    url: "https://nomadlyst.com/settings",
+    siteName: "Nomadlyst",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Profile | Remote Radar",
+    title: "Profile | Nomadlyst",
     description:
-      "Customize your job search experience with Remote Radar’s profile settings.",
+      "Customize your job search experience with Nomadlyst’s profile settings.",
   },
 };
 

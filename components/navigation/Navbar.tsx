@@ -18,7 +18,7 @@ const Navbar = async () => {
           width={48}
           height={48}
         />
-        <h1 className="primary-text-gradient">Remote Radar</h1>
+        <h1 className="primary-text-gradient">Nomadlyst</h1>
       </Link>
 
       <div className="flex-between gap-4">

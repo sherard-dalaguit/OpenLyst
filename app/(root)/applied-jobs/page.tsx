@@ -9,18 +9,18 @@ import Pagination from "@/components/Pagination";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: "Applied Jobs",
-  description: "Review the remote jobs you’ve already applied for. Stay organized in your job hunt with Remote Radar.",
+  title: "Applied Jobs | Nomadlyst",
+  description: "Review the remote jobs you’ve already applied for. Stay organized in your job hunt with Nomadlyst.",
   openGraph: {
-    title: "Applied Jobs | Remote Radar",
-    description: "Track all the remote job applications you’ve submitted with Remote Radar.",
-    url: "https://remoteradar.io/applied-jobs",
-    siteName: "Remote Radar",
+    title: "Applied Jobs | Nomadlyst",
+    description: "Track all the remote job applications you’ve submitted with Nomadlyst.",
+    url: "https://nomadlyst.com/applied-jobs",
+    siteName: "Nomadlyst",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Applied Jobs | Remote Radar",
+    title: "Applied Jobs | Nomadlyst",
     description: "Review and manage your remote job applications in one place.",
   },
 };

@@ -17,17 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const titleCategory = formatCategoryTitle(params.category);
   return {
     title: `Remote ${titleCategory} Jobs`,
-    description: `Find curated remote ${titleCategory} jobs from top companies worldwide. Updated daily on Remote Radar.`,
+    description: `Find curated remote ${titleCategory} jobs from top companies worldwide. Updated daily on Nomadlyst.`,
     openGraph: {
-      title: `Remote ${titleCategory} Jobs | Remote Radar`,
+      title: `Remote ${titleCategory} Jobs | Nomadlyst`,
       description: `Browse the latest remote ${titleCategory} job opportunities. Filter by salary, type, and more.`,
-      url: `https://remoteradar.io/jobs/${params.category}`,
-      siteName: "Remote Radar",
+      url: `https://nomadlyst.com/jobs/${params.category}`,
+      siteName: "Nomadlyst",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: `Remote ${titleCategory} Jobs | Remote Radar`,
+      title: `Remote ${titleCategory} Jobs | Nomadlyst`,
       description: `Discover the best remote ${titleCategory} roles, curated daily.`,
     },
   };
