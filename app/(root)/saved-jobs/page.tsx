@@ -9,7 +9,7 @@ import Pagination from "@/components/Pagination";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: "Saved Jobs | Nomadlyst",
+  title: "Saved Jobs",
   description:
     "View and manage all the remote jobs you've saved for later. Keep track of opportunities easily with Nomadlyst.",
   openGraph: {

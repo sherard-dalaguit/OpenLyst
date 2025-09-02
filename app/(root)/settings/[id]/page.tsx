@@ -12,7 +12,7 @@ import {Metadata} from "next";
 import DeleteAccountDialog from "@/components/DeleteAccountDialog";
 
 export const metadata: Metadata = {
-  title: "Settings | Nomadlyst",
+  title: "Settings",
   description: "Manage your profile, preferences, and email job alert settings on Nomadlyst.",
   openGraph: {
     title: "Profile | Nomadlyst",
