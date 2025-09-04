@@ -55,7 +55,7 @@ export default function Home() {
 
 				<div className="mx-6 md:mx-10 -mt-[30vh] mb-[22vh] max-w-6xl p-[4px] z-50 bg-gradient-to-r from-[#843cf3] via-[#d73ed7] to-[#ff8f5d] rounded-2xl">
 					<Image
-						src="/screenshots/remote_radar.webp"
+						src="/screenshots/nomadlyst.webp"
 						alt="hero"
 						height={720}
 						width={1400}

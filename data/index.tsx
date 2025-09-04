@@ -5,22 +5,22 @@ export const servicesContent = [
   {
     title: "Aggregated Job Listings",
     description: "Browse thousands of remote jobs in one place. Nomadlyst pulls roles from top boards like WeWorkRemotely, RemoteOK, and Wellfound into a single, unified feed—so you don’t have to hop between platforms.",
-    image: "/screenshots/remote_radar_2.webp",
+    image: "/screenshots/nomadlyst_2.webp",
   },
   {
     title: "Save & Track Jobs",
     description: "Bookmark jobs you’re interested in and revisit them anytime. Keep track of saved roles as you prepare applications, so nothing slips through the cracks.",
-    image: "/screenshots/remote_radar_3.webp",
+    image: "/screenshots/nomadlyst_3.webp",
   },
   {
     title: "Advanced Search & Filters",
     description: "Narrow down listings by role, industry, salary range, and more to find your perfect match. Combine multiple criteria to refine results with pinpoint accuracy.",
-    image: "/screenshots/remote_radar_4.webp",
+    image: "/screenshots/nomadlyst_4.webp",
   },
 	{
     title: "Email Digests",
     description: "Stay updated without constant refreshing. Get curated daily or weekly emails with the latest remote jobs that match your interests—delivered straight to your inbox.",
-    image: "/screenshots/remote_radar_5.webp",
+    image: "/screenshots/nomadlyst_5.webp",
   },
 ];
 
