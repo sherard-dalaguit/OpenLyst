@@ -103,7 +103,8 @@ export async function sendJobDigestEmail(
 
   await sgMail.send({
     to,
-    from: process.env.EMAIL_FROM!,
+    from: { email: 'no-reply@nomadlyst.com', name: 'Nomadlyst' },
+		replyTo: 'support@nomadlyst.com',
     subject,
     html
   })
