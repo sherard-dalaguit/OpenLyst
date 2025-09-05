@@ -1,6 +1,7 @@
 'use server';
 
 import { countJobsSince } from '@/lib/utils';
+import dbConnect from "@/lib/mongoose";
 
 export interface JobCounts {
   dailyCount: number;
@@ -9,6 +10,7 @@ export interface JobCounts {
 }
 
 export async function getJobCounts(): Promise<JobCounts> {
+	await dbConnect();
   const now = Date.now();
   const dailySince = new Date(now - 24 * 60 * 60 * 1000);
   const weeklySince = new Date(now - 7 * 24 * 60 * 60 * 1000);
