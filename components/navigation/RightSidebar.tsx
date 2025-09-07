@@ -2,11 +2,10 @@ import {dailyTips} from "@/data";
 import {getJobCounts} from "@/lib/actions/getJobCounts";
 
 const RightSidebar = async () => {
-	const today = new Date();
-  const dayNumber = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+	const dayIndex = Math.floor(Date.now() / 86_400_000);
 
   const tipsPerDay = 5;
-  const startIndex = dayNumber % dailyTips.length;
+  const startIndex = (dayIndex * tipsPerDay) % dailyTips.length;
 
   const tipsToShow = Array.from({ length: tipsPerDay }).map((_, i) => {
     return dailyTips[(startIndex + i) % dailyTips.length];
