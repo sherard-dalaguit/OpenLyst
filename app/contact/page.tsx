@@ -26,7 +26,7 @@ const Contact = async () => {
 					</p>
 					<p className="paragraph-regular text-dark500_light400">
 						You can reach us anytime at
-						{" "}<a href="mailto:support@nomadlyst.com" className="primary-text-gradient">
+						{" "}<a href="mailto:support@openlyst.io" className="primary-text-gradient">
 							support@openlyst.io
 						</a>.
 					</p>
