@@ -2,11 +2,8 @@ import {Spotlight} from "@/components/ui/spotlight";
 import Image from "next/image";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import {auth} from "@/auth";
 
 const Contact = async () => {
-	const session = await auth();
-	const userId = session?.user?.id;
 
 	return (
 		<main className="flex min-h-screen items-center bg-black justify-center overflow-hidden relative">
@@ -30,13 +27,13 @@ const Contact = async () => {
 					<p className="paragraph-regular text-dark500_light400">
 						You can reach us anytime at
 						{" "}<a href="mailto:support@nomadlyst.com" className="primary-text-gradient">
-							support@nomadlyst.com
+							support@openlyst.io
 						</a>.
 					</p>
 				</div>
 				<div className="mt-8 flex justify-center">
 					<Button className="primary-gradient">
-						<Link href="/jobs">Return to Nomadlyst</Link>
+						<Link href="/jobs">Return to OpenLyst</Link>
 					</Button>
 				</div>
 			</section>

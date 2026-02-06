@@ -16,11 +16,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nomadlyst",
-    template: "%s | Nomadlyst",
+    default: "OpenLyst",
+    template: "%s | OpenLyst",
   },
   description:
-    "Nomadlyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
+    "OpenLyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
   keywords: [
     "remote jobs",
     "work from anywhere",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     }
   ],
   creator: "Sherard Dalaguit",
-  publisher: "Nomadlyst",
+  publisher: "OpenLyst",
   icons: {
     icon: "/logo.png",
   }

@@ -37,7 +37,7 @@ const MobileNavigation = async () => {
 						height={30}
 						alt="logo"
 					/>
-					<p className="h2-semibold font-space-grotesk primary-text-gradient">Nomadlyst</p>
+					<p className="h2-semibold font-space-grotesk primary-text-gradient">OpenLyst</p>
 				</Link>
 
 				<div className="no-scrollbar flex h-[calc(100vh-80px)] flex-col justify-between overflow-y-auto">

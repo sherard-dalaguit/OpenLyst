@@ -243,7 +243,7 @@ export const NavbarLogo = () => {
         width={30}
         height={30}
       />
-      <span className="text-lg font-medium primary-text-gradient dark:text-white">Nomadlyst</span>
+      <span className="text-lg font-medium primary-text-gradient dark:text-white">OpenLyst</span>
     </Link>
   );
 };

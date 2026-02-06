@@ -120,7 +120,7 @@ export const StickyScroll = ({
 						<div className="p-[3px] z-50 bg-gradient-to-r from-[#843cf3] via-[#d73ed7] to-[#ff8f5d] rounded-2xl">
 							<Image
 								src={content[activeCard].image}
-								alt="Nomadlyst screenshot"
+								alt="OpenLyst screenshot"
 								height={720}
 								width={1400}
 								className="h-full rounded-2xl object-left-top"

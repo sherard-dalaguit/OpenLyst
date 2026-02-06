@@ -3,7 +3,7 @@ name: Scrape Remote Jobs
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "10 */6 * * *"
+    - cron: "10 */8 * * *"
 concurrency:
   group: scrape-remote-jobs
   cancel-in-progress: true
@@ -15,7 +15,7 @@ jobs:
     env:
       NODE_ENV: production
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      SITE_URL: https://www.nomadlyst.com
+      SITE_URL: https://www.openlyst.io
 
     steps:
       - name: Checkout

@@ -19,7 +19,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 			<section className="light-border background-light800_dark200 shadow-light100_dark100 min-w-full rounded-[10px] px-4 py-10 z-10 shadow-md sm:min-w-[520px] sm:px-8">
 				<div className="flex items-center justify-between gap-2">
 					<div className="space-y-2.5">
-						<h1 className="h2-bold text-dark100_light900">Join Nomadlyst</h1>
+						<h1 className="h2-bold text-dark100_light900">Join OpenLyst</h1>
 						<p className="paragraph-regular text-dark500_light400">
 							To get the latest remote jobs sent to your inbox
 						</p>
@@ -27,7 +27,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 					<Image
 						src="/logo.png"
-						alt="Nomadlyst Logo"
+						alt="OpenLyst Logo"
 						width={60}
 						height={60}
 						className="object-contain"

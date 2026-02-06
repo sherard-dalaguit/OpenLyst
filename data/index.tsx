@@ -4,7 +4,7 @@ import {IconBookmark, IconCircleCheck, IconHome, IconSettings} from "@tabler/ico
 export const servicesContent = [
   {
     title: "Aggregated Job Listings",
-    description: "Browse thousands of remote jobs in one place. Nomadlyst pulls roles from top boards like WeWorkRemotely, RemoteOK, and Wellfound into a single, unified feed—so you don’t have to hop between platforms.",
+    description: "Browse thousands of remote jobs in one place. OpenLyst pulls roles from top boards like WeWorkRemotely, RemoteOK, and Wellfound into a single, unified feed—so you don’t have to hop between platforms.",
     image: "/screenshots/nomadlyst_2.webp",
   },
   {
@@ -27,8 +27,8 @@ export const servicesContent = [
 export const FAQDetails = [
   {
     value: "item-1",
-    title: "What is Nomadlyst?",
-    content: "Nomadlyst is a free platform that collects remote job postings from multiple top job boards and displays them in one place. Instead of visiting several sites every day, you can browse everything from one dashboard.",
+    title: "What is OpenLyst?",
+    content: "OpenLyst is a free platform that collects remote job postings from multiple top job boards and displays them in one place. Instead of visiting several sites every day, you can browse everything from one dashboard.",
   },
   {
     value: "item-2",
@@ -42,13 +42,13 @@ export const FAQDetails = [
   },
   {
     value: "item-4",
-    title: "Is Nomadlyst free to use?",
-    content: "Absolutely. Nomadlyst is completely free—there are no hidden fees, subscriptions, or paywalls. I don't care about monetizing your job search.",
+    title: "Is OpenLyst free to use?",
+    content: "Absolutely. OpenLyst is completely free—there are no hidden fees, subscriptions, or paywalls. I don't care about monetizing your job search.",
   },
   {
     value: "item-5",
     title: "Do you only list software engineering jobs?",
-    content: "No. While Nomadlyst includes plenty of developer roles, it also covers design, marketing, sales, customer support, product management, and more. You can filter by category to see only the jobs you care about.",
+    content: "No. While OpenLyst includes plenty of developer roles, it also covers design, marketing, sales, customer support, product management, and more. You can filter by category to see only the jobs you care about.",
   },
   {
     value: "item-6",
@@ -58,17 +58,17 @@ export const FAQDetails = [
   {
     value: "item-7",
     title: "What about applied jobs?",
-    content: "Nomadlyst lets you mark jobs as 'applied' so you can easily track your progress and avoid applying to the same posting twice.",
+    content: "OpenLyst lets you mark jobs as 'applied' so you can easily track your progress and avoid applying to the same posting twice.",
   },
   {
     value: "item-8",
     title: "Do you store or share my applications?",
-    content: "No. Nomadlyst doesn't even have a feature to submit job applications to companies directly—it just links you to the original posting. Saved and applied jobs are only stored in your account for your personal tracking.",
+    content: "No. OpenLyst doesn't even have a feature to submit job applications to companies directly—it just links you to the original posting. Saved and applied jobs are only stored in your account for your personal tracking.",
   },
 	{
 		value: "item-9",
 		title: "Why did you make this?",
-		content: "After spending hours each day hopping between job boards, I wanted a simpler way to find remote roles. Nomadlyst is my solution to streamline the search process and help others do the same. Plus, the current SWE market is looking pretty tough so I wanted to build something useful that I can bring up in interviews 😭.",
+		content: "After spending hours each day hopping between job boards, I wanted a simpler way to find remote roles. OpenLyst is my solution to streamline the search process and help others do the same. Plus, the current SWE market is looking pretty tough so I wanted to build something useful that I can bring up in interviews 😭.",
 	},
 ]
 

@@ -31,7 +31,7 @@ export default function Home() {
 					</h1>
 
 					<p className="text-lg md:text-xl lg:text-2xl px-4 max-w-4xl my-16">
-						Nomadlyst pulls in hundreds of remote job listings from around the web and sends them to your inbox every day.
+						OpenLyst pulls in hundreds of remote job listings from around the web and sends them to your inbox every day.
 					</p>
 
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

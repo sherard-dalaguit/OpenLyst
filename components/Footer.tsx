@@ -1,7 +1,6 @@
 import {SpotlightReverse} from "@/components/ui/spotlight-reverse";
 import {IconBriefcase, IconSend} from "@tabler/icons-react";
 import Image from "next/image";
-import {socialMedia} from "@/data";
 import LitButton from "@/components/ui/LitButton";
 import Link from "next/link";
 
@@ -49,24 +48,7 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className="flex mt-16 md:flex-row flex-col max-w-screen-xl mx-auto justify-between items-center">
-				<p className="md:text-base text-sm md:font-normal font-light">Copyright © 2025 Nomadlyst</p>
-
-				{/*<div className="flex items-center justify-center md:gap-3 gap-6 mt-5">*/}
-				{/*	{socialMedia.map((profile) => (*/}
-				{/*		<a key={profile.id} href={profile.link} target="_blank" rel="noopener noreferrer">*/}
-				{/*			<div className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300">*/}
-				{/*				<Image*/}
-				{/*					src={profile.img}*/}
-				{/*					alt={profile.img}*/}
-				{/*					width={20}*/}
-				{/*					height={20}*/}
-				{/*				/>*/}
-				{/*			</div>*/}
-				{/*		</a>*/}
-				{/*	))}*/}
-				{/*</div>*/}
-			</div>
+			<p className="mt-12 md:text-base text-sm md:font-normal font-light">Copyright © 2026 OpenLyst</p>
 		</footer>
 	)
 }

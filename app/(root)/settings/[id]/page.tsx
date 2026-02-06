@@ -13,25 +13,23 @@ import DeleteAccountDialog from "@/components/DeleteAccountDialog";
 
 export const metadata: Metadata = {
   title: "Settings",
-  description: "Manage your profile, preferences, and email job alert settings on Nomadlyst.",
+  description: "Manage your profile, preferences, and email job alert settings on OpenLyst.",
   openGraph: {
-    title: "Profile | Nomadlyst",
+    title: "Profile | OpenLyst",
     description: "Update your personal information, job preferences, and saved alerts.",
-    url: "https://nomadlyst.com/settings",
-    siteName: "Nomadlyst",
+    url: "https://openlyst.io/settings",
+    siteName: "OpenLyst",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Profile | Nomadlyst",
-    description:
-      "Customize your job search experience with Nomadlyst’s profile settings.",
+    title: "Profile | OpenLyst",
+    description: "Customize your job search experience with OpenLyst’s profile settings.",
   },
 };
 
-const SettingsPage = async ({ params, searchParams }: RouteParams) => {
+const SettingsPage = async ({ params }: RouteParams) => {
 	const { id } = await params;
-  const { page, pageSize } = await searchParams;
 
 	if (!id) notFound();
 

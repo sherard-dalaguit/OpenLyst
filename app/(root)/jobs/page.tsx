@@ -12,15 +12,15 @@ export const metadata: Metadata = {
   title: "Browse Remote Jobs",
   description: "Explore thousands of remote jobs across engineering, product, design, data, and more. Updated daily with powerful filters and email digests.",
   openGraph: {
-    title: "Browse Remote Jobs | Nomadlyst",
+    title: "Browse Remote Jobs | OpenLyst",
     description: "Discover the latest remote job opportunities, updated daily. Filter by category, salary, and more.",
-    url: "https://nomadlyst.com/jobs",
-    siteName: "Nomadlyst",
+    url: "https://openlyst.io/jobs",
+    siteName: "OpenLyst",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Browse Remote Jobs | Nomadlyst",
+    title: "Browse Remote Jobs | OpenLyst",
     description: "Explore thousands of remote jobs curated daily. Filter by category, salary, and more.",
   },
 };

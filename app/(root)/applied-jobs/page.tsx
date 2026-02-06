@@ -10,17 +10,17 @@ import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Applied Jobs",
-  description: "Review the remote jobs you’ve already applied for. Stay organized in your job hunt with Nomadlyst.",
+  description: "Review the remote jobs you’ve already applied for. Stay organized in your job hunt with OpenLyst.",
   openGraph: {
-    title: "Applied Jobs | Nomadlyst",
-    description: "Track all the remote job applications you’ve submitted with Nomadlyst.",
-    url: "https://nomadlyst.com/applied-jobs",
-    siteName: "Nomadlyst",
+    title: "Applied Jobs | OpenLyst",
+    description: "Track all the remote job applications you’ve submitted with OpenLyst.",
+    url: "https://openlyst.io/applied-jobs",
+    siteName: "OpenLyst",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Applied Jobs | Nomadlyst",
+    title: "Applied Jobs | OpenLyst",
     description: "Review and manage your remote job applications in one place.",
   },
 };
