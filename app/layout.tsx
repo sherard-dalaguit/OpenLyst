@@ -15,6 +15,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.openlyst.io"),
   title: {
     default: "OpenLyst",
     template: "%s | OpenLyst",
@@ -32,13 +33,16 @@ export const metadata: Metadata = {
     "digital nomad jobs",
   ],
   authors: [
-    { 
-      name: "Sherard Dalaguit", 
-      url: "https://sherarddalaguit.com" 
+    {
+      name: "Sherard Dalaguit",
+      url: "https://sherarddalaguit.com"
     }
   ],
   creator: "Sherard Dalaguit",
   publisher: "OpenLyst",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/logo.png",
   }
