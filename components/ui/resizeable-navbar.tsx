@@ -235,13 +235,14 @@ export const NavbarLogo = () => {
   return (
     <Link
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 font-normal text-black"
+      className="relative z-20 mr-4 flex items-center space-x-1 px-2 py-1 font-normal text-black"
     >
       <Image
         src="/logo.png"
         alt="logo"
         width={30}
         height={30}
+        quality={100}
       />
       <span className="text-lg font-medium primary-text-gradient dark:text-white">OpenLyst</span>
     </Link>

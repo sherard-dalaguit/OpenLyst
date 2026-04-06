@@ -15,10 +15,11 @@ const Navbar = async () => {
         <Image
           src={"/logo.png"}
           alt="logo"
-          width={48}
-          height={48}
+          width={40}
+          height={40}
+          quality={100}
         />
-        <h1 className="primary-text-gradient">OpenLyst</h1>
+        <h1 className="primary-text-gradient ml-1">OpenLyst</h1>
       </Link>
 
       <div className="flex-between gap-4">
