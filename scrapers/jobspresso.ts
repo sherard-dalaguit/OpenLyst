@@ -120,22 +120,26 @@ export async function scrapeJobspresso(): Promise<number> {
       await Job.findOneAndUpdate(
         { sourceId: source._id, sourceJobId: link },
         {
-          sourceJobId: link,
-          title,
-          companyName,
-          location,
-          category: mapToBroadCategory(title, []),
-          description,
-          salaryMin,
-          salaryMax,
-          postedAt,
-          fetchedAt: new Date(),
-          jobType: mapToJobType([]),
-          sourceId: source._id,
-          sourceLink: link,
-          sourceName: "Jobspresso",
+          $set: {
+            title,
+            companyName,
+            location,
+            category: mapToBroadCategory(title, []),
+            description,
+            salaryMin,
+            salaryMax,
+            fetchedAt: new Date(),
+            jobType: mapToJobType([]),
+            sourceId: source._id,
+            sourceLink: link,
+            sourceName: "Jobspresso",
+          },
+          $setOnInsert: {
+            sourceJobId: link,
+            postedAt,
+          },
         },
-        { upsert: true, setDefaultsOnInsert: true }
+        { upsert: true }
       );
 
       count++;

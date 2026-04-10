@@ -120,22 +120,26 @@ export async function scrapeSkipTheDrive(): Promise<number> {
       await Job.findOneAndUpdate(
         { sourceId: source._id, sourceLink: job.link },
         {
-          sourceJobId: job.link,
-          title,
-          companyName: companyNameFromDetail,
-          location: locationFromDetail || location,
-          category: mappedCategory,
-          description,
-          salaryMin,
-          salaryMax,
-          postedAt: new Date(datePostedRaw),
-          fetchedAt: new Date(),
-          jobType,
-          sourceId: source._id,
-          sourceLink: job.link,
-          sourceName: "SkipTheDrive",
+          $set: {
+            title,
+            companyName: companyNameFromDetail,
+            location: locationFromDetail || location,
+            category: mappedCategory,
+            description,
+            salaryMin,
+            salaryMax,
+            fetchedAt: new Date(),
+            jobType,
+            sourceId: source._id,
+            sourceLink: job.link,
+            sourceName: "SkipTheDrive",
+          },
+          $setOnInsert: {
+            sourceJobId: job.link,
+            postedAt: new Date(datePostedRaw),
+          },
         },
-        { upsert: true, setDefaultsOnInsert: true }
+        { upsert: true }
       );
 
       totalCount++;

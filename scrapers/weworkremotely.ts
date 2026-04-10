@@ -129,23 +129,27 @@ export async function scrapeWeWorkRemotely(): Promise<number> {
       await Job.findOneAndUpdate(
         { sourceId: source._id, sourceJobId },
         {
-          sourceJobId,
-          title: position,
-          companyName,
-          location,
-          category: mapToBroadCategory(position, item.categories || []),
-          description,
-          snippet,
-          salaryMin,
-          salaryMax,
-          postedAt,
-          fetchedAt: new Date(),
-          jobType: mapToJobType(item.categories || []),
-          sourceId: source._id,
-          sourceLink: link,
-          sourceName: "WeWorkRemotely",
+          $set: {
+            title: position,
+            companyName,
+            location,
+            category: mapToBroadCategory(position, item.categories || []),
+            description,
+            snippet,
+            salaryMin,
+            salaryMax,
+            fetchedAt: new Date(),
+            jobType: mapToJobType(item.categories || []),
+            sourceId: source._id,
+            sourceLink: link,
+            sourceName: "WeWorkRemotely",
+          },
+          $setOnInsert: {
+            sourceJobId,
+            postedAt,
+          },
         },
-        { upsert: true, setDefaultsOnInsert: true }
+        { upsert: true }
       );
 
       totalCount++;

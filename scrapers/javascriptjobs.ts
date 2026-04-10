@@ -145,8 +145,27 @@ export async function scrapeJavascriptJobs(): Promise<number> {
       // upsert into Mongo
       await Job.findOneAndUpdate(
         { sourceId: job.sourceId, sourceJobId: job.sourceJobId },
-        job,
-        { upsert: true, setDefaultsOnInsert: true }
+        {
+          $set: {
+            title: job.title,
+            companyName: job.companyName,
+            location: job.location,
+            category: job.category,
+            description: job.description,
+            salaryMin: job.salaryMin,
+            salaryMax: job.salaryMax,
+            fetchedAt: job.fetchedAt,
+            jobType: job.jobType,
+            sourceId: job.sourceId,
+            sourceLink: job.sourceLink,
+            sourceName: job.sourceName,
+          },
+          $setOnInsert: {
+            sourceJobId: job.sourceJobId,
+            postedAt: job.postedAt,
+          },
+        },
+        { upsert: true }
       );
 
       count++;

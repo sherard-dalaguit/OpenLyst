@@ -15,7 +15,7 @@ export async function gatherNewJobs(
   categories: string[]
 ): Promise<JobDigestItem[]> {
   const jobs = await Job.find({
-    postedAt: {$gt: since},
+    createdAt: {$gt: since},
     category: {$in: categories}
   })
   console.log(`Found ${jobs.length} new jobs since ${since.toISOString()}`)

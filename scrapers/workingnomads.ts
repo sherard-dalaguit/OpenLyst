@@ -80,22 +80,26 @@ export async function scrapeWorkingNomads(): Promise<number> {
     await Job.findOneAndUpdate(
       { sourceId: source._id, sourceJobId },
       {
-        sourceJobId,
-        title,
-        companyName,
-        location,
-        category,
-        description,
-        salaryMin,
-        salaryMax,
-        postedAt,
-        fetchedAt: new Date(),
-        jobType,
-        sourceId: source._id,
-        sourceLink,
-        sourceName: "WorkingNomads",
+        $set: {
+          title,
+          companyName,
+          location,
+          category,
+          description,
+          salaryMin,
+          salaryMax,
+          fetchedAt: new Date(),
+          jobType,
+          sourceId: source._id,
+          sourceLink,
+          sourceName: "WorkingNomads",
+        },
+        $setOnInsert: {
+          sourceJobId,
+          postedAt,
+        },
       },
-      { upsert: true, setDefaultsOnInsert: true }
+      { upsert: true }
     );
 
     count++;

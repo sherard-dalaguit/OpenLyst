@@ -29,27 +29,29 @@ export async function scrapeRemoteOK(): Promise<number> {
             ? raw.tags
             : [];
 
-          const job = {
-            sourceJobId: raw.id.toString(),
-            title: raw.position,
-            companyName: raw.company,
-            location: raw.location || "Remote",
-            category: mapToBroadCategory(raw.position, tags),
-            description: raw.description || "",
-            salaryMin: raw.salary_min,
-            salaryMax: raw.salary_max,
-            postedAt:    new Date(raw.date),
-            fetchedAt:   new Date(),
-            jobType: mapToJobType(tags),
-            sourceId:    source._id,
-            sourceLink:  url,
-            sourceName: "RemoteOk",
-          };
-
           await Job.findOneAndUpdate(
-            { sourceId: job.sourceId, sourceJobId: job.sourceJobId },
-            job,
-            { upsert: true, setDefaultsOnInsert: true }
+            { sourceId: source._id, sourceJobId: raw.id.toString() },
+            {
+              $set: {
+                title: raw.position,
+                companyName: raw.company,
+                location: raw.location || "Remote",
+                category: mapToBroadCategory(raw.position, tags),
+                description: raw.description || "",
+                salaryMin: raw.salary_min,
+                salaryMax: raw.salary_max,
+                fetchedAt: new Date(),
+                jobType: mapToJobType(tags),
+                sourceId: source._id,
+                sourceLink: url,
+                sourceName: "RemoteOk",
+              },
+              $setOnInsert: {
+                sourceJobId: raw.id.toString(),
+                postedAt: new Date(raw.date),
+              },
+            },
+            { upsert: true }
           );
           count++;
         })

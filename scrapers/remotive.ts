@@ -42,22 +42,26 @@ export async function scrapeRemotive(): Promise<number> {
     await Job.findOneAndUpdate(
       { sourceId: source._id, sourceJobId },
       {
-        sourceJobId,
-        title,
-        companyName,
-        location,
-        category,
-        description,
-        salaryMin,
-        salaryMax,
-        postedAt,
-        fetchedAt: new Date(),
-        jobType,
-        sourceId: source._id,
-        sourceLink: raw.url,
-        sourceName: "Remotive",
+        $set: {
+          title,
+          companyName,
+          location,
+          category,
+          description,
+          salaryMin,
+          salaryMax,
+          fetchedAt: new Date(),
+          jobType,
+          sourceId: source._id,
+          sourceLink: raw.url,
+          sourceName: "Remotive",
+        },
+        $setOnInsert: {
+          sourceJobId,
+          postedAt,
+        },
       },
-      { upsert: true, setDefaultsOnInsert: true }
+      { upsert: true }
     );
     count++;
   }
