@@ -17,6 +17,7 @@ export interface IJob {
 	isBookmarked: boolean;
 	isApplied: boolean;
   postedAt: Date;
+  fetchedAt: Date;
 }
 
 export interface IJobDoc extends IJob, Document {}
@@ -37,6 +38,7 @@ const JobSchema = new Schema<IJob>(
 		isBookmarked: { type: Boolean, default: false },
 		isApplied: { type: Boolean, default: false },
 		postedAt: { type: Date, required: true },
+		fetchedAt: { type: Date },
 	},
 	{ timestamps: true }
 )

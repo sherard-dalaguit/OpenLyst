@@ -8,15 +8,15 @@ export async function GET() {
   console.log('[cron/cleanup] -> handler hit')
   await dbConnect()
 
-  const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000)
+  const threeWeeksAgo = new Date(Date.now() - 21 * 24 * 60 * 60 * 1000)
 
   const oldJobs = await Job.find(
-    { postedAt: { $lt: sixMonthsAgo } },
+    { fetchedAt: { $lt: threeWeeksAgo } },
     { _id: 1 }
   ).lean()
 
   const jobIds = oldJobs.map((j) => j._id)
-  console.log(`[cron/cleanup] Found ${jobIds.length} jobs older than 6 months`)
+  console.log(`[cron/cleanup] Found ${jobIds.length} jobs not seen in 3 weeks`)
 
   if (jobIds.length === 0) {
     return NextResponse.json({ status: 'ok', deleted: 0 })
