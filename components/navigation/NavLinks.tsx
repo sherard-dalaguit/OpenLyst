@@ -35,19 +35,18 @@ const NavLinks = ({
 						href={href}
 						key={item.label}
 						className={cn(
+							'flex items-center justify-start gap-3 rounded-lg px-3 py-2.5 transition-all duration-150 relative',
 							isActive
-								? 'primary-gradient rounded-lg text-light-900'
-								: 'text-dark300_light900',
-							'flex items-center justify-start gap-4 bg-transparent p-4'
+								? 'bg-black/[0.06] dark:bg-white/[0.08] text-black dark:text-white before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:h-4 before:w-[3px] before:rounded-full before:bg-primary-500'
+								: 'text-[#666] dark:text-[#888] hover:bg-black/[0.04] dark:hover:bg-white/[0.05] hover:text-black dark:hover:text-white'
 						)}
 					>
 						{item.icon}
-						<p className={
-							cn(
-								isActive ? 'base-bold' : 'base-medium',
-								!isMobileNav && 'max-lg:hidden',
-							)}
-						>
+						<p className={cn(
+							'text-sm',
+							isActive ? 'font-medium' : 'font-normal',
+							!isMobileNav && 'max-lg:hidden',
+						)}>
 							{item.label}
 						</p>
 					</Link>

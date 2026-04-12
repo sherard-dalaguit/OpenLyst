@@ -9,13 +9,13 @@
   --color-primary-500: #f700ff;
 
   --color-dark-100: #000000;
-  --color-dark-200: #0f1117;
-  --color-dark-300: #151821;
-  --color-dark-400: #212734;
-  --color-dark-500: #101012;
+  --color-dark-200: #0a0a0a;
+  --color-dark-300: #111111;
+  --color-dark-400: #1a1a1a;
+  --color-dark-500: #0a0a0a;
 
-  --color-light-400: #858ead;
-  --color-light-500: #7b8ec8;
+  --color-light-400: #888888;
+  --color-light-500: #999999;
   --color-light-700: #dce3f1;
   --color-light-800: #f4f6f8;
   --color-light-850: #fdfdfd;
@@ -265,11 +265,7 @@
 }
 
 @utility dark-gradient {
-  background: linear-gradient(
-    232deg,
-    rgba(23, 28, 35, 0.41) 0%,
-    rgba(19, 22, 28, 0.7) 100%
-  );
+  background: linear-gradient(180deg, #0a0a0a 30%, #000000 100%);
 }
 
 @utility light-gradient {
@@ -300,7 +296,7 @@
 }
 
 @utility card-wrapper {
-  @apply bg-light-900 dark:dark-gradient shadow-light-100 dark:shadow-dark-100;
+  @apply bg-light-900 dark:dark-gradient shadow-light-100 dark:shadow-none border border-black/[0.08] dark:border-white/[0.1];
 }
 
 @utility btn {

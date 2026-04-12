@@ -123,13 +123,13 @@ const HomeFilter = () => {
 							<DropdownMenuTrigger asChild>
 								<Button
 									key={filter.name}
-									className="body-medium rounded-lg px-6 py-3 capitalize shadow-none bg-light-800 text-light-500 hover:bg-light-800 dark:bg-dark-300 dark:text-light-500 dark:hover:bg-dark-300"
+									className="body-medium rounded-lg px-6 py-3 capitalize shadow-none bg-light-800 text-light-500 hover:bg-light-800 dark:bg-dark-300/70 dark:text-light-500 dark:hover:bg-dark-400 dark:hover:border-white/[0.2] dark:hover:text-white border border-black/[0.08] dark:border-white/[0.1] transition-all duration-150"
 								>
 									{filter.name}
 								</Button>
 							</DropdownMenuTrigger>
 
-							<DropdownMenuContent className="background-light900_dark300 border-none">
+							<DropdownMenuContent>
 								{filter.type === 'dropdown' && filter.options?.map((option) => (
 									<DropdownMenuItem
 										key={option.value}

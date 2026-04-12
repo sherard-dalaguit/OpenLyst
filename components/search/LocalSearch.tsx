@@ -47,7 +47,7 @@ const LocalSearch = ({ route, imgSrc, placeholder, otherClasses }: Props) => {
 	}, [searchQuery, router, route, searchParams, pathname]);
 
 	return (
-		<div className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4 ${otherClasses}`}>
+		<div className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4 border border-black/[0.08] dark:border-white/[0.1] transition-all duration-200 focus-within:border-primary-500/50 focus-within:shadow-[0_0_0_3px_rgba(247,0,255,0.08)] ${otherClasses}`}>
 			<Image 
 				src={imgSrc}
 				width={24}

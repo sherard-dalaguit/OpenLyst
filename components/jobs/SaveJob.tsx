@@ -43,8 +43,8 @@ const SaveJob = ({
 
 	return (
 		hasSaved
-			? <IconBookmarkFilled className={`cursor-pointer ${isLoading && 'opacity-50'}`} onClick={handleSave} />
-			: <IconBookmark className={`cursor-pointer ${isLoading && 'opacity-50'}`} onClick={handleSave} />
+			? <IconBookmarkFilled className={`cursor-pointer text-primary-500 transition-all duration-150 hover:scale-110 ${isLoading && 'opacity-50'}`} onClick={handleSave} />
+			: <IconBookmark className={`cursor-pointer transition-all duration-150 hover:scale-110 hover:text-primary-500 ${isLoading && 'opacity-50'}`} onClick={handleSave} />
 	)
 }
 

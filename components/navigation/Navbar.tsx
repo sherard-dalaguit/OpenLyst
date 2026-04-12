@@ -10,13 +10,13 @@ const Navbar = async () => {
   const session = await auth();
 
   return (
-    <nav className="flex-between background-light900_dark200 fixed z-50 w-full gap-5 p-6 shadow-light-300 dark:shadow-none sm:px-12">
+    <nav className="flex-between fixed z-50 w-full gap-5 px-6 py-3 sm:px-12 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-black/[0.08] dark:border-white/[0.08]">
       <Link href="/" className="flex flex-row items-center text-2xl font-semibold">
         <Image
           src={"/logo.png"}
           alt="logo"
-          width={40}
-          height={40}
+          width={36}
+          height={36}
           quality={100}
         />
         <h1 className="primary-text-gradient ml-1">OpenLyst</h1>

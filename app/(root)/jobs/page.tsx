@@ -55,7 +55,7 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 			<section className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
 				<LocalSearch
 					imgSrc="/icons/search.svg"
-					placeholder="Search jobs..."
+					placeholder="Search roles, companies, or keywords..."
 					otherClasses="flex-1"
 					route={ROUTES.HOME}
 				/>
@@ -69,7 +69,7 @@ const Jobs = async ({ searchParams }: SearchParams) => {
 				data={jobs}
 				empty={EMPTY_JOB}
 				render={(jobs) => (
-					<div className="mt-10 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
+					<div className="mt-14 flex w-full flex-col lg:flex-row lg:flex-wrap gap-6">
 						{jobs.map((job) => (
 							<JobCard key={job._id} job={job} />
 						))}

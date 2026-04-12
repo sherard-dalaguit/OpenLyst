@@ -10,6 +10,16 @@ interface Props {
 	job: JobType;
 }
 
+const COMPANY_COLORS = [
+	{ bg: 'rgba(247, 0, 255, 0.12)', text: '#f700ff' },
+	{ bg: 'rgba(250, 138, 46, 0.12)', text: '#fa8a2e' },
+	{ bg: 'rgba(99, 102, 241, 0.12)', text: '#818cf8' },
+	{ bg: 'rgba(20, 184, 166, 0.12)', text: '#2dd4bf' },
+	{ bg: 'rgba(245, 158, 11, 0.12)', text: '#fbbf24' },
+	{ bg: 'rgba(236, 72, 153, 0.12)', text: '#f472b6' },
+	{ bg: 'rgba(34, 197, 94, 0.12)', text: '#4ade80' },
+];
+
 const JobCard = (
 {job: {
 	_id,
@@ -33,8 +43,15 @@ const JobCard = (
 	const hasSavedJobPromise = hasSavedJob({ jobId: _id });
 	const hasAppliedJobPromise = hasAppliedJob({ jobId: _id });
 
+	const colorIndex = companyName
+		.split('')
+		.reduce((acc, c) => acc + c.charCodeAt(0), 0) % COMPANY_COLORS.length;
+	const companyColor = COMPANY_COLORS[colorIndex];
+
+	const isRecent = Date.now() - new Date(postedAt).getTime() < 24 * 60 * 60 * 1000;
+
 	return (
-		<div className="card-wrapper lg:w-48/100 rounded-[10px] p-9 sm:px-11">
+		<div className="card-wrapper lg:w-48/100 rounded-[10px] p-9 sm:px-11 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.18] dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
 			<div className="flex flex-row items-start justify-between gap-5 sm:flex-row">
 				<div className="flex-1">
 					<Link href={sourceLink} target="_blank" rel="noopener noreferrer">
@@ -44,15 +61,23 @@ const JobCard = (
 					</Link>
 				</div>
 
-				<div className="flex items-center gap-3">
+				<div className="flex items-center gap-3 text-[#666] dark:text-[#888]">
 					<SaveJob jobId={_id} hasSavedJobPromise={hasSavedJobPromise} />
 					<ApplyJob jobId={_id} hasAppliedJobPromise={hasAppliedJobPromise} />
 				</div>
 			</div>
 
-			<h4 className="text-dark100_light900 mt-2">
-				{companyName}
-			</h4>
+			<div className="flex items-center gap-2.5 mt-2">
+				<div
+					style={{ backgroundColor: companyColor.bg }}
+					className="flex-shrink-0 size-7 rounded-md flex items-center justify-center"
+				>
+					<span style={{ color: companyColor.text }} className="text-[11px] font-bold uppercase leading-none">
+						{companyName.slice(0, 2)}
+					</span>
+				</div>
+				<h4 className="text-dark400_light700 text-sm">{companyName}</h4>
+			</div>
 
 			<div className="mt-3.5 flex w-full flex-wrap gap-2">
 				{jobType && (
@@ -105,8 +130,10 @@ const JobCard = (
 			</div>
 
 			<div className="flex-between mt-6 w-full flex-wrap gap-3">
-				<h4 className="text-dark100_light900">
-					{/*{sourceName} posted {getTimeStamp(new Date(postedAt))}*/}
+				<h4 className="flex items-center gap-2 text-sm text-dark400_light700">
+					{isRecent && (
+						<span className="size-1.5 rounded-full bg-green-500 shrink-0" />
+					)}
 					Posted {getTimeStamp(new Date(postedAt))}
 				</h4>
 			</div>
