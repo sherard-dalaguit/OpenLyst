@@ -72,19 +72,27 @@ export function parseSalary(
 export const CATEGORY_KEYWORDS: Record<string, string[]> = {
   "Software Engineering": [
     "software engineer", "developer", "programmer",
-    "full-stack", "backend", "frontend", "mobile",
-    "react", "node", "python", "java", "golang"
+    "full-stack", "fullstack", "full stack",
+    "frontend", "front-end",
+    "backend", "back-end",
+    "mobile",
+    "react", "angular", "vue",
+    "node", "python", "java", "golang",
+    "typescript", "ruby", "php", "rust", "swift", "kotlin",
+    "c#", "c++", "rails", "django", "laravel"
   ],
 
   "Data": [
     "data scientist", "data engineer", "data analyst",
     "machine learning", "ml", "analytics",
-    "business intelligence", "bi"
+    "business intelligence", "bi",
+    "sql", "tableau", "spark", "dbt", "etl",
+    "postgresql", "snowflake", "pandas"
   ],
 
   "Product Management": [
     "product manager", "product owner", "pm",
-    "roadmap", "feature", "prioritization"
+    "roadmap", "prioritization", "backlog", "stakeholder"
   ],
 
   "Design": [
@@ -94,7 +102,7 @@ export const CATEGORY_KEYWORDS: Record<string, string[]> = {
 
   "Marketing": [
     "marketing", "growth", "seo", "sem",
-    "content marketing", "social media", "ppc", "email"
+    "content marketing", "social media", "ppc", "email marketing"
   ],
 
   "Sales": [
@@ -103,7 +111,7 @@ export const CATEGORY_KEYWORDS: Record<string, string[]> = {
   ],
 
   "Customer Support": [
-    "customer support", "helpdesk", "technical support", "cs"
+    "customer support", "helpdesk", "technical support", "customer success"
   ],
 
   "DevOps": [
@@ -119,7 +127,8 @@ export const CATEGORY_KEYWORDS: Record<string, string[]> = {
 
   "Operations": [
     "operations", "project manager", "program manager",
-    "logistics", "ops", "project management"
+    "logistics", "ops", "project management",
+    "scrum master", "agile coach"
   ],
 
   "Other": []
@@ -138,6 +147,12 @@ export const CATEGORY_PRIORITY = [
   "Operations",
   "Other"
 ];
+
+// matches kw as a whole word/phrase — avoids "pm" hitting "npm", "cs" hitting "css", etc.
+function wordMatch(text: string, kw: string): boolean {
+  const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?<!\\w)${escaped}(?!\\w)`).test(text);
+}
 
 export function mapToBroadCategory(
   title: string,
@@ -159,7 +174,7 @@ export function mapToBroadCategory(
   // 1) scan the title
   for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
     for (const kw of keywords) {
-      if (normalizedTitle.includes(kw)) {
+      if (wordMatch(normalizedTitle, kw)) {
         scores[category] += TITLE_WEIGHT;
       }
     }
@@ -169,7 +184,7 @@ export function mapToBroadCategory(
   for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
     for (const kw of keywords) {
       for (const tag of tags) {
-        if (tag.includes(kw)) {
+        if (wordMatch(tag, kw)) {
           scores[category] += TAG_WEIGHT;
         }
       }
