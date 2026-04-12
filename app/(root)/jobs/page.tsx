@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Browse Remote Jobs | OpenLyst",
     description: "Discover the latest remote job opportunities, updated daily. Filter by category, salary, and more.",
-    url: "https://openlyst.io/jobs",
+    url: "https://www.openlyst.io/jobs",
     siteName: "OpenLyst",
     type: "website",
   },

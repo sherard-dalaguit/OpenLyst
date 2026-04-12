@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Remote ${titleCategory} Jobs | OpenLyst`,
       description: `Browse the latest remote ${titleCategory} job opportunities. Filter by salary, type, and more.`,
-      url: `https://openlyst.io/jobs/${params.category}`,
+      url: `https://www.openlyst.io/jobs/${params.category}`,
       siteName: "OpenLyst",
       type: "website",
     },
