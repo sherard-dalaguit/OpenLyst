@@ -17,7 +17,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.openlyst.io"),
   title: {
-    default: "OpenLyst",
+    default: "OpenLyst – Curated Remote Jobs",
     template: "%s | OpenLyst",
   },
   description:
@@ -44,8 +44,57 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/logo.png",
-  }
+    icon: "/favicon.ico",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://www.openlyst.io",
+    siteName: "OpenLyst",
+    title: "OpenLyst – Curated Remote Jobs",
+    description:
+      "OpenLyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "OpenLyst",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "OpenLyst – Curated Remote Jobs",
+    description:
+      "OpenLyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
+    images: ["/logo.png"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "OpenLyst",
+  url: "https://www.openlyst.io",
+  description: "OpenLyst helps you discover curated remote jobs across engineering, design, product, and more. Updated daily with powerful filters and email digests.",
+  publisher: {
+    "@type": "Organization",
+    name: "OpenLyst",
+    url: "https://www.openlyst.io",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.openlyst.io/logo.png",
+    },
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://www.openlyst.io/jobs?query={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
@@ -54,6 +103,10 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
     <html lang="en" suppressHydrationWarning>
       <SessionProvider session={session}>
         <body className={`${poppins.className} antialiased`}>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
