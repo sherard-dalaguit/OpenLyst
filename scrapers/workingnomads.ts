@@ -33,7 +33,8 @@ export async function scrapeWorkingNomads(): Promise<number> {
 
   let count = 0;
   for (const raw of jobsArray) {
-    console.log(raw)
+    if (raw.expired) continue;
+
     // 5) map fields from the _source
     const sourceJobId  = raw.id?.toString() || raw.slug || raw.url;
     const title = raw.title || raw.position || "";
@@ -72,9 +73,12 @@ export async function scrapeWorkingNomads(): Promise<number> {
     }
 
     // 7) derive category & jobType from tags/categories
+    // category_name (e.g. "Development", "Design") is prepended so it acts as
+    // an extra scoring signal without bypassing our taxonomy normalization
     const tags     = Array.isArray(raw.tags) ? raw.tags : raw.all_tags || [];
-    const category = mapToBroadCategory(title, tags);
-    const jobType  = mapToJobType(tags);
+    const categoryHints = raw.category_name ? [raw.category_name, ...tags] : tags;
+    const category = mapToBroadCategory(title, categoryHints);
+    const jobType  = mapToJobType(categoryHints);
 
     // 8) upsert into Mongo
     await Job.findOneAndUpdate(
