@@ -2,6 +2,15 @@ import {Spotlight} from "@/components/ui/spotlight";
 import Image from "next/image";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Get in touch with the OpenLyst team. Reach us at support@openlyst.io.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 const Contact = async () => {
 

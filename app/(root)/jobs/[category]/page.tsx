@@ -18,6 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Remote ${titleCategory} Jobs`,
     description: `Find curated remote ${titleCategory} jobs from top companies worldwide. Updated daily on OpenLyst.`,
+    alternates: {
+      canonical: `/jobs/${params.category}`,
+    },
     openGraph: {
       title: `Remote ${titleCategory} Jobs | OpenLyst`,
       description: `Browse the latest remote ${titleCategory} job opportunities. Filter by salary, type, and more.`,

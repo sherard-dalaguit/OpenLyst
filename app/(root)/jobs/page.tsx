@@ -11,6 +11,9 @@ import {Metadata} from "next";
 export const metadata: Metadata = {
   title: "Browse Remote Jobs",
   description: "Explore thousands of remote jobs across engineering, product, design, data, and more. Updated daily with powerful filters and email digests.",
+  alternates: {
+    canonical: "/jobs",
+  },
   openGraph: {
     title: "Browse Remote Jobs | OpenLyst",
     description: "Discover the latest remote job opportunities, updated daily. Filter by category, salary, and more.",
