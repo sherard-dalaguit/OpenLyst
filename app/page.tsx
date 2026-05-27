@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import LitButton from '@/components/ui/LitButton';
 import { IconBriefcase, IconSend } from '@tabler/icons-react';
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from 'next/image';
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.openlyst.io",
+  },
+};
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";
 import {Services} from "@/components/Services";
 import Link from "next/link";

@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import {Spotlight} from "@/components/ui/spotlight";
 import Image from "next/image";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {auth} from "@/auth";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 const UnsubscribeSuccess = async () => {
 	const session = await auth();
