@@ -4,9 +4,7 @@ import {SignInSchema} from "@/lib/validations";
 import {signInWithCredentials} from "@/lib/actions/auth.action";
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: "https://www.openlyst.io/sign-in",
-  },
+  robots: { index: false, follow: false },
 };
 
 const SignIn = () => {
