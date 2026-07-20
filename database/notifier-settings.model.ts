@@ -5,6 +5,7 @@ export interface INotifierSettings {
   mode: "v1" | "v2";
   gateMode: "strict_allowlist" | "wide_net";
   strictRemoteOnly: boolean;
+  homeLocations: string[];
   freshnessDays: number;
   quietHours: { start: string; end: string; tz: string } | null;
   enabledCompanyIds: string[];
@@ -23,6 +24,7 @@ const NotifierSettingsSchema = new Schema<INotifierSettings>(
       default: "wide_net",
     },
     strictRemoteOnly: { type: Boolean, default: false },
+    homeLocations: { type: [String], default: [] },
     freshnessDays: { type: Number, default: 3 },
     quietHours: {
       type: {

@@ -28,6 +28,7 @@ export interface NotifierSettingsValues {
   mode: 'v1' | 'v2'
   gateMode: 'strict_allowlist' | 'wide_net'
   strictRemoteOnly: boolean
+  homeLocations: string[]
   freshnessDays: number
   enabledCompanyIds: string[]
 }
@@ -129,16 +130,41 @@ const NotifierModeForm = ({ initial, companies }: Props) => {
             </RadioGroup>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <Switch
-              id="strict-remote"
-              checked={values.strictRemoteOnly}
-              disabled={isPending}
-              onCheckedChange={(strictRemoteOnly: boolean) => save({ strictRemoteOnly })}
-            />
-            <Label htmlFor="strict-remote" className="text-dark500_light800">
-              Only alert on roles explicitly marked remote
-            </Label>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="strict-remote"
+                checked={values.strictRemoteOnly}
+                disabled={isPending}
+                onCheckedChange={(strictRemoteOnly: boolean) => save({ strictRemoteOnly })}
+              />
+              <Label htmlFor="strict-remote" className="text-dark500_light800">
+                Restrict by location (remote + home regions only)
+              </Label>
+            </div>
+            {values.strictRemoteOnly && (
+              <div className="ml-9 flex flex-col gap-1">
+                <Label htmlFor="home-locations" className="text-sm text-light-500">
+                  Also allow office roles in these locations (comma-separated). Leave blank
+                  for remote-only.
+                </Label>
+                <Input
+                  id="home-locations"
+                  defaultValue={values.homeLocations.join(', ')}
+                  disabled={isPending}
+                  placeholder="Los Angeles, Orange County, Irvine"
+                  onBlur={e => {
+                    const next = e.target.value
+                      .split(',')
+                      .map(s => s.trim())
+                      .filter(Boolean)
+                    if (next.join('|') !== values.homeLocations.join('|')) {
+                      save({ homeLocations: next })
+                    }
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-3">

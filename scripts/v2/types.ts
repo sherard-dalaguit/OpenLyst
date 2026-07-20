@@ -49,6 +49,9 @@ export interface V2Settings {
   mode: "v1" | "v2";
   gate_mode: "strict_allowlist" | "wide_net";
   strict_remote_only: boolean;
+  /** When strict_remote_only is on, office roles in these locations also pass
+   *  (keyword substrings, e.g. "Los Angeles"). Empty => remote-only. */
+  home_locations: string[];
   freshness_days: number;
   quiet_hours: QuietHours | null;
   enabled_company_ids: string[];

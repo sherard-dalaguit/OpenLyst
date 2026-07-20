@@ -32,6 +32,7 @@ export async function GET() {
         mode: "v1",
         gateMode: "wide_net",
         strictRemoteOnly: false,
+        homeLocations: [],
         freshnessDays: 3,
         quietHours: null,
         enabledCompanyIds: defaultEnabledIds(),
@@ -52,6 +53,14 @@ export async function PUT(request: Request) {
   }
   if (typeof body.strictRemoteOnly === "boolean") {
     update.strictRemoteOnly = body.strictRemoteOnly;
+  }
+  if (
+    Array.isArray(body.homeLocations) &&
+    body.homeLocations.every((x: unknown) => typeof x === "string")
+  ) {
+    update.homeLocations = (body.homeLocations as string[])
+      .map(s => s.trim())
+      .filter(Boolean);
   }
   if (
     typeof body.freshnessDays === "number" &&

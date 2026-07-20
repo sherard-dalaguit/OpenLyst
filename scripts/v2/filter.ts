@@ -30,6 +30,21 @@ export function looksRemote(locations: string[]): boolean {
   );
 }
 
+/** True if any listed location contains one of the user's home-region keywords
+ *  (e.g. "Los Angeles", "Irvine"). Case-insensitive substring — keywords must
+ *  be distinctive enough (>=4 chars) to avoid false matches. */
+export function homeLocationMatch(
+  locations: string[],
+  homeLocations: string[]
+): boolean {
+  if (!homeLocations?.length) return false;
+  const homes = homeLocations.map(h => h.toLowerCase().trim()).filter(Boolean);
+  return locations.some(l => {
+    const ll = l.toLowerCase();
+    return homes.some(h => ll.includes(h));
+  });
+}
+
 function ageInDays(iso: string): number {
   return (Date.now() - new Date(iso).getTime()) / (24 * 60 * 60 * 1000);
 }
@@ -78,8 +93,14 @@ export function qualifies(
     return { ok: false, reason: "stale" };
   }
 
-  if (settings.strict_remote_only && !looksRemote(role.locations)) {
-    return { ok: false, reason: "not-remote" };
+  // Location gate: when strict_remote_only is on, a role passes if it's listed
+  // remote OR sits in one of the user's home-region keywords (home_locations).
+  // Empty home_locations => pure remote-only.
+  if (settings.strict_remote_only) {
+    const locationOk =
+      looksRemote(role.locations) ||
+      homeLocationMatch(role.locations, settings.home_locations);
+    if (!locationOk) return { ok: false, reason: "location" };
   }
 
   return { ok: true };

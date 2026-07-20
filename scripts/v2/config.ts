@@ -22,6 +22,7 @@ export function defaultSettings(targets: TargetsConfig): V2Settings {
     mode: "v1",
     gate_mode: "wide_net",
     strict_remote_only: false,
+    home_locations: [],
     freshness_days: 3,
     quiet_hours: null,
     enabled_company_ids: targets.companies.filter(c => c.enabled).map(c => c.id),
@@ -44,6 +45,7 @@ export async function loadSettings(targets: TargetsConfig): Promise<V2Settings> 
     mode: doc.mode ?? defaults.mode,
     gate_mode: doc.gateMode ?? defaults.gate_mode,
     strict_remote_only: doc.strictRemoteOnly ?? defaults.strict_remote_only,
+    home_locations: doc.homeLocations ?? defaults.home_locations,
     freshness_days: doc.freshnessDays ?? defaults.freshness_days,
     quiet_hours: doc.quietHours ?? null,
     enabled_company_ids:

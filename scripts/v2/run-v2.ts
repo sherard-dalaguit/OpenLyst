@@ -92,7 +92,8 @@ async function main() {
 
   console.log(
     `[v2] mode=${settings.mode} gate=${settings.gate_mode} fresh=${settings.freshness_days}d ` +
-      `strictRemote=${settings.strict_remote_only} flags=${JSON.stringify(flags)}`
+      `strictRemote=${settings.strict_remote_only} home=[${settings.home_locations.join(", ")}] ` +
+      `flags=${JSON.stringify(flags)}`
   );
 
   if (settings.mode !== "v2" && !flags.force && !flags.prime) {

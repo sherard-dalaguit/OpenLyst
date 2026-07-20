@@ -39,6 +39,7 @@ async function getNotifierSettings() {
 		mode: doc?.mode ?? "v1",
 		gateMode: doc?.gateMode ?? "wide_net",
 		strictRemoteOnly: doc?.strictRemoteOnly ?? false,
+		homeLocations: doc?.homeLocations ?? [],
 		freshnessDays: doc?.freshnessDays ?? 3,
 		enabledCompanyIds:
 			doc?.enabledCompanyIds?.length
