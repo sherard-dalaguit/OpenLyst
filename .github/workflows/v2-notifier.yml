@@ -1,0 +1,64 @@
+# OpenLyst v2 — hourly intl-remote new-grad SWE notifier (SRS §6.3).
+# State (seen-roles) and the mode toggle live in MongoDB, not committed JSON:
+# the Vercel app can't write repo files at runtime and MONGODB_URI is already
+# an Actions secret, so no write-back PAT or bot commits are needed (FR-11c).
+name: V2 Intl-Remote Notifier
+
+on:
+  workflow_dispatch:
+    inputs:
+      prime:
+        description: "Priming run: mark all current postings seen, send nothing"
+        type: boolean
+        default: false
+      dry_run:
+        description: "Dry run: log matches, no email, no state writes"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "7 * * * *" # hourly (offset to dodge top-of-hour runner congestion)
+
+concurrency:
+  group: openlyst-v2
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NODE_ENV: production
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+      SITE_URL: https://www.openlyst.io
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci --include=dev
+
+      - name: Run v2 notifier
+        run: |
+          FLAGS=""
+          if [ "${{ inputs.prime }}" = "true" ]; then FLAGS="--prime"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then FLAGS="$FLAGS --dry-run --force"; fi
+          npx tsx scripts/v2/run-v2.ts $FLAGS | tee v2-output.txt
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### V2 Notifier Run"
+            echo '```'
+            cat v2-output.txt || true
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
