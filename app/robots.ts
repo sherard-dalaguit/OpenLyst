@@ -1,12 +1,15 @@
 import { MetadataRoute } from "next";
 
+const BASE_URL = "https://www.openlyst.io";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/jobs/", "/saved-jobs/", "/applied-jobs/", "/settings/", "/api/"],
+      disallow: ["/saved-jobs", "/applied-jobs", "/settings", "/api/"],
     },
-    sitemap: "https://www.openlyst.io/sitemap.xml",
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

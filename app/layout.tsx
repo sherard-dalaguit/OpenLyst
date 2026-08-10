@@ -40,9 +40,6 @@ export const metadata: Metadata = {
   ],
   creator: "Sherard Dalaguit",
   publisher: "OpenLyst",
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: "/favicon.ico",
     apple: "/logo.png",

@@ -6,7 +6,9 @@ import {Button} from "@/components/ui/button";
 import {auth} from "@/auth";
 
 export const metadata: Metadata = {
+  title: "Unsubscribed",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/unsubscribe-success" },
 };
 
 const UnsubscribeSuccess = async () => {

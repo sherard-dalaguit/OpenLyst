@@ -7,7 +7,17 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: "https://www.openlyst.io",
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 import {LandingNavbar} from "@/components/navigation/LandingNavbar";

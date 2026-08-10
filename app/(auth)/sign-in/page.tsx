@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import SignInForm from "@/components/forms/SignInForm";
 
 export const metadata: Metadata = {
-  robots: { index: false, follow: false },
+  title: "Sign In",
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/sign-in" },
 };
 
 const SignIn = () => {
