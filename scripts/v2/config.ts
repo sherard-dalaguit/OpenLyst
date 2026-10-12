@@ -42,7 +42,9 @@ export async function loadSettings(targets: TargetsConfig): Promise<V2Settings> 
   const defaults = defaultSettings(targets);
   if (!doc) return defaults;
   return {
-    mode: doc.mode ?? defaults.mode,
+    // Locked to v1: the mode toggle was removed from the app, so a stale "v2"
+    // in the settings doc must not re-activate the hourly notifier.
+    mode: "v1",
     gate_mode: doc.gateMode ?? defaults.gate_mode,
     strict_remote_only: doc.strictRemoteOnly ?? defaults.strict_remote_only,
     home_locations: doc.homeLocations ?? defaults.home_locations,

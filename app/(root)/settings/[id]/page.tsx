@@ -10,10 +10,6 @@ import ReceiveAlertsSwitch from "@/components/forms/ReceiveAlertsSwitch";
 import PreferencesForm from "@/components/forms/PreferencesForm";
 import {Metadata} from "next";
 import DeleteAccountDialog from "@/components/DeleteAccountDialog";
-import NotifierModeForm from "@/components/forms/NotifierModeForm";
-import dbConnect from "@/lib/mongoose";
-import NotifierSettings, {INotifierSettings} from "@/database/notifier-settings.model";
-import targets from "@/config/targets.json";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -31,22 +27,6 @@ export const metadata: Metadata = {
     description: "Customize your job search experience with OpenLyst’s profile settings.",
   },
 };
-
-async function getNotifierSettings() {
-	await dbConnect();
-	const doc = (await NotifierSettings.findOne({key: "singleton"}).lean()) as INotifierSettings | null;
-	return {
-		mode: doc?.mode ?? "v1",
-		gateMode: doc?.gateMode ?? "wide_net",
-		strictRemoteOnly: doc?.strictRemoteOnly ?? false,
-		homeLocations: doc?.homeLocations ?? [],
-		freshnessDays: doc?.freshnessDays ?? 3,
-		enabledCompanyIds:
-			doc?.enabledCompanyIds?.length
-				? doc.enabledCompanyIds
-				: targets.companies.filter(c => c.enabled).map(c => c.id),
-	};
-}
 
 const SettingsPage = async ({ params }: RouteParams) => {
 	const { id } = await params;
@@ -137,27 +117,6 @@ const SettingsPage = async ({ params }: RouteParams) => {
         initialFrequency={user.preferences.frequency}
         allCategories={allCategories}
       />
-
-			{loggedInUser?.user?.id === id && (
-				<>
-					<h1 className="h1-bold text-dark100_light900 mt-10">Notifier Mode</h1>
-					<p className="paragraph-regular text-dark200_light800 mt-2 mb-6">
-						Choose between the daily digest and the real-time international-remote
-						new-grad notifier. Takes effect on the next scheduled run.
-					</p>
-					<NotifierModeForm
-						initial={await getNotifierSettings()}
-						companies={targets.companies.map(c => ({
-							id: c.id,
-							name: c.name,
-							tier: c.tier,
-							intl_policy: c.intl_policy,
-							pollable: c.enabled,
-							hires_new_grads: c.hires_new_grads,
-						}))}
-					/>
-				</>
-			)}
 		</>
 	)
 };
